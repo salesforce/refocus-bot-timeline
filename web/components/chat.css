@@ -25,7 +25,9 @@
   padding: 0 0.6rem 0.35rem 0.6rem;
   min-height: 500px;
   height: 500px;
-  overflow-y: scroll;}
+  overflow-y: scroll;
+  background: #fff;
+}
 
 /**
  * @summary Handles spacing and direction of items in the list
@@ -36,7 +38,7 @@
 .slds-chat-listitem {
   display: -ms-flexbox;
   display: flex;
-  margin-top: 0.5rem; }
+  padding: 0.2rem 0; }
 
 /**
  * @summary Modifier used to style outbound message list items
@@ -332,7 +334,7 @@
   font-size: 0.8125rem;
   -ms-flex-pack: center;
       justify-content: center;
-  padding: 0 0 0.5rem 0;
+  padding: 0.4rem 0 0.4rem 0;
   width: 100%; }
 
 /**
@@ -363,3 +365,7 @@
 
 .slds-chat_past .slds-chat-message__meta b {
   color: #3e3e3c; }
+
+.slds-button-group-list {
+  display: inline-flex;
+}
