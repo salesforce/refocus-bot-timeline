@@ -15,15 +15,12 @@ class App extends React.Component{
         .sort((a, b) => moment(a.createdAt).diff(moment(b.createdAt))),
       currentText: '',
       scroll: false,
+      filter: 'all',
     };
     this.closeToast = this.closeToast.bind(this);
-    this.sendChat = this.sendChat.bind(this);
+    this.filterType = this.filterType.bind(this);
     this.chatChange = this.chatChange.bind(this);
-  }
-
-  sendChat(){
-    this.setState({ currentText: '' });
-    bdk.createEvents(this.state.roomId, this.state.currentText);
+    this.sendChat = this.sendChat.bind(this);
   }
 
   componentWillReceiveProps(nextProps) {
@@ -43,8 +40,17 @@ class App extends React.Component{
     this.setState({ message: '' });
   }
 
+  filterType(type) {
+    this.setState({ filter: type });
+  }
+
   chatChange(e){
     this.setState({ currentText: e.target.value });
+  }
+
+  sendChat(){
+    this.setState({ currentText: '' });
+    bdk.createEvents(this.state.roomId, this.state.currentText);
   }
 
   render(){
@@ -60,27 +66,51 @@ class App extends React.Component{
         <div className={buttonHeaderClass}>
           <ul className="slds-button-group-list">
             <li>
-              <button className="slds-button slds-button_brand">All</button>
+              <button
+                className={'slds-button ' +
+                  (this.state.filter === 'all' ?
+                    'slds-button_brand' :
+                    'slds-button_neutral')}
+                onClick={() => this.filterType('all')}>
+                All
+              </button>
             </li>
             <li>
-              <button className="slds-button slds-button_neutral">
+              <button
+                className={'slds-button ' +
+                  (this.state.filter === 'comments' ?
+                    'slds-button_brand' :
+                    'slds-button_neutral')}
+                onClick={() => this.filterType('comments')}>
                 Comments
               </button>
             </li>
             <li>
-              <button className="slds-button slds-button_neutral">
+              <button
+                className={'slds-button ' +
+                  (this.state.filter === 'events' ?
+                    'slds-button_brand' :
+                    'slds-button_neutral')}
+                onClick={() => this.filterType('events')}>
                 Events
               </button>
             </li>
             <li>
-              <button className="slds-button slds-button_neutral">
+              <button
+                className={'slds-button ' +
+                  (this.state.filter === 'users' ?
+                    'slds-button_brand' :
+                    'slds-button_neutral')}
+                onClick={() => this.filterType('users')}>
                 Users
               </button>
             </li>
           </ul>
         </div>
         <ul className="slds-chat-list"
-          ref={(elem) => this.container = elem}>
+          ref={(elem) => {
+            this.container = elem;
+          }}>
           <li>
             <div className="slds-chat-bookend">
               Start of timeline for&nbsp;<b>Room #{this.state.roomId}</b>
