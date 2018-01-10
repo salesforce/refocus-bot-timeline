@@ -1,8 +1,8 @@
 {
-  "name": "Events-Bot",
+  "name": "Timeline-Bot",
   "version": "0.1.0",
-  "description": "A bot for PagerDuty integration",
-  "url": "https://git.soma.salesforce.com/Refocus-Bots/Events-Bot",
+  "description": "A bot that show all events in a room",
+  "url": "https://git.soma.salesforce.com/Refocus-Bots/Timeline-Bot",
   "scripts": {
     "start-ui": "webpack-dev-server --open",
     "start": "npm run build-ui && node index.js",
