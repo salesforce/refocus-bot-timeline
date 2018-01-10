@@ -1,4 +1,5 @@
 import PropTypes from 'prop-types';
+const moment = require('moment');
 const React=require('react');
 const env = process.env.NODE_ENV || 'dev';
 const config = require('../../config.js')[env];
@@ -10,8 +11,10 @@ class App extends React.Component{
     super(props);
     this.state={
       roomId: this.props.roomId,
-      response: this.props.response,
+      response: this.props.response
+        .sort((a, b) => moment(a.createdAt).diff(moment(b.createdAt))),
       currentText: '',
+      scroll: false,
     };
     this.closeToast = this.closeToast.bind(this);
     this.sendChat = this.sendChat.bind(this);
@@ -26,7 +29,14 @@ class App extends React.Component{
   componentWillReceiveProps(nextProps) {
     const eventLog = this.state.response.concat(nextProps.response);
     this.setState({ response: eventLog });
-    this.container.scrollTop = this.container.scrollHeight;
+    this.setState({ scroll: true });
+  }
+
+  componentDidUpdate() {
+    if (this.state.scroll) {
+      this.container.scrollTop = this.container.scrollHeight;
+      this.setState({ scroll: false });
+    }
   }
 
   closeToast(){
@@ -39,8 +49,36 @@ class App extends React.Component{
 
   render(){
     const { response } = this.state;
+    const buttonHeaderClass = 'slds-size_1-of-1 slds-text-align_center' +
+      ' slds-docked-composer__header';
+
+    const footerClass = 'slds-docked-composer__footer slds-grid slds-form' +
+      ' slds-form_stacked slds-p-horizontal_medium slds-m-bottom_small';
+
     return (
       <div>
+        <div className={buttonHeaderClass}>
+          <ul className="slds-button-group-list">
+            <li>
+              <button className="slds-button slds-button_brand">All</button>
+            </li>
+            <li>
+              <button className="slds-button slds-button_neutral">
+                Comments
+              </button>
+            </li>
+            <li>
+              <button className="slds-button slds-button_neutral">
+                Events
+              </button>
+            </li>
+            <li>
+              <button className="slds-button slds-button_neutral">
+                Users
+              </button>
+            </li>
+          </ul>
+        </div>
         <ul className="slds-chat-list"
           ref={(elem) => this.container = elem}>
           <li>
@@ -64,7 +102,7 @@ class App extends React.Component{
             );
           })}
         </ul>
-        <div className="slds-docked-composer__footer slds-grid slds-form slds-form_stacked slds-p-horizontal_medium slds-m-bottom_small">
+        <div className={footerClass}>
           <div className="slds-size_1-of-1 slds-form-element slds-col">
             <div className="slds-form-element__control slds-p-around_xx-small">
               <input
@@ -81,7 +119,7 @@ class App extends React.Component{
                 }}/>
             </div>
           </div>
-          <div className="slds-text-align_center slds-col  slds-p-around_xx-small">
+          <div className="slds-col slds-p-around_xx-small">
             <button
               className="slds-button slds-button_brand"
               onClick={() => this.sendChat()}>
