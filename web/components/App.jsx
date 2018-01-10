@@ -15,7 +15,7 @@ class App extends React.Component{
         .sort((a, b) => moment(a.createdAt).diff(moment(b.createdAt))),
       currentText: '',
       scroll: false,
-      filter: 'all',
+      filter: 'All',
     };
     this.closeToast = this.closeToast.bind(this);
     this.filterType = this.filterType.bind(this);
@@ -50,7 +50,10 @@ class App extends React.Component{
 
   sendChat(){
     this.setState({ currentText: '' });
-    bdk.createEvents(this.state.roomId, this.state.currentText);
+    const eventType = {
+      'type': 'Comment',
+    };
+    bdk.createEvents(this.state.roomId, this.state.currentText, eventType);
   }
 
   render(){
@@ -68,40 +71,40 @@ class App extends React.Component{
             <li>
               <button
                 className={'slds-button ' +
-                  (this.state.filter === 'all' ?
+                  (this.state.filter === 'All' ?
                     'slds-button_brand' :
                     'slds-button_neutral')}
-                onClick={() => this.filterType('all')}>
+                onClick={() => this.filterType('All')}>
                 All
               </button>
             </li>
             <li>
               <button
                 className={'slds-button ' +
-                  (this.state.filter === 'comments' ?
+                  (this.state.filter === 'Comment' ?
                     'slds-button_brand' :
                     'slds-button_neutral')}
-                onClick={() => this.filterType('comments')}>
+                onClick={() => this.filterType('Comment')}>
                 Comments
               </button>
             </li>
             <li>
               <button
                 className={'slds-button ' +
-                  (this.state.filter === 'events' ?
+                  (this.state.filter === 'Event' ?
                     'slds-button_brand' :
                     'slds-button_neutral')}
-                onClick={() => this.filterType('events')}>
+                onClick={() => this.filterType('Event')}>
                 Events
               </button>
             </li>
             <li>
               <button
                 className={'slds-button ' +
-                  (this.state.filter === 'users' ?
+                  (this.state.filter === 'User' ?
                     'slds-button_brand' :
                     'slds-button_neutral')}
-                onClick={() => this.filterType('users')}>
+                onClick={() => this.filterType('User')}>
                 Users
               </button>
             </li>
@@ -117,19 +120,48 @@ class App extends React.Component{
             </div>
           </li>
           {response.map((event) => {
-            return (
-              <li className="slds-chat-listitem" key={event.id}>
-                <div className="slds-chat-message">
-                  <div className="slds-chat-message__body slds-chat_past">
-                    <div className="slds-chat-message__meta">
-                      <b>User</b> • {event.createdAt}</div>
-                    <div className="slds-chat-message__text">
-                      <span>{event.log}</span>
+            if ((this.state.filter === 'All') ||
+              ((event.context) &&
+                (event.context.type === this.state.filter))
+            ) {
+              if ((event.context) && (event.context.type === 'Event')) {
+                return (
+                  <li
+                    className="slds-chat-listitem slds-chat-listitem_event"
+                    key={event.id}>
+                    <div className="slds-chat-event">
+                      <div className="slds-chat-event__rule"></div>
+                      <div className="slds-chat-event__body">
+                        <p>
+                          <b>Event</b> was performed •&nbsp;
+                          {moment(event.createdAt).format('YYYY-MM-DD HH:mm Z')}
+                        </p>
+                      </div>
+                      <div className="slds-chat-event__rule"></div>
+                      <div className="slds-chat-event__agent-message">
+                        {event.log}
+                      </div>
+                    </div>
+                  </li>
+                );
+              }
+              return (
+                <li className="slds-chat-listitem" key={event.id}>
+                  <div className="slds-chat-message">
+                    <div className="slds-chat-message__body slds-chat_past">
+                      <div className="slds-chat-message__meta">
+                        <b>User</b> •&nbsp;
+                        {moment(event.createdAt).format('YYYY-MM-DD HH:mm Z')}
+                      </div>
+                      <div className="slds-chat-message__text">
+                        <span>{event.log}</span>
+                      </div>
                     </div>
                   </div>
-                </div>
-              </li>
-            );
+                </li>
+              );
+            }
+            return (<div key={event.id}></div>);
           })}
         </ul>
         <div className={footerClass}>
