@@ -22,10 +22,7 @@ const env = process.env.NODE_ENV || 'dev';
 const config = require('../config.js')[env];
 const bdk = require('@salesforce/refocus-bdk')(config);
 const botName = require('../package.json').name;
-
-const ROOMID = window.location.pathname.split('rooms/').length > 1 ?
-  parseInt(window.location.pathname.split('rooms/')[1]) : 2;
-const roomId = parseInt(ROOMID);
+const roomId = bdk.getRoomId();
 
 /**
  * When a refocus.events is dispatch it is handled here.

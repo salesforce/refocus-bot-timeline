@@ -1,5 +1,4 @@
 import PropTypes from 'prop-types';
-import 'react-select/dist/react-select.css';
 const React=require('react');
 const env = process.env.NODE_ENV || 'dev';
 const config = require('../../config.js')[env];
