@@ -1,13 +1,11 @@
 import PropTypes from 'prop-types';
-import Select from 'react-select';
 import 'react-select/dist/react-select.css';
 const React=require('react');
-const ToastMessage=require('./ToastMessage.jsx');
-const botName = require('../../package.json').name;
-const bdk = require('../../lib/refocus-bdk.js');
+const env = process.env.NODE_ENV || 'dev';
+const config = require('../../config.js')[env];
+const bdk = require('@salesforce/refocus-bdk')(config);
 
 class App extends React.Component{
-
   constructor(props){
     super(props);
     this.state={
@@ -24,30 +22,39 @@ class App extends React.Component{
 
   componentWillReceiveProps(nextProps) {
     const eventLog = this.state.response.concat(nextProps.response);
-    this.setState({response: eventLog});
+    this.setState({ response: eventLog });
   }
 
   closeToast(){
-    this.setState({message: ''});
+    this.setState({ message: '' });
   }
 
   render(){
     const { response } = this.state;
 
-    return(
+    return (
       <div>
-        <div class="slds-form-element">
-          <label class="slds-form-element__label" for="text-input-id-1">Chat</label>
-          <div class="slds-form-element__control">
-            <input id="chat" type="text" id="text-input-id-1" class="slds-input" placeholder="Type Message" />
-            <button class="slds-button" onClick={() => this.sendChat()}>Send</button>
+        <div className="slds-form-element">
+          <label className="slds-form-element__label">Chat</label>
+          <div className="slds-form-element__control">
+            <input
+              id="chat"
+              type="text"
+              className="slds-input"
+              placeholder="Type Message" />
+            <button
+              className="slds-button"
+              onClick={() => this.sendChat()}>
+              Send
+            </button>
           </div>
         </div>
-        <table className="slds-table slds-table_bordered slds-table_cell-buffer">
+        <table
+          className="slds-table slds-table_bordered slds-table_cell-buffer">
           <tbody>
             {response.map((event) => {
-              return(
-                <tr>
+              return (
+                <tr key>
                   <td>{event.log}</td>
                 </tr>
               );
@@ -62,6 +69,6 @@ class App extends React.Component{
 App.propTypes={
   roomId: PropTypes.number,
   response: PropTypes.object,
-}
+};
 
 module.exports=App;

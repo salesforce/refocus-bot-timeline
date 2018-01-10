@@ -17,11 +17,28 @@ var config = {
 	},
 
 	module: {
+		noParse: /superagent-proxy/,
 		rules: [
-			{test: /\.(js|jsx)$/, use: 'babel-loader?compact=true'}, //code transformer (if file is .js)
-			{test: /\.css$/, use: ['style-loader', 'css-loader']},
-			{test: /\.handlebars$/, loader: "handlebars-loader"},
-			{test: /.(png|jpg|jpeg|gif|svg|woff|woff2|ttf|eot)$/, use: "url-loader?limit=100000"},
+			{
+				test: /\.(js|jsx)$/,
+				include: [path.resolve(__dirname, 'lib'), path.resolve(__dirname, 'web')],
+				use: 'babel-loader?compact=true',
+			},
+			{
+				test: /\.css$/,
+				use: ['style-loader', 'css-loader'],
+				include: path.resolve(__dirname, 'web'),
+			},
+			{
+				test: /\.handlebars$/,
+				loader: "handlebars-loader",
+				include: path.resolve(__dirname, 'web'),
+			},
+			{
+				test: /.(png|jpg|jpeg|gif|svg|woff|woff2|ttf|eot)$/,
+				use: "url-loader?limit=100000",
+				include: path.resolve(__dirname, 'web'),
+			},
 		]
 	},
 
@@ -40,16 +57,16 @@ var config = {
 			name: botName,
 		}),
 		new ZipPlugin({
-      		filename: 'bot.zip',
-      		include: [/\.js$/, /\.html$/],
-      		exclude: ['public']
+			filename: 'bot.zip',
+			include: [/\.js$/, /\.html$/],
+			exclude: ['public']
 		}),
 		new webpack.DefinePlugin({
 			'process.env': {
 				'NODE_ENV': JSON.stringify(process.env.NODE_ENV),
-				'SFDC_USERNAME': JSON.stringify(process.env.SFDC_USERNAME),
-				'SFDC_PASSWORD': JSON.stringify(process.env.SFDC_PASSWORD),
-				'TOKEN': JSON.stringify(process.env.TOKEN),
+				'SENDER_EMAIL': JSON.stringify(process.env.SENDER_EMAIL),
+				'API_TOKEN': JSON.stringify(process.env.API_TOKEN),
+				'SOCKET_TOKEN': JSON.stringify(process.env.SOCKET_TOKEN),
  			}
  		}),
 	]
