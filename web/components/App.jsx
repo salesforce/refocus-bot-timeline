@@ -49,11 +49,13 @@ class App extends React.Component{
   }
 
   sendChat(){
-    this.setState({ currentText: '' });
-    const eventType = {
-      'type': 'Comment',
-    };
-    bdk.createEvents(this.state.roomId, this.state.currentText, eventType);
+    if (this.state.currentText !== '') {
+      this.setState({ currentText: '' });
+      const eventType = {
+        'type': 'Comment',
+      };
+      bdk.createEvents(this.state.roomId, this.state.currentText, eventType);
+    }
   }
 
   render(){
@@ -232,6 +234,7 @@ class App extends React.Component{
 App.propTypes={
   roomId: PropTypes.number,
   response: PropTypes.object,
+  user: PropTypes.object,
 };
 
 module.exports=App;
