@@ -286,7 +286,8 @@
   border-top: 1px #dddbda solid;
   height: 1px;
   -ms-flex-positive: 1;
-      flex-grow: 1; }
+      flex-grow: 1;
+  }
 
 /**
   * @summary Used for styling the event body text
@@ -299,7 +300,10 @@
       align-items: center;
   display: -ms-flexbox;
   display: flex;
-  margin: 0 0.5rem; }
+  margin: 0 0.5rem;
+  max-width: 80%;
+  word-wrap: break-word;
+}
 
 /**
   * @summary Used to style any messages from an agent in the event
@@ -366,6 +370,68 @@
 .slds-chat_past .slds-chat-message__meta b {
   color: #3e3e3c; }
 
-.slds-button-group-list {
-  display: inline-flex;
-}
+.slds-button + .slds-button-group,
+.slds-button + .slds-button-group-list-center {
+  margin-left: 0.25rem; }
+
+/**
+ * @summary Creates button group container
+ *
+ * @name base
+ * @selector .slds-button-group
+ * @restrict div
+ * @variant
+ */
+.slds-button-group,
+.slds-button-group-list-center {
+  display: -ms-inline-flex;
+  display: inline-flex; }
+
+.slds-button-group .slds-button,
+.slds-button-group-list-center .slds-button {
+  border-radius: 0; }
+
+.slds-button-group .slds-button:focus,
+.slds-button-group-list-center .slds-button:focus {
+  z-index: 1; }
+
+.slds-button-group .slds-button + .slds-button,
+.slds-button-group .slds-button + .slds-button_last .slds-button,
+.slds-button-group .slds-button + .slds-button--last .slds-button,
+.slds-button-group-list-center li + li .slds-button {
+  margin-left: -1px; }
+
+.slds-button-group-list-center li:first-child .slds-button,
+.slds-button-group .slds-button:first-child {
+  border-radius: 0.25rem 0 0 0.25rem; }
+
+/**
+ * These selectors must remain in long hand in order to zero out borders that
+ * we don't want on last-child or :only-child wrapped buttons
+ *
+ * @selector .slds-button_last
+ * @restrict .slds-button-group div, .slds-button-group-list-center div
+ */
+.slds-button-group .slds-button:last-child,
+.slds-button-group-list-center li:last-child .slds-button,
+.slds-button-group .slds-button_last .slds-button,
+.slds-button-group .slds-button--last .slds-button,
+.slds-button-group .slds-button.slds-button_last,
+.slds-button-group .slds-button.slds-button--last,
+.slds-button-group .slds-button_last .slds-button:only-child,
+.slds-button-group .slds-button--last .slds-button:only-child,
+.slds-button-group .slds-button.slds-button_last,
+.slds-button-group .slds-button.slds-button--last {
+  border-radius: 0 0.25rem 0.25rem 0; }
+
+.slds-button-group .slds-button:only-child,
+.slds-button-group-list-center li:only-child .slds-button {
+  border-radius: 0.25rem; }
+
+.slds-button-group + .slds-button-group,
+.slds-button-group + .slds-button-group-list-center,
+.slds-button-group + .slds-button,
+.slds-button-group-list-center + .slds-button-group-list-center,
+.slds-button-group-list-center + .slds-button-group,
+.slds-button-group-list-center + .slds-button {
+  margin-left: 0.25rem; }
