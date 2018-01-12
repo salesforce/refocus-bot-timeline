@@ -49,11 +49,15 @@ class App extends React.Component{
   }
 
   sendChat(){
-    this.setState({ currentText: '' });
-    const eventType = {
-      'type': 'Comment',
-    };
-    bdk.createEvents(this.state.roomId, this.state.currentText, eventType);
+    if (this.state.currentText !== '') {
+      this.setState({ currentText: '' });
+      const eventType = {
+        'type': 'Comment',
+        'user': this.props.user,
+        'join': true,
+      };
+      bdk.createEvents(this.state.roomId, this.state.currentText, eventType);
+    }
   }
 
   render(){
@@ -70,7 +74,7 @@ class App extends React.Component{
     return (
       <div>
         <div className={buttonHeaderClass}>
-          <ul className="slds-button-group-list">
+          <ul className="slds-button-group-list-center">
             <li>
               <button
                 className={'slds-button ' +
@@ -171,7 +175,12 @@ class App extends React.Component{
                           </svg>
                         </span>
                         <p>
-                          <b>User</b> has joined room •&nbsp;
+                          <b>
+                            {((event.context) && (event.context.user)) ?
+                              event.context.user.name : 'User'}
+                          </b> has {((event.context) &&
+                            (event.context.join)) ?
+                            'joined' : 'left'} room •&nbsp;
                           {moment(event.createdAt).format('YYYY-MM-DD HH:mm Z')}
                         </p>
                       </div>
@@ -185,7 +194,8 @@ class App extends React.Component{
                   <div className="slds-chat-message">
                     <div className="slds-chat-message__body slds-chat_past">
                       <div className="slds-chat-message__meta">
-                        <b>User</b> •&nbsp;
+                        <b>{((event.context) && (event.context.user)) ?
+                          event.context.user.name : 'User'}</b> •&nbsp;
                         {moment(event.createdAt).format('YYYY-MM-DD HH:mm Z')}
                       </div>
                       <div className="slds-chat-message__text">
@@ -232,6 +242,7 @@ class App extends React.Component{
 App.propTypes={
   roomId: PropTypes.number,
   response: PropTypes.object,
+  user: PropTypes.object,
 };
 
 module.exports=App;
