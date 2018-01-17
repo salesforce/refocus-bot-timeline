@@ -70,7 +70,7 @@ class FilterHeader extends React.Component{
 }
 
 FilterHeader.propTypes={
-  filter: PropTypes.String,
+  filter: PropTypes.string,
   changeType: PropTypes.func,
 };
 
