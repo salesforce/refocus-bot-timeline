@@ -119,7 +119,7 @@ class App extends React.Component{
 
 App.propTypes={
   roomId: PropTypes.number,
-  response: PropTypes.object,
+  response: PropTypes.array,
   user: PropTypes.object,
 };
 
