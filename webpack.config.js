@@ -64,7 +64,6 @@ var config = {
 		new webpack.DefinePlugin({
 			'process.env': {
 				'NODE_ENV': JSON.stringify(process.env.NODE_ENV),
-				'SENDER_EMAIL': JSON.stringify(process.env.SENDER_EMAIL),
 				'API_TOKEN': JSON.stringify(process.env.API_TOKEN),
 				'SOCKET_TOKEN': JSON.stringify(process.env.SOCKET_TOKEN),
  			}
