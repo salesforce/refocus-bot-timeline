@@ -13,7 +13,8 @@ class UserMessage extends React.Component{
 
     return (
       <li
-        className="slds-chat-listitem slds-chat-listitem_event">
+        className="slds-chat-listitem slds-chat-listitem_event"
+        key={event.id}>
         <div className="slds-chat-event">
           <div className="slds-chat-event__rule"></div>
           <div className="slds-chat-event__body">
@@ -25,7 +26,12 @@ class UserMessage extends React.Component{
               </svg>
             </span>
             <p>
-              <b>User</b> has joined room •&nbsp;
+              <b>
+                {((event.context) && (event.context.user)) ?
+                  event.context.user.name : 'User'}
+              </b> has {((event.context) &&
+                (event.context.join)) ?
+                'joined' : 'left'} room •&nbsp;
               {moment(event.createdAt).format('YYYY-MM-DD HH:mm Z')}
             </p>
           </div>

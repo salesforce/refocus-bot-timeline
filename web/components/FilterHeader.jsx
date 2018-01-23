@@ -22,7 +22,7 @@ class FilterHeader extends React.Component{
 
     return (
       <div className={buttonHeaderClass}>
-        <ul className="slds-button-group-list">
+        <ul className="slds-button-group-list-center">
           <li>
             <button
               className={'slds-button ' +
