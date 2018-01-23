@@ -58,6 +58,8 @@ class App extends React.Component{
       this.setState({ currentText: '' });
       const eventType = {
         'type': 'Comment',
+        'user': this.props.user,
+        'join': true,
       };
       bdk.createEvents(this.state.roomId, this.state.currentText, eventType);
     }
