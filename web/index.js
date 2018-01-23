@@ -24,7 +24,11 @@ const config = require('../config.js')[env];
 const bdk = require('@salesforce/refocus-bdk')(config);
 const botName = require('../package.json').name;
 const roomId = bdk.getRoomId();
-const _user =JSON.parse(user.replace(/&quot;/g, '"'));
+const _user = {
+  name: bdk.getUserName(),
+  id: bdk.getUserName(),
+  email: bdk.getUserEmail(),
+};
 
 /**
  * When a refocus.events is dispatch it is handled here.
