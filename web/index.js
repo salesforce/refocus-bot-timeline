@@ -17,7 +17,6 @@ require('../web/dist/public/styles/salesforce-lightning-design-system.css');
 
 const React = require('react');
 const ReactDOM = require('react-dom');
-const moment = require('moment');
 const App = require('./components/App.jsx');
 const env = process.env.NODE_ENV || 'dev';
 const config = require('../config.js')[env];
@@ -26,7 +25,7 @@ const botName = require('../package.json').name;
 const roomId = bdk.getRoomId();
 const _user = {
   name: bdk.getUserName(),
-  id: bdk.getUserName(),
+  id: bdk.getUserId(),
   email: bdk.getUserEmail(),
 };
 
@@ -68,41 +67,12 @@ function handleActions(action) {
 }
 
 /**
- * When the users leave/reloads the page, send an event to let log
- * the user leaving.
- */
-function confirmExit(){
-  const eventType = {
-    'type': 'User',
-    'user': _user,
-    'join': false,
-  };
-  bdk.createEvents(
-    roomId,
-    _user.name + ' has left the room at ' +
-      moment().format('YYYY-MM-DD HH:mm Z'),
-    eventType
-  );
-}
-
-/**
  * The actions to take before load.
  */
 function init() {
   bdk.getEvents(roomId)
     .then((events) => {
       renderUI(events.body, _user);
-      const eventType = {
-        'type': 'User',
-        'user': _user,
-        'join': true,
-      };
-      bdk.createEvents(
-        roomId,
-        _user.name + ' has joined the room at ' +
-          moment().format('YYYY-MM-DD HH:mm Z'),
-        eventType
-      );
     });
 }
 
@@ -124,7 +94,6 @@ function renderUI(response){
   );
 }
 
-window.onbeforeunload = confirmExit;
 document.getElementById(botName)
   .addEventListener('refocus.events', handleEvents, false);
 document.getElementById(botName)
