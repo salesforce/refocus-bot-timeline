@@ -30,7 +30,7 @@ class UserMessage extends React.Component{
                 {((event.context) && (event.context.user)) ?
                   event.context.user.name : 'User'}
               </b> has {((event.context) &&
-                (event.context.join)) ?
+                (event.context.isActive)) ?
                 'joined' : 'left'} room •&nbsp;
               {moment(event.createdAt).format('YYYY-MM-DD HH:mm Z')}
             </p>
