@@ -16,6 +16,7 @@
     "@salesforce/refocus-bdk": "^1.0.3",
     "chai": "^4.0.2",
     "express": "4.10.2",
+    "is-url": "^1.2.2",
     "lodash": "^4.17.4",
     "mocha": "^3.4.2",
     "moment": "^2.18.1",

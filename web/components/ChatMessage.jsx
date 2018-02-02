@@ -1,6 +1,7 @@
 import PropTypes from 'prop-types';
 const moment = require('moment');
 const React=require('react');
+const isUrl=require('is-url');
 import './chat.css';
 
 class ChatMessage extends React.Component{
@@ -17,7 +18,14 @@ class ChatMessage extends React.Component{
               {moment(event.createdAt).format('YYYY-MM-DD HH:mm Z')}
             </div>
             <div className="slds-chat-message__text">
-              <span>{event.log}</span>
+              { isUrl(event.log) ?
+                <a
+                  href={event.log}
+                  target='_blank'>
+                  {event.log}
+                </a> :
+                <span>{event.log}</span>
+              }
             </div>
           </div>
         </div>
