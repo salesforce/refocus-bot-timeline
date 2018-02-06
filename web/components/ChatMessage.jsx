@@ -21,6 +21,7 @@ class ChatMessage extends React.Component{
               { isUrl(event.log) ?
                 <a
                   href={event.log}
+                  rel='noopener noreferrer'
                   target='_blank'>
                   {event.log}
                 </a> :
