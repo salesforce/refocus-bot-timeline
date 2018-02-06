@@ -2,6 +2,7 @@ var path = require('path');
 var HtmlWebpackPlugin = require('html-webpack-plugin'); //creates index.html folder and puts it in dist folder
 var webpack = require('webpack');
 var ZipPlugin = require('zip-webpack-plugin');
+const Dotenv = require('dotenv-webpack');
 var env = process.env.NODE_ENV || 'dev';
 var url = require('./config.js')[env].refocusUrl;
 const botName = require('./package.json').name;
@@ -68,6 +69,11 @@ var config = {
 				'SOCKET_TOKEN': JSON.stringify(process.env.SOCKET_TOKEN),
  			}
  		}),
+ 		new Dotenv({
+	      path: './.env',
+	      safe: false,
+	      systemvars: true
+	    }),
 	]
 };
 
