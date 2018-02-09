@@ -1,5 +1,4 @@
 import PropTypes from 'prop-types';
-
 import ReactHtmlParser from 'react-html-parser';
 const moment = require('moment');
 const React=require('react');
