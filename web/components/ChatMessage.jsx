@@ -1,7 +1,8 @@
 import PropTypes from 'prop-types';
+import ReactHtmlParser from 'react-html-parser';
 const moment = require('moment');
 const React=require('react');
-const isUrl=require('is-url');
+var linkifyHtml = require('linkifyjs/html');
 import './chat.css';
 
 class ChatMessage extends React.Component{
@@ -18,14 +19,14 @@ class ChatMessage extends React.Component{
               {moment(event.createdAt).format('YYYY-MM-DD HH:mm Z')}
             </div>
             <div className="slds-chat-message__text">
-              { isUrl(event.log) ?
-                <a
-                  href={event.log}
-                  rel='noopener noreferrer'
-                  target='_blank'>
-                  {event.log}
-                </a> :
-                <span>{event.log}</span>
+              {
+                <span>
+                  {ReactHtmlParser(linkifyHtml(event.log, {
+                    attributes: {
+                      rel: 'noopener noreferrer'
+                    }
+                  }))}
+                </span>
               }
             </div>
           </div>

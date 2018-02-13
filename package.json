@@ -1,6 +1,6 @@
 {
   "name": "Timeline-Bot",
-  "version": "0.1.0",
+  "version": "1.0.1",
   "description": "A bot that show all events in a room",
   "url": "https://git.soma.salesforce.com/Refocus-Bots/Timeline-Bot",
   "scripts": {
@@ -18,7 +18,7 @@
     "dotenv": "4.0.0",
     "dotenv-webpack": "1.5.4",
     "express": "4.10.2",
-    "is-url": "^1.2.2",
+    "linkifyjs": "^2.1.5",
     "lodash": "^4.17.4",
     "mocha": "^3.4.2",
     "moment": "^2.18.1",
