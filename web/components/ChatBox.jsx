@@ -10,15 +10,19 @@ class ChatBox extends React.Component{
       currentText: this.props.currentText,
       chatChange: this.props.chatChange,
       sendChat: this.props.sendChat,
+      pendingMessage: this.props.pendingMessage,
     };
   }
 
   componentWillReceiveProps(nextProps) {
-    this.setState({ currentText: nextProps.currentText });
+    this.setState({
+      currentText: nextProps.currentText,
+      pendingMessage: nextProps.pendingMessage
+    });
   }
 
   render(){
-    const { currentText, chatChange, sendChat } = this.state;
+    const { currentText, chatChange, sendChat, pendingMessage } = this.state;
     const footerClass = 'slds-docked-composer__footer slds-grid slds-form' +
       ' slds-form_stacked slds-p-horizontal_medium slds-m-bottom_small';
 
@@ -33,6 +37,7 @@ class ChatBox extends React.Component{
               placeholder="Type Message"
               value={currentText}
               onChange={chatChange}
+              disabled={pendingMessage}
               onKeyPress={(event) => {
                 if (event.key === 'Enter') {
                   sendChat();
@@ -42,9 +47,13 @@ class ChatBox extends React.Component{
         </div>
         <div className="slds-col slds-p-around_xx-small">
           <button
+            disabled={pendingMessage}
             className="slds-button slds-button_brand"
             onClick={() => sendChat()}>
-            Send
+            {pendingMessage ?
+              <p className="saving">
+                <span>.</span><span>.</span><span>.</span>
+              </p> : 'Send'}
           </button>
         </div>
       </div>
@@ -56,6 +65,7 @@ ChatBox.propTypes={
   currentText: PropTypes.string,
   chatChange: PropTypes.func,
   sendChat: PropTypes.func,
+  pendingMessage: PropTypes.bool
 };
 
 module.exports=ChatBox;

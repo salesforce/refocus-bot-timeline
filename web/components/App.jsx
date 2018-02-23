@@ -21,6 +21,7 @@ class App extends React.Component{
       currentText: '',
       scroll: false,
       filter: 'All',
+      pendingMessage: false
     };
     this.closeToast = this.closeToast.bind(this);
     this.filterType = this.filterType.bind(this);
@@ -55,13 +56,20 @@ class App extends React.Component{
 
   sendChat(){
     if (this.state.currentText !== '') {
-      this.setState({ currentText: '' });
       const eventType = {
         'type': 'Comment',
         'user': this.props.user,
         'join': true,
       };
-      bdk.createEvents(this.state.roomId, this.state.currentText, eventType);
+
+      this.setState({ pendingMessage: true });
+      bdk.createEvents(this.state.roomId, this.state.currentText, eventType)
+        .then(() => {
+          this.setState({
+            pendingMessage: false,
+            currentText: ''
+          });
+        });
     }
   }
 
@@ -113,7 +121,8 @@ class App extends React.Component{
         <ChatBox
           currentText={this.state.currentText}
           chatChange={this.chatChange}
-          sendChat={this.sendChat} />
+          sendChat={this.sendChat}
+          pendingMessage={this.state.pendingMessage}/>
       </div>
     );
   }
