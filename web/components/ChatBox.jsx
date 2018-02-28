@@ -24,7 +24,7 @@ class ChatBox extends React.Component{
   render(){
     const { currentText, chatChange, sendChat, pendingMessage } = this.state;
     const footerClass = 'slds-docked-composer__footer slds-grid slds-form' +
-      ' slds-form_stacked slds-p-horizontal_medium slds-m-bottom_small';
+      ' slds-form_stacked slds-p-horizontal_medium';
 
     return (
       <div className={footerClass}>
