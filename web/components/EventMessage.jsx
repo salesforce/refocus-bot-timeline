@@ -12,8 +12,7 @@ class EventMessage extends React.Component{
     const iconPath = '../static/icons/utility-sprite/svg/symbols.svg';
 
     return (
-      <li
-        className="slds-chat-listitem slds-chat-listitem_event">
+      <li className="slds-chat-listitem slds-chat-listitem_event">
         <div className="slds-chat-event">
           <div className="slds-chat-event__rule"></div>
           <div className="slds-chat-event__body">
