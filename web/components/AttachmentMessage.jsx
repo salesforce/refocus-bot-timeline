@@ -15,11 +15,10 @@ class AttachmentMessage extends React.Component{
     const iconPath = '../static/icons/utility-sprite/svg/symbols.svg';
 
     return (
-      <li className="slds-chat-listitem" key={event.id}>
-        <div className="slds-chat-message">
-          <div className="slds-chat-message__body slds-chat_past">
-            <div className="slds-chat-message__text">
-            <div className="slds-chat-event__body">
+      <li className="slds-chat-listitem slds-chat-listitem_event">
+        <div className="slds-chat-event">
+          <div className="slds-chat-event__rule"></div>
+          <div className="slds-chat-event__body">
             <span className={svgIconClass}>
               <svg className={iconClass} aria-hidden="true">
                 <use
@@ -32,7 +31,9 @@ class AttachmentMessage extends React.Component{
               {moment(event.createdAt).format('YYYY-MM-DD HH:mm Z')}
             </p>
           </div>
-              {
+          <div className="slds-chat-event__rule"></div>
+          <div className="slds-chat-event__agent-message">
+            {
                 <span>
                   {ReactHtmlParser(linkifyHtml(event.log, {
                     attributes: {
@@ -46,7 +47,6 @@ class AttachmentMessage extends React.Component{
                       <img src={event.context.attachment} className='preview' />
                 }
               </div>
-            </div>
           </div>
         </div>
       </li>
