@@ -8,6 +8,7 @@ const FilterHeader = require('./FilterHeader.jsx');
 const EventMessage = require('./EventMessage.jsx');
 const UserMessage = require('./UserMessage.jsx');
 const ChatMessage = require('./ChatMessage.jsx');
+const AttachmentMessage = require('./AttachmentMessage.jsx');
 const ChatBox = require('./ChatBox.jsx');
 import './chat.css';
 
@@ -92,10 +93,11 @@ class App extends React.Component{
           </li>
           {response.map((event) => {
             if ((this.state.filter === 'All') ||
-              ((event.context) &&
-                (event.context.type === this.state.filter))
+              ((event.context) && (event.context.type === this.state.filter) ||
+                ((this.state.filter === 'Attachment') && (event.context.type === 'Event') && (event.context.attachment)))
             ) {
-              if ((event.context) && (event.context.type === 'Event')) {
+              if ((event.context) && (event.context.type === 'Event') &&
+                  (!event.context.attachment)) {
                 return (
                   <EventMessage
                     event={ event }
@@ -105,6 +107,14 @@ class App extends React.Component{
               if ((event.context) && (event.context.type === 'User')) {
                 return (
                   <UserMessage
+                    event={ event }
+                    key={ event.id } />
+                );
+              }
+              if ((event.context) && (event.context.type === 'Event') &&
+                  (event.context.attachment)) {
+                return (
+                  <AttachmentMessage
                     event={ event }
                     key={ event.id } />
                 );
