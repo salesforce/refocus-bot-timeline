@@ -94,7 +94,9 @@ class App extends React.Component{
           {response.map((event) => {
             if ((this.state.filter === 'All') ||
               ((event.context) && (event.context.type === this.state.filter) ||
-                ((this.state.filter === 'Attachment') && (event.context.type === 'Event') && (event.context.attachment)))
+                ((this.state.filter === 'Attachment') &&
+                  (event.context.type === 'Event') &&
+                  (event.context.attachment)))
             ) {
               if ((event.context) && (event.context.type === 'Event') &&
                   (!event.context.attachment)) {
