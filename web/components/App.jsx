@@ -1,8 +1,8 @@
 import PropTypes from 'prop-types';
 const moment = require('moment');
 const React=require('react');
-const env = process.env.NODE_ENV || 'dev';
-const config = require('../../config.js')[env];
+const env = require('./config.js').env;
+const config = require('./config.js')[env];
 const bdk = require('@salesforce/refocus-bdk')(config);
 const FilterHeader = require('./FilterHeader.jsx');
 const EventMessage = require('./EventMessage.jsx');

@@ -1,11 +1,9 @@
-'use strict';
-
 require('dotenv').config();
 const express = require('express');
 const app = express();
 const http = require('http');
-const env = process.env.NODE_ENV || 'dev';
-const PORT = process.env.PORT || 5000;
+const env = require('./config.js').env;
+const PORT = require('./config.js').port;
 const config = require('./config.js')[env];
 const packageJSON = require('./package.json');
 const bdk = require('@salesforce/refocus-bdk')(config);
@@ -15,9 +13,10 @@ bdk.installOrUpdateBot(packageJSON);
 
 app.use(express.static('web/dist'));
 app.get('/*', (req, res) => {
+  // eslint-disable-next-line
   res.sendFile(__dirname + '/web/dist/index.html');
 });
 
 http.Server(app).listen(PORT, () => {
-  console.log('listening on: ', PORT);
+  bdk.log.info('listening on: ', PORT);
 });
