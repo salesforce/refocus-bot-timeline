@@ -1,9 +1,6 @@
 import PropTypes from 'prop-types';
 const moment = require('moment');
 const React=require('react');
-import ReactHtmlParser from 'react-html-parser';
-var linkifyHtml = require('linkifyjs/html');
-
 import './chat.css';
 
 class AttachmentMessage extends React.Component{
@@ -33,13 +30,14 @@ class AttachmentMessage extends React.Component{
           </div>
           <div className='slds-chat-event__rule'></div>
           <div className='slds-chat-event__agent-message'>
-            {event.context.userName} uploaded
-            <a href={event.context.fileURL} target='_blank'rel='noopener noreferrer'>{event.context.fileName}</a>
-              <div>
-                {event.context.fileType.includes('image') &&
-                      <img src={event.context.attachment} className='preview' />
-                }
-              </div>
+            {event.context.userName} uploaded &nbsp;
+            <a href={event.context.fileURL} target='_blank'
+              rel='noopener noreferrer'>{event.context.fileName}</a>
+            <div>
+              {event.context.fileType.includes('image') &&
+                <img src={event.context.attachment} className='preview' />
+              }
+            </div>
           </div>
         </div>
       </li>
