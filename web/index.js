@@ -18,8 +18,8 @@ require('../web/dist/public/styles/salesforce-lightning-design-system.css');
 const React = require('react');
 const ReactDOM = require('react-dom');
 const App = require('./components/App.jsx');
-const env = process.env.NODE_ENV || 'dev';
-const config = require('../config.js')[env];
+const env = require('./config.js').env;
+const config = require('./config.js')[env];
 const bdk = require('@salesforce/refocus-bdk')(config);
 const botName = require('../package.json').name;
 const roomId = bdk.getRoomId();
@@ -28,53 +28,6 @@ const _user = {
   id: bdk.getUserId(),
   email: bdk.getUserEmail(),
 };
-
-/**
- * When a refocus.events is dispatch it is handled here.
- *
- * @param {Event} event - The most recent event object
- */
-function handleEvents(event) {
-  console.log(botName + ' Event Activity', event);
-  renderUI([event.detail], _user);
-}
-
-/**
- * When a refocus.room.settings is dispatch it is handled here.
- *
- * @param {Room} room - Room object that was dispatched
- */
-function handleSettings(room) {
-  console.log(botName + ' Room Activity', room);
-}
-
-/**
- * When a refocus.bot.data is dispatch it is handled here.
- *
- * @param {BotData} data - Bot Data object that was dispatched
- */
-function handleData(data) {
-  console.log(botName + ' Bot Data Activity', data);
-}
-
-/**
- * When a refocus.bot.actions is dispatch it is handled here.
- *
- * @param {BotAction} action - Bot Action object that was dispatched
- */
-function handleActions(action) {
-  console.log(botName + ' Bot Action Activity', action);
-}
-
-/**
- * The actions to take before load.
- */
-function init() {
-  bdk.getEvents(roomId)
-    .then((events) => {
-      renderUI(events.body, _user);
-    });
-}
 
 /**
  * This is the main function to render the UI
@@ -92,6 +45,53 @@ function renderUI(response){
     />,
     document.getElementById(botName)
   );
+}
+
+/**
+ * When a refocus.events is dispatch it is handled here.
+ *
+ * @param {Event} event - The most recent event object
+ */
+function handleEvents(event) {
+  bdk.log.info(botName + ' Event Activity', event);
+  renderUI([event.detail], _user);
+}
+
+/**
+ * When a refocus.room.settings is dispatch it is handled here.
+ *
+ * @param {Room} room - Room object that was dispatched
+ */
+function handleSettings(room) {
+  bdk.log.info(botName + ' Room Activity', room);
+}
+
+/**
+ * When a refocus.bot.data is dispatch it is handled here.
+ *
+ * @param {BotData} data - Bot Data object that was dispatched
+ */
+function handleData(data) {
+  bdk.log.info(botName + ' Bot Data Activity', data);
+}
+
+/**
+ * When a refocus.bot.actions is dispatch it is handled here.
+ *
+ * @param {BotAction} action - Bot Action object that was dispatched
+ */
+function handleActions(action) {
+  bdk.log.info(botName + ' Bot Action Activity', action);
+}
+
+/**
+ * The actions to take before load.
+ */
+function init() {
+  bdk.getEvents(roomId)
+    .then((events) => {
+      renderUI(events.body, _user);
+    });
 }
 
 document.getElementById(botName)
