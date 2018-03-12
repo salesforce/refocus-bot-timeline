@@ -12,12 +12,12 @@ class EventMessage extends React.Component{
     const iconPath = '../static/icons/utility-sprite/svg/symbols.svg';
 
     return (
-      <li className="slds-chat-listitem slds-chat-listitem_event">
-        <div className="slds-chat-event">
-          <div className="slds-chat-event__rule"></div>
-          <div className="slds-chat-event__body">
+      <li className='slds-chat-listitem slds-chat-listitem_event'>
+        <div className='slds-chat-event'>
+          <div className='slds-chat-event__rule'></div>
+          <div className='slds-chat-event__body'>
             <span className={svgIconClass}>
-              <svg className={iconClass} aria-hidden="true">
+              <svg className={iconClass} aria-hidden='true'>
                 <use
                   xlinkHref= {iconPath + '#event'}>
                 </use>
@@ -28,8 +28,8 @@ class EventMessage extends React.Component{
               {moment(event.createdAt).format('YYYY-MM-DD HH:mm Z')}
             </p>
           </div>
-          <div className="slds-chat-event__rule"></div>
-          <div className="slds-chat-event__agent-message">
+          <div className='slds-chat-event__rule'></div>
+          <div className='slds-chat-event__agent-message'>
             {event.log}
           </div>
         </div>

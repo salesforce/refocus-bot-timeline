@@ -18,7 +18,7 @@ require('../web/dist/public/styles/salesforce-lightning-design-system.css');
 const React = require('react');
 const ReactDOM = require('react-dom');
 const App = require('./components/App.jsx');
-const env = require('../config.js').env;
+const { env } = require('../config.js');
 const config = require('../config.js')[env];
 const bdk = require('@salesforce/refocus-bdk')(config);
 const botName = require('../package.json').name;
