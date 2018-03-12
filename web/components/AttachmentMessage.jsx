@@ -31,7 +31,7 @@ class AttachmentMessage extends React.Component{
           <div className='slds-chat-event__rule'></div>
           <div className='slds-chat-event__agent-message'>
             {event.context.userName} uploaded &nbsp;
-            <a href={event.context.fileURL} target='_blank'
+            <a href={event.context.attachment} target='_blank'
               rel='noopener noreferrer'>{event.context.fileName}</a>
             <div>
               {event.context.fileType.includes('image') &&

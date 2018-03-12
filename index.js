@@ -1,6 +1,7 @@
 require('dotenv').config();
 const express = require('express');
 const app = express();
+const path = require('path');
 const http = require('http');
 const env = require('./config.js').env;
 const PORT = require('./config.js').port;
@@ -13,8 +14,7 @@ bdk.installOrUpdateBot(packageJSON);
 
 app.use(express.static('web/dist'));
 app.get('/*', (req, res) => {
-  // eslint-disable-next-line
-  res.sendFile(__dirname + '/web/dist/index.html');
+  res.sendFile(path.join(__dirname, '/web/dist/index.html'));
 });
 
 http.Server(app).listen(PORT, () => {
