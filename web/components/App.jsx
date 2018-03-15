@@ -95,7 +95,8 @@ class App extends React.Component{
               ((event.context) &&
                 (event.context.type === this.state.filter))
             ) {
-              if ((event.context) && (event.context.type === 'Event')) {
+              if ((event.context) && (event.context.type === 'Event' ||
+                event.context.type === 'RoomState')) {
                 return (
                   <EventMessage
                     event={ event }
