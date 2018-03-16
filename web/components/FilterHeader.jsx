@@ -63,6 +63,16 @@ class FilterHeader extends React.Component{
               Users
             </button>
           </li>
+          <li>
+            <button
+              className={'slds-button ' +
+                (filter === 'Attachment' ?
+                  'slds-button_brand' :
+                  'slds-button_neutral')}
+              onClick={() => changeType('Attachment')}>
+              Attachments
+            </button>
+          </li>
         </ul>
       </div>
     );

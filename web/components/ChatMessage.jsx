@@ -2,7 +2,7 @@ import PropTypes from 'prop-types';
 import ReactHtmlParser from 'react-html-parser';
 const moment = require('moment');
 const React=require('react');
-var linkifyHtml = require('linkifyjs/html');
+const linkifyHtml = require('linkifyjs/html');
 import './chat.css';
 
 class ChatMessage extends React.Component{
