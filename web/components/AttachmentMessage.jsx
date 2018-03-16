@@ -3,7 +3,7 @@ const moment = require('moment');
 const React=require('react');
 import './chat.css';
 
-class EventMessage extends React.Component{
+class AttachmentMessage extends React.Component{
   render(){
     const { event } = this.props;
     const svgIconClass = 'slds-icon_container slds-icon-utility-change_owner ' +
@@ -24,13 +24,20 @@ class EventMessage extends React.Component{
               </svg>
             </span>
             <p>
-              <b>Event</b> was performed •&nbsp;
+              <b>File</b> was uploaded •&nbsp;
               {moment(event.createdAt).format('YYYY-MM-DD HH:mm Z')}
             </p>
           </div>
           <div className='slds-chat-event__rule'></div>
           <div className='slds-chat-event__agent-message'>
-            {event.log}
+            {event.context.userName} uploaded &nbsp;
+            <a href={event.context.attachment} target='_blank'
+              rel='noopener noreferrer'>{event.context.fileName}</a>
+            <div>
+              {event.context.fileType.includes('image') &&
+                <img src={event.context.attachment} className='preview' />
+              }
+            </div>
           </div>
         </div>
       </li>
@@ -38,8 +45,8 @@ class EventMessage extends React.Component{
   }
 }
 
-EventMessage.propTypes={
+AttachmentMessage.propTypes={
   event: PropTypes.object,
 };
 
-module.exports=EventMessage;
+module.exports=AttachmentMessage;
