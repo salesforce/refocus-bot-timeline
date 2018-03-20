@@ -13,6 +13,11 @@
   margin-bottom: 0.75rem;
 }
 
+.preview{
+  max-width: 10rem;
+  height: auto;
+}
+
 /**
  * The chat payload should be displayed in the form of a list. Each item in the list has a number of vertical and horizontal spacing rules based on its type
  *
