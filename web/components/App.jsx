@@ -1,13 +1,14 @@
 import PropTypes from 'prop-types';
 const moment = require('moment');
 const React=require('react');
-const env = process.env.NODE_ENV || 'dev';
+const { env } = require('../../config.js');
 const config = require('../../config.js')[env];
 const bdk = require('@salesforce/refocus-bdk')(config);
 const FilterHeader = require('./FilterHeader.jsx');
 const EventMessage = require('./EventMessage.jsx');
 const UserMessage = require('./UserMessage.jsx');
 const ChatMessage = require('./ChatMessage.jsx');
+const AttachmentMessage = require('./AttachmentMessage.jsx');
 const ChatBox = require('./ChatBox.jsx');
 import './chat.css';
 
@@ -81,22 +82,29 @@ class App extends React.Component{
         <FilterHeader
           filter={ this.state.filter }
           changeType={ this.filterType } />
-        <ul className="slds-chat-list"
+        <ul className='slds-chat-list'
           ref={(elem) => {
             this.container = elem;
           }}>
           <li>
-            <div className="slds-chat-bookend">
+            <div className='slds-chat-bookend'>
               Start of timeline for&nbsp;<b>Room #{this.state.roomId}</b>
             </div>
           </li>
           {response.map((event) => {
+            const isAttachment = (this.state.filter === 'Attachment') &&
+                  (event.context.type === 'Event') &&
+                  (event.context.attachment);
+            const isSelectedFilter = (event.context) &&
+              (event.context.type === this.state.filter);
+
             if ((this.state.filter === 'All') ||
-              ((event.context) &&
-                (event.context.type === this.state.filter))
+              (isSelectedFilter) ||
+                (isAttachment)
             ) {
               if ((event.context) && (event.context.type === 'Event' ||
-                event.context.type === 'RoomState')) {
+                event.context.type === 'RoomState') &&
+                (!event.context.attachment)) {
                 return (
                   <EventMessage
                     event={ event }
@@ -106,6 +114,14 @@ class App extends React.Component{
               if ((event.context) && (event.context.type === 'User')) {
                 return (
                   <UserMessage
+                    event={ event }
+                    key={ event.id } />
+                );
+              }
+              if ((event.context) && (event.context.type === 'Event') &&
+                  (event.context.attachment)) {
+                return (
+                  <AttachmentMessage
                     event={ event }
                     key={ event.id } />
                 );
