@@ -102,8 +102,9 @@ class App extends React.Component{
               (isSelectedFilter) ||
                 (isAttachment)
             ) {
-              if ((event.context) && (event.context.type === 'Event') &&
-                  (!event.context.attachment)) {
+              if ((event.context) && (event.context.type === 'Event' ||
+                event.context.type === 'RoomState') &&
+                (!event.context.attachment)) {
                 return (
                   <EventMessage
                     event={ event }
