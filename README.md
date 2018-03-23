@@ -6,4 +6,4 @@ Follows [semantic versioning](https://docs.npmjs.com/getting-started/semantic-ve
 * 1.0.2 Message remains in text box until it is sent successfully.
 * 1.0.3 Added support for attachments from dropzone
 * 1.0.4 Added support for room activate/deactivate
-* 1.0.5 Removed reference to refocus-connect
+* 1.0.5 Removed public folder and reference to refocus-connect.
