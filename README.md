@@ -7,3 +7,4 @@ Follows [semantic versioning](https://docs.npmjs.com/getting-started/semantic-ve
 * 1.0.3 Added support for attachments from dropzone
 * 1.0.4 Added support for room activate/deactivate
 * 1.0.5 Removed public folder and reference to refocus-connect.
+* 1.1.0 Fix message focus after message sent, Fix UI issues, UTC Times only

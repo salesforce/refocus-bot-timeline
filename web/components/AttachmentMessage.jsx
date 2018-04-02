@@ -25,7 +25,7 @@ class AttachmentMessage extends React.Component{
             </span>
             <p>
               <b>File</b> was uploaded •&nbsp;
-              {moment(event.createdAt).format('YYYY-MM-DD HH:mm Z')}
+              {moment.utc(event.createdAt).format('YYYY-MM-DD HH:mm')} UTC
             </p>
           </div>
           <div className='slds-chat-event__rule'></div>
