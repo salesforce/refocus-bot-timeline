@@ -18,7 +18,10 @@ class App extends React.Component{
     this.state={
       roomId: this.props.roomId,
       response: this.props.response
-        .sort((a, b) => moment(a.createdAt).diff(moment(b.createdAt))),
+        .sort((a, b) => moment(a.createdAt).diff(moment(b.createdAt)))
+        .filter((value, index, self) => { 
+          return self.indexOf(value) === index;
+        }),
       currentText: '',
       scroll: false,
       filter: 'All',
@@ -32,6 +35,10 @@ class App extends React.Component{
 
   componentWillReceiveProps(nextProps) {
     const eventLog = this.state.response.concat(nextProps.response);
+    eventLog.filter((value, index, self) => { 
+      return self.indexOf(value) === index;
+    });
+    
     this.setState({ response: eventLog });
     this.setState({ scroll: true });
   }
