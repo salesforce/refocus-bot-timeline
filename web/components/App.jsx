@@ -1,5 +1,6 @@
 import PropTypes from 'prop-types';
 const moment = require('moment');
+const _ = require('lodash');
 const React=require('react');
 const { env } = require('../../config.js');
 const config = require('../../config.js')[env];
@@ -18,7 +19,12 @@ class App extends React.Component{
     this.state={
       roomId: this.props.roomId,
       response: this.props.response
-        .sort((a, b) => moment(a.createdAt).diff(moment(b.createdAt))),
+        .sort((a, b) => moment(a.createdAt).diff(moment(b.createdAt)))
+        .filter((value, index, self) => {
+          const duplicates = _.filter(self.slice(0, index), ['id', value.id]);
+          return  duplicates.length === 0 ?
+            value : false;
+        }),
       currentText: '',
       scroll: false,
       filter: 'All',
@@ -31,7 +37,14 @@ class App extends React.Component{
   }
 
   componentWillReceiveProps(nextProps) {
-    const eventLog = this.state.response.concat(nextProps.response);
+    let eventLog = this.state.response.concat(nextProps.response);
+    eventLog = eventLog
+      .sort((a, b) => moment(a.createdAt).diff(moment(b.createdAt)))
+      .filter((value, index, self) => {
+        const duplicates = _.filter(self.slice(0, index), ['id', value.id]);
+        return  duplicates.length === 0 ?
+          value : false;
+      });
     this.setState({ response: eventLog });
     this.setState({ scroll: true });
   }

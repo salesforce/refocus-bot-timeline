@@ -16,7 +16,7 @@ class ChatMessage extends React.Component{
             <div className="slds-chat-message__meta">
               <b>{((event.context) && (event.context.user)) ?
                 event.context.user.name : 'User'}</b> •&nbsp;
-              {moment(event.createdAt).format('YYYY-MM-DD HH:mm Z')}
+              {moment.utc(event.createdAt).format('YYYY-MM-DD HH:mm')} UTC
             </div>
             <div className="slds-chat-message__text">
               {
