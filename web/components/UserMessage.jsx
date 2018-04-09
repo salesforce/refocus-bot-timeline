@@ -32,7 +32,7 @@ class UserMessage extends React.Component{
               </b> has {((event.context) &&
                 (event.context.isActive)) ?
                 'joined' : 'left'} room •&nbsp;
-              {moment(event.createdAt).format('YYYY-MM-DD HH:mm Z')}
+              {moment.utc(event.createdAt).format('YYYY-MM-DD HH:mm')} UTC
             </p>
           </div>
           <div className="slds-chat-event__rule"></div>

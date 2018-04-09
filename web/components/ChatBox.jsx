@@ -1,5 +1,4 @@
 import PropTypes from 'prop-types';
-const moment = require('moment');
 const React=require('react');
 import './chat.css';
 
@@ -28,24 +27,27 @@ class ChatBox extends React.Component{
 
     return (
       <div className={footerClass}>
-        <div className="slds-size_1-of-1 slds-form-element slds-col">
+        <div className="slds-form-element slds-col">
           <div className="slds-form-element__control slds-p-around_xx-small">
             <input
               id="chat"
+              ref={(currentChat) => {
+                this.chat = currentChat;
+              }}
               type="search"
               className="slds-input"
               placeholder="Type Message"
               value={currentText}
               onChange={chatChange}
-              disabled={pendingMessage}
               onKeyPress={(event) => {
-                if (event.key === 'Enter') {
+                if ((event.key === 'Enter') &&
+                  (!pendingMessage)) {
                   sendChat();
                 }
               }}/>
           </div>
         </div>
-        <div className="slds-col slds-p-around_xx-small">
+        <div className="slds-p-around_xx-small">
           <button
             disabled={pendingMessage}
             className="slds-button slds-button_brand"
