@@ -25,7 +25,7 @@ class EventMessage extends React.Component{
             </span>
             <p>
               <b>Event</b> was performed •&nbsp;
-              {moment(event.createdAt).format('YYYY-MM-DD HH:mm Z')}
+              {moment.utc(event.createdAt).format('YYYY-MM-DD HH:mm')} UTC
             </p>
           </div>
           <div className='slds-chat-event__rule'></div>
