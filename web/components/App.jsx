@@ -21,8 +21,8 @@ class App extends React.Component{
       response: this.props.response
         .sort((a, b) => moment(a.createdAt).diff(moment(b.createdAt)))
         .filter((value, index, self) => {
-          const dulplicates = _.filter(self.slice(0, index), ['id', value.id]);
-          return  dulplicates.length === 0 ?
+          const duplicates = _.filter(self.slice(0, index), ['id', value.id]);
+          return  duplicates.length === 0 ?
             value : false;
         }),
       currentText: '',
@@ -41,8 +41,8 @@ class App extends React.Component{
     eventLog = eventLog
       .sort((a, b) => moment(a.createdAt).diff(moment(b.createdAt)))
       .filter((value, index, self) => {
-        const dulplicates = _.filter(self.slice(0, index), ['id', value.id]);
-        return  dulplicates.length === 0 ?
+        const duplicates = _.filter(self.slice(0, index), ['id', value.id]);
+        return  duplicates.length === 0 ?
           value : false;
       });
     this.setState({ response: eventLog });
