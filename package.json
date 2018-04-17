@@ -1,6 +1,6 @@
 {
   "name": "Timeline-Bot",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "A bot that show all events in a room",
   "url": "https://git.soma.salesforce.com/Refocus-Bots/Timeline-Bot",
   "scripts": {
