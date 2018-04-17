@@ -8,14 +8,19 @@ import './chat.css';
 class ChatMessage extends React.Component{
   render(){
     const { event } = this.props;
+    let name;
+
+    if (event.context && event.context.user) {
+      name = event.context.user.fullName ?
+        event.context.user.fullName : event.context.user.name;
+    }
 
     return (
       <li className="slds-chat-listitem" key={event.id}>
         <div className="slds-chat-message">
           <div className="slds-chat-message__body slds-chat_past">
             <div className="slds-chat-message__meta">
-              <b>{((event.context) && (event.context.user)) ?
-                event.context.user.name : 'User'}</b> •&nbsp;
+              <b>{name ? name : 'User'}</b> •&nbsp;
               {moment.utc(event.createdAt).format('YYYY-MM-DD HH:mm')} UTC
             </div>
             <div className="slds-chat-message__text">
