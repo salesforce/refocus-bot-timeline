@@ -29,17 +29,10 @@ class EventMessage extends React.Component{
                 </use>
               </svg>
             </span>
-            { name ? (
-              <p>
-                <b>Event</b> performed by {name} •&nbsp;
-                {moment.utc(event.createdAt).format('YYYY-MM-DD HH:mm')} UTC
-              </p>
-            ) : (
-              <p>
-                <b>Event</b> was performed •&nbsp;
-                {moment.utc(event.createdAt).format('YYYY-MM-DD HH:mm')} UTC
-              </p>
-            )}
+            <p>
+              <b>Event</b> performed{name ? ` by ${name}` : ''} •&nbsp;
+              {moment.utc(event.createdAt).format('YYYY-MM-DD HH:mm')} UTC
+            </p>
           </div>
           <div className='slds-chat-event__rule'></div>
           <div className='slds-chat-event__agent-message'>
