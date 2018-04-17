@@ -27,7 +27,7 @@ class App extends React.Component{
         }),
       currentText: '',
       scroll: false,
-      filter: 'All',
+      filter: 'CommentAttachment',
       pendingMessage: false
     };
     this.closeToast = this.closeToast.bind(this);
@@ -60,8 +60,24 @@ class App extends React.Component{
     this.setState({ message: '' });
   }
 
-  filterType(type) {
-    this.setState({ filter: type });
+  filterType(type) {    
+    if ((this.state.filter === 'All') ||
+      (type === 'All')) {
+      this.setState({ filter: type });
+    } else {
+      if (this.state.filter.includes(type)) {
+        if (this.state.filter === type) {
+          this.setState({ filter: 'All' });
+        } else {
+          this.setState({ filter: this.state.filter
+            .replace(type, '') });          
+        }
+      } else {
+        this.setState({ filter: this.state.filter +
+          type });
+      }      
+    }
+    this.setState({ scroll: true });
   }
 
   chatChange(e){
@@ -105,11 +121,11 @@ class App extends React.Component{
             </div>
           </li>
           {response.map((event) => {
-            const isAttachment = (this.state.filter === 'Attachment') &&
+            const isAttachment = (this.state.filter.includes('Attachment')) &&
                   (event.context.type === 'Event') &&
                   (event.context.attachment);
             const isSelectedFilter = (event.context) &&
-              (event.context.type === this.state.filter);
+              (this.state.filter.includes(event.context.type));
 
             if ((this.state.filter === 'All') ||
               (isSelectedFilter) ||
