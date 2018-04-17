@@ -20,8 +20,7 @@ class ChatMessage extends React.Component{
         <div className="slds-chat-message">
           <div className="slds-chat-message__body slds-chat_past">
             <div className="slds-chat-message__meta">
-              <b>{name ?
-                name : 'User'}</b> •&nbsp;
+              <b>{name ? name : 'User'}</b> •&nbsp;
               {moment.utc(event.createdAt).format('YYYY-MM-DD HH:mm')} UTC
             </div>
             <div className="slds-chat-message__text">
