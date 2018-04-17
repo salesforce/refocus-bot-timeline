@@ -15,7 +15,7 @@ class ChatMessage extends React.Component{
       name = event.context.user.fullName ?
         event.context.user.fullName : event.context.user.name;
     }
-    
+
     return (
       <li className="slds-chat-listitem" key={event.id}>
         <div className="slds-chat-message">
