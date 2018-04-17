@@ -10,6 +10,8 @@ class UserMessage extends React.Component{
       'slds-chat-icon';
     const iconClass = 'slds-icon slds-m-bottom_xx-small slds-icon_xx-small';
     const iconPath = '../static/icons/utility-sprite/svg/symbols.svg';
+    const name = event.context.user.fullName ?
+      event.context.user.fullName : event.context.user.name;
 
     return (
       <li
@@ -28,7 +30,7 @@ class UserMessage extends React.Component{
             <p>
               <b>
                 {((event.context) && (event.context.user)) ?
-                  event.context.user.name : 'User'}
+                  name : 'User'}
               </b> has {((event.context) &&
                 (event.context.isActive)) ?
                 'joined' : 'left'} room •&nbsp;

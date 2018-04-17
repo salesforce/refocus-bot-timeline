@@ -10,6 +10,12 @@ class EventMessage extends React.Component{
       'slds-chat-icon';
     const iconClass = 'slds-icon slds-m-bottom_xx-small slds-icon_xx-small';
     const iconPath = '../static/icons/utility-sprite/svg/symbols.svg';
+    let name;
+
+    if (event.context && event.context.user) {
+      name = event.context.user.fullName ?
+        event.context.user.fullName : event.context.user.name;
+    }
 
     return (
       <li className='slds-chat-listitem slds-chat-listitem_event'>
@@ -23,10 +29,17 @@ class EventMessage extends React.Component{
                 </use>
               </svg>
             </span>
-            <p>
-              <b>Event</b> was performed •&nbsp;
-              {moment.utc(event.createdAt).format('YYYY-MM-DD HH:mm')} UTC
-            </p>
+            { name ? (
+              <p>
+                <b>Event</b> performed by {name} •&nbsp;
+                {moment.utc(event.createdAt).format('YYYY-MM-DD HH:mm')} UTC
+              </p>
+            ) : (
+              <p>
+                <b>Event</b> was performed •&nbsp;
+                {moment.utc(event.createdAt).format('YYYY-MM-DD HH:mm')} UTC
+              </p>
+            )}
           </div>
           <div className='slds-chat-event__rule'></div>
           <div className='slds-chat-event__agent-message'>
