@@ -30,7 +30,7 @@ class EventMessage extends React.Component{
               </svg>
             </span>
             <p>
-              <b>Event</b> performed{name ? ` by ${name}` : ''} •&nbsp;
+              <b>Event</b> was performed{name ? ` by ${name}` : ''} •&nbsp;
               {moment.utc(event.createdAt).format('YYYY-MM-DD HH:mm')} UTC
             </p>
           </div>
