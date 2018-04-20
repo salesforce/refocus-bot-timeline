@@ -2,7 +2,8 @@ import PropTypes from 'prop-types';
 import ReactHtmlParser from 'react-html-parser';
 const moment = require('moment');
 const React=require('react');
-const linkifyHtml = require('linkifyjs/html');
+const linkifyHtml = require('linkifyjs/string');
+const decode = require('unescape');
 import './chat.css';
 
 class ChatMessage extends React.Component{
@@ -26,11 +27,21 @@ class ChatMessage extends React.Component{
             <div className="slds-chat-message__text">
               {
                 <span>
-                  {ReactHtmlParser(linkifyHtml(event.log, {
-                    attributes: {
-                      rel: 'noopener noreferrer'
-                    }
-                  }))}
+                  {
+                    ReactHtmlParser(
+                      linkifyHtml(event.log, {
+                        attributes: {
+                          rel: 'noopener noreferrer'
+                        }
+                      })
+                    ).map((htmlString) => {
+                      if (typeof htmlString === 'string') {
+                        return decode(htmlString);
+                      } else {
+                        return htmlString;
+                      }
+                    })
+                  }
                 </span>
               }
             </div>
