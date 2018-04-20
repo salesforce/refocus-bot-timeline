@@ -9,3 +9,4 @@ Follows [semantic versioning](https://docs.npmjs.com/getting-started/semantic-ve
 * 1.0.5 Removed public folder and reference to refocus-connect.
 * 1.1.0 Fix message focus after message sent, Fix UI issues, UTC Times only
 * 1.1.1 Uses fullName instead of email for events/messages etc.
+* 1.1.2 Fix less than sign issues
