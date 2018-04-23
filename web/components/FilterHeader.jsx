@@ -36,7 +36,7 @@ class FilterHeader extends React.Component{
           <li>
             <button
               className={'slds-button ' +
-                (filter === 'Comment' ?
+                (filter.includes('Comment') ?
                   'slds-button_brand' :
                   'slds-button_neutral')}
               onClick={() => changeType('Comment')}>
@@ -46,7 +46,7 @@ class FilterHeader extends React.Component{
           <li>
             <button
               className={'slds-button ' +
-                (filter === 'Event' ?
+                (filter.includes('Event') ?
                   'slds-button_brand' :
                   'slds-button_neutral')}
               onClick={() => changeType('Event')}>
@@ -56,7 +56,7 @@ class FilterHeader extends React.Component{
           <li>
             <button
               className={'slds-button ' +
-                (filter === 'User' ?
+                (filter.includes('User') ?
                   'slds-button_brand' :
                   'slds-button_neutral')}
               onClick={() => changeType('User')}>
@@ -66,7 +66,7 @@ class FilterHeader extends React.Component{
           <li>
             <button
               className={'slds-button ' +
-                (filter === 'Attachment' ?
+                (filter.includes('Attachment') ?
                   'slds-button_brand' :
                   'slds-button_neutral')}
               onClick={() => changeType('Attachment')}>
