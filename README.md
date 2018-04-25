@@ -11,3 +11,4 @@ Follows [semantic versioning](https://docs.npmjs.com/getting-started/semantic-ve
 * 1.1.1 Uses fullName instead of email for events/messages etc.
 * 1.1.2 Fix less than sign issues
 * 1.1.3 Fix scroll on tag change, Add multiple tag support, Default to Comments and Attachments
+* 1.1.3 Get All Events
