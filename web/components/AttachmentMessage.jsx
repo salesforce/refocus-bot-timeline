@@ -33,12 +33,15 @@ class AttachmentMessage extends React.Component{
             {event.context.userName} uploaded &nbsp;
             <a href={event.context.attachment} target='_blank'
               rel='noopener noreferrer'>{event.context.fileName}</a>
-            <div>
-              {event.context.fileType.includes('image') &&
-                <img src={event.context.attachment} className='preview' />
-              }
-            </div>
           </div>
+          {event.context.fileType.includes('image') &&
+            <div className='slds-chat-event__agent-message'>
+              <a href={event.context.attachment} target='_blank'
+                rel='noopener noreferrer'>
+                <img src={event.context.attachment} className='preview' />
+              </a>
+            </div>
+          }
         </div>
       </li>
     );
