@@ -86,9 +86,9 @@ function handleActions(action) {
  * The actions to take before load.
  */
 function init() {
-  bdk.getEvents(roomId)
+  bdk.getAllEvents(roomId)
     .then((events) => {
-      renderUI(events.body, _user);
+      renderUI(events, _user);
     });
 }
 
