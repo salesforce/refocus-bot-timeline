@@ -13,3 +13,4 @@ Follows [semantic versioning](https://docs.npmjs.com/getting-started/semantic-ve
 * 1.1.3 Fix scroll on tag change, Add multiple tag support, Default to Comments and Attachments
 * 1.1.4 Get All Events
 * 1.1.5 Make images clickable
+* 1.1.6 Remove extra scripts
