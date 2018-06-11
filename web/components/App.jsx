@@ -54,7 +54,7 @@ class App extends React.Component{
           value : false;
       });
     this.setState({ response: eventLog });
-    var element = document.getElementById('chat-list');
+    const element = document.getElementById('chat-list');
     if (element.scrollHeight - element.scrollTop === element.clientHeight) {
       this.setState({scroll: true})
     } else {
