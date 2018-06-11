@@ -53,7 +53,6 @@ class App extends React.Component{
         return  duplicates.length === 0 ?
           value : false;
       });
-
     this.setState({ response: eventLog });
     var element = document.getElementById('chat-list');
     if (element.scrollHeight - element.scrollTop === element.clientHeight) {
@@ -203,7 +202,6 @@ class App extends React.Component{
             return (<div key={event.id}></div>);
           })}
         </ul>
-                           
         <ChatBox
           currentText={this.state.currentText}
           chatChange={this.chatChange}
