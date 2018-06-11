@@ -14,10 +14,15 @@ class ChatBox extends React.Component{
   }
 
   componentWillReceiveProps(nextProps) {
+    console.log(nextProps.currentText);
     this.setState({
       currentText: nextProps.currentText,
       pendingMessage: nextProps.pendingMessage
     });
+
+    if (nextProps.currentText === '') {
+      document.getElementById('chat').innerText = '';
+    }
   }
 
   render(){
@@ -29,22 +34,27 @@ class ChatBox extends React.Component{
       <div className={footerClass}>
         <div className="slds-form-element slds-col">
           <div className="slds-form-element__control slds-p-around_xx-small">
-            <input
-              id="chat"
-              ref={(currentChat) => {
-                this.chat = currentChat;
-              }}
-              type="search"
-              className="slds-input"
-              placeholder="Type Message"
-              value={currentText}
-              onChange={chatChange}
-              onKeyPress={(event) => {
-                if ((event.key === 'Enter') &&
-                  (!pendingMessage)) {
-                  sendChat();
-                }
-              }}/>
+            <div className="slds-rich-text-editor slds-grid slds-grid_vertical slds-nowrap">
+              <div id="chat"
+                ref={(currentChat) => {
+                  this.chat = currentChat;
+                }}
+
+                onKeyPress={chatChange}
+                placeholder="Type Message"
+                // onKeyPress={(event) => {
+                //   if ((event.key === 'Enter') &&
+                //     (!pendingMessage)) {
+                //     sendChat();
+                //   }
+                // }}
+                contentEditable="true" className="slds-input" style={{ maxHeight: '100px', overflow: 'scroll' }}>
+              </div>
+            </div>
+            <br/>
+
+
+
           </div>
         </div>
         <div className="slds-p-around_xx-small">
