@@ -13,9 +13,9 @@ class ToastMessage extends React.Component {
   }
 
   closeToast() {
-    //this.setState({ show: false });
+    this.setState({ show: false });
     if (this.props.closed) {
-      //this.props.closed();
+      this.props.closed();
     }
   }
 
