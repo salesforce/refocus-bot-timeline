@@ -10,6 +10,7 @@ const EventMessage = require('./EventMessage.jsx');
 const UserMessage = require('./UserMessage.jsx');
 const ChatMessage = require('./ChatMessage.jsx');
 const AttachmentMessage = require('./AttachmentMessage.jsx');
+const ToastMessage = require('./ToastMessage.jsx');
 const ChatBox = require('./ChatBox.jsx');
 import './chat.css';
 
@@ -17,6 +18,7 @@ class App extends React.Component{
   constructor(props){
     super(props);
     this.state={
+      toast: false,
       roomId: this.props.roomId,
       response: this.props.response
         .sort((a, b) => moment(a.createdAt).diff(moment(b.createdAt)))
@@ -34,6 +36,12 @@ class App extends React.Component{
     this.filterType = this.filterType.bind(this);
     this.chatChange = this.chatChange.bind(this);
     this.sendChat = this.sendChat.bind(this);
+    this.clicked = this.clicked.bind(this);
+    this.shouldShowToast = this.shouldShowToast.bind(this);
+  }
+
+  componentDidMount() {
+    this.setState({ scroll: true });
   }
 
   componentWillReceiveProps(nextProps) {
@@ -45,8 +53,23 @@ class App extends React.Component{
         return  duplicates.length === 0 ?
           value : false;
       });
+
     this.setState({ response: eventLog });
-    this.setState({ scroll: true });
+    var element = document.getElementById('chat-list');
+    if (element.scrollHeight - element.scrollTop === element.clientHeight) {
+      this.setState({scroll: true})
+    } else {
+      this.setState({toast: this.shouldShowToast(nextProps.response[0])});
+    }
+  }
+
+  shouldShowToast(response) {
+    if (response.context && (this.state.filter === 'All' ||
+      this.state.filter.includes(response.context.type))) {
+      return true;
+    } else {
+      return false;
+    }
   }
 
   componentDidUpdate() {
@@ -57,10 +80,17 @@ class App extends React.Component{
   }
 
   closeToast(){
-    this.setState({ message: '' });
+    this.setState({ toast: false });
   }
 
-  filterType(type) {    
+  clicked() {
+    this.setState({
+      scroll: true,
+      toast: false
+    });
+  }
+
+  filterType(type) {
     if ((this.state.filter === 'All') ||
       (type === 'All')) {
       this.setState({ filter: type });
@@ -111,7 +141,16 @@ class App extends React.Component{
         <FilterHeader
           filter={ this.state.filter }
           changeType={ this.filterType } />
+        {this.state.toast ?
+          <ToastMessage
+            message = {"Jump to new Event.."}
+            closed={this.closeToast}
+            clicked={this.clicked}
+          /> :
+          <div></div>
+        }
         <ul className='slds-chat-list'
+          id="chat-list"
           ref={(elem) => {
             this.container = elem;
           }}>
@@ -164,6 +203,7 @@ class App extends React.Component{
             return (<div key={event.id}></div>);
           })}
         </ul>
+                           
         <ChatBox
           currentText={this.state.currentText}
           chatChange={this.chatChange}
