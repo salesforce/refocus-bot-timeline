@@ -144,14 +144,6 @@ class App extends React.Component{
         <FilterHeader
           filter={ this.state.filter }
           changeType={ this.filterType } />
-        {this.state.toast ?
-          <ToastMessage
-            message = { 'Jump to new Event..' }
-            closed={this.closeToast}
-            clicked={this.clicked}
-          /> :
-          <div></div>
-        }
         <ul className='slds-chat-list'
           id="chat-list"
           ref={(elem) => {
@@ -206,6 +198,14 @@ class App extends React.Component{
             return (<div key={event.id}></div>);
           })}
         </ul>
+        {this.state.toast ?
+          <ToastMessage
+            message = { 'Jump to new Event..' }
+            closed={this.closeToast}
+            clicked={this.clicked}
+          /> :
+          <div></div>
+        }
         <ChatBox
           currentText={this.state.currentText}
           chatChange={this.chatChange}
