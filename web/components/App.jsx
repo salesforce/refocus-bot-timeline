@@ -14,6 +14,9 @@ const ToastMessage = require('./ToastMessage.jsx');
 const ChatBox = require('./ChatBox.jsx');
 import './chat.css';
 
+const ZERO = 0;
+const DFB = 5; // Distance From Bottom
+
 class App extends React.Component{
   constructor(props){
     super(props);
@@ -49,16 +52,17 @@ class App extends React.Component{
     eventLog = eventLog
       .sort((a, b) => moment(a.createdAt).diff(moment(b.createdAt)))
       .filter((value, index, self) => {
-        const duplicates = _.filter(self.slice(0, index), ['id', value.id]);
-        return  duplicates.length === 0 ?
+        const duplicates = _.filter(self.slice(ZERO, index), ['id', value.id]);
+        return duplicates.length === ZERO ?
           value : false;
       });
     this.setState({ response: eventLog });
     const element = document.getElementById('chat-list');
-    if (element.scrollHeight - element.scrollTop === element.clientHeight) {
-      this.setState({scroll: true})
+    if (element.scrollHeight - element.scrollTop - DFB <=
+      element.clientHeight) {
+      this.setState({ scroll: true });
     } else {
-      this.setState({toast: this.shouldShowToast(nextProps.response[0])});
+      this.setState({ toast: this.shouldShowToast(nextProps.response[ZERO]) });
     }
   }
 
@@ -66,9 +70,9 @@ class App extends React.Component{
     if (response.context && (this.state.filter === 'All' ||
       this.state.filter.includes(response.context.type))) {
       return true;
-    } else {
-      return false;
     }
+
+    return false;
   }
 
   componentDidUpdate() {
@@ -142,7 +146,7 @@ class App extends React.Component{
           changeType={ this.filterType } />
         {this.state.toast ?
           <ToastMessage
-            message = {"Jump to new Event.."}
+            message = { 'Jump to new Event..' }
             closed={this.closeToast}
             clicked={this.clicked}
           /> :
