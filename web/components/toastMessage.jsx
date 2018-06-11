@@ -13,9 +13,9 @@ class ToastMessage extends React.Component {
   }
 
   closeToast() {
-    this.setState({ show: false });
+    //this.setState({ show: false });
     if (this.props.closed) {
-      this.props.closed();
+      //this.props.closed();
     }
   }
 
@@ -42,7 +42,8 @@ class ToastMessage extends React.Component {
     return (
       <div className={toastContainer}>
         <div className="slds-region_narrow slds-is-relative">
-          <div className="slds-notify_container slds-is-absolute">
+          <div className="slds-notify_container slds-is-absolute"
+            style={{ bottom: '10px', top: 'auto' }}>
             <div onClick = { this.props.clicked }
               className="slds-notify slds-notify_toast"
               style={{ width: 'auto' }}
