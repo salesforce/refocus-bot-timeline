@@ -36,8 +36,6 @@ class ToastMessage extends React.Component {
 
   render() {
     const { message, show } = this.state;
-    const buttonClasses = 'slds-button slds-button_icon ' +
-      'slds-notify__close slds-button_icon-inverse';
     let toastContainer = 'slds-size_2-of-2 ';
     toastContainer += show ? 'slds-show' : 'slds-hide';
 
@@ -47,10 +45,12 @@ class ToastMessage extends React.Component {
           <div className="slds-notify_container slds-is-absolute">
             <div onClick = { this.props.clicked }
               className="slds-notify slds-notify_toast"
-              style={{width: 'auto'}}
+              style={{ width: 'auto' }}
               role="alert">
               <div className="slds-notify__content">
-                <a className="slds-text-heading_small slds-text-link">{ message }</a>
+                <a className="slds-text-heading_small slds-text-link">
+                  { message }
+                </a>
               </div>
             </div>
           </div>
@@ -63,6 +63,7 @@ class ToastMessage extends React.Component {
 ToastMessage.propTypes = {
   message: PropTypes.string,
   closed: PropTypes.func,
+  clicked: PropTypes.func
 };
 
 module.exports = ToastMessage;
