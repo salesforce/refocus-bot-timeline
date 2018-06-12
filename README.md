@@ -14,3 +14,4 @@ Follows [semantic versioning](https://docs.npmjs.com/getting-started/semantic-ve
 * 1.1.4 Get All Events
 * 1.1.5 Make images clickable
 * 1.1.6 Remove extra scripts
+* 1.1.7 Allow copy and paste with newlines and can type a newline with SHIFT + ENTER
