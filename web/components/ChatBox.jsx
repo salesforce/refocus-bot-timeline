@@ -33,8 +33,7 @@ class ChatBox extends React.Component{
           <div className="slds-form-element__control slds-p-around_xx-small">
             <div id="chat"
               className="slds-input slds-rich-text-editor"
-              contentEditable="true" 
-              style={{ maxHeight: '100px', overflow: 'auto' }}
+              contentEditable="true"
               onKeyUp={chatChange}
               placeholder="Type Message"
               onKeyPress={(event) => {
