@@ -65,6 +65,7 @@ class ChatBox extends React.Component{
 }
 
 ChatBox.propTypes={
+  currentText: PropTypes.string,
   chatChange: PropTypes.func,
   sendChat: PropTypes.func,
   pendingMessage: PropTypes.bool
