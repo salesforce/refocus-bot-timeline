@@ -23,3 +23,4 @@ Follows [semantic versioning](https://docs.npmjs.com/getting-started/semantic-ve
 * 1.1.5 Make images clickable
 * 1.1.6 Remove extra scripts
 * 1.1.7 Add env variable for refocus url
+* 1.1.8 Stop auto scroll and make toast on new Event.
