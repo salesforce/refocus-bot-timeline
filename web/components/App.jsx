@@ -114,7 +114,7 @@ class App extends React.Component{
   }
 
   chatChange(e){
-    this.setState({ currentText: e.target.value });
+    this.setState({ currentText: e.target.innerText });
   }
 
   sendChat(){
