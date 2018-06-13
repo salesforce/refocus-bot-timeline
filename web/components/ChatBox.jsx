@@ -6,7 +6,6 @@ class ChatBox extends React.Component{
   constructor(props){
     super(props);
     this.state={
-      currentText: this.props.currentText,
       chatChange: this.props.chatChange,
       sendChat: this.props.sendChat,
       pendingMessage: this.props.pendingMessage,
@@ -15,13 +14,16 @@ class ChatBox extends React.Component{
 
   componentWillReceiveProps(nextProps) {
     this.setState({
-      currentText: nextProps.currentText,
       pendingMessage: nextProps.pendingMessage
     });
+
+    if (nextProps.currentText === '') {
+      document.getElementById('chat').innerText = '';
+    }
   }
 
   render(){
-    const { currentText, chatChange, sendChat, pendingMessage } = this.state;
+    const { chatChange, sendChat, pendingMessage } = this.state;
     const footerClass = 'slds-docked-composer__footer slds-grid slds-form' +
       ' slds-form_stacked slds-p-horizontal_medium';
 
@@ -29,22 +31,20 @@ class ChatBox extends React.Component{
       <div className={footerClass}>
         <div className="slds-form-element slds-col">
           <div className="slds-form-element__control slds-p-around_xx-small">
-            <input
-              id="chat"
-              ref={(currentChat) => {
-                this.chat = currentChat;
-              }}
-              type="search"
-              className="slds-input"
+            <div id="chat"
+              className="slds-input slds-rich-text-editor"
+              contentEditable="true"
+              onKeyUp={chatChange}
               placeholder="Type Message"
-              value={currentText}
-              onChange={chatChange}
               onKeyPress={(event) => {
-                if ((event.key === 'Enter') &&
-                  (!pendingMessage)) {
-                  sendChat();
+                if (event.key === 'Enter') {
+                  if (!event.shiftKey && !pendingMessage) {
+                    event.preventDefault();
+                    sendChat();
+                  } 
                 }
-              }}/>
+              }}>
+            </div>
           </div>
         </div>
         <div className="slds-p-around_xx-small">
