@@ -26,14 +26,14 @@ module.exports = {
   },
   sandbox: {
     refocusUrl: process.env.REFOCUS_URL ||
-      'https://refocus-sandbox.hk.salesforce.com',
+      'https://refocus-sandbox.internal.salesforce.com',
     loginUrl: process.env.SFDC_URL,
     token: process.env.API_TOKEN,
     socketToken: process.env.SOCKET_TOKEN,
   },
   production: {
     refocusUrl: process.env.REFOCUS_URL ||
-      'https://refocus.hk.salesforce.com',
+      'https://refocus.internal.salesforce.com',
     loginUrl: process.env.SFDC_URL,
     token: process.env.API_TOKEN,
     socketToken: process.env.SOCKET_TOKEN,
