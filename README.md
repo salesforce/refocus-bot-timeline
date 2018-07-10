@@ -25,3 +25,4 @@ Follows [semantic versioning](https://docs.npmjs.com/getting-started/semantic-ve
 * 1.1.7 Add env variable for refocus url
 * 1.1.8 Stop auto scroll and make toast on new Event.
 * 1.1.9 Allow copy and paste with newlines and can type a newline with SHIFT + ENTER
+* 1.1.10 Uglify for production.
