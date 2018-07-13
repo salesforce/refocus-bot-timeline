@@ -7,6 +7,7 @@ const Dotenv = require('dotenv-webpack');
 const env = require('./config.js').env;
 const url = require('./config.js')[env].refocusUrl;
 const botName = require('./package.json').name;
+const Uglify = require('uglifyjs-webpack-plugin');
 
 const config = {
 
@@ -72,7 +73,7 @@ const config = {
 
 if (env === 'production') {
   config.plugins.push(
-    new webpack.optimize.UglifyJsPlugin()
+    new Uglify()
   );
 }
 
