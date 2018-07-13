@@ -1,3 +1,8 @@
+.slds-rich-text-editor {
+  max-height: 100px;
+  overflow: auto;
+}
+
 /**
  * This component is used to display a current or past chat session between a customer and a service agent.
  * It appears in the form of a "Log"
