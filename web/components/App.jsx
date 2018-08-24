@@ -94,6 +94,7 @@ class App extends React.Component{
   }
 
   filterType(type) {
+    this.props.getEventsByType(type);
     if ((this.state.filter === 'All') ||
       (type === 'All')) {
       this.setState({ filter: type });
