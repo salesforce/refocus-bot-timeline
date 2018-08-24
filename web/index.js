@@ -27,6 +27,12 @@ const _user = {
   email: bdk.getUserEmail(),
 };
 
+const eventTypes = ['comment', 'event', 'user', 'attachment'];
+const eventTypeRetrieved = {};
+eventTypes.forEach((e) => {
+  eventTypeRetrieved[e.toLowerCase()] = false;
+});
+
 /**
  * This is the main function to render the UI
  *
@@ -37,8 +43,9 @@ const _user = {
 function renderUI(response){
   ReactDOM.render(
     <App
-      roomId={ roomId }
-      response={ response }
+      roomId = { roomId }
+      response = { response }
+      getEventsByType = { getEventsByType }
       user={ _user }
     />,
     document.getElementById(botName)
@@ -83,13 +90,49 @@ function handleActions(action) {
 }
 
 /**
+ * Gets all events that are of a specific type and renders UI with these events.
+ *
+ * @param {String} type - Type of Event to load.
+ * @returns {Promise} - Resolves to getting Events required.
+ */
+function getEventsByType(type) {
+  const promises = [];
+  const typeFinished = [];
+
+  if (type.toLowerCase() === 'all') {
+    eventTypes.forEach((e) => {
+      if (!eventTypeRetrieved[e.toLowerCase()]) {
+        promises.push(bdk.getAllEvents(roomId, e));
+        typeFinished.push(e);
+      }
+    });
+  } else if (!eventTypeRetrieved[type.toLowerCase()]) {
+    promises.push(bdk.getAllEvents(roomId, type));
+    typeFinished.push(type);
+  }
+
+  return Promise.all(promises).then((res) => {
+    const events = [].concat.apply([], res);
+    typeFinished.forEach((t) => {
+      eventTypeRetrieved[t.toLowerCase()] = true;
+    });
+
+    renderUI(events, _user);
+  });
+}
+
+/**
  * The actions to take before load.
  */
 function init() {
-  bdk.getAllEvents(roomId)
-    .then((events) => {
-      renderUI(events, _user);
-    });
+  renderUI([], _user);
+
+  const promises = [
+    getEventsByType('comment'),
+    getEventsByType('attachment')
+  ];
+
+  Promise.all(promises);
 }
 
 document.getElementById(botName)
