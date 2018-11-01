@@ -30,7 +30,7 @@ class ChatMessage extends React.Component{
         <div className="slds-p-around--medium">
           <div className="slds-media">
             <div className="slds-media__body">  
-              <EventHeader event={event} iconUrl={'../static/icons/standard-sprite/svg/symbols.svg#post'}/>
+              <EventHeader type={event} iconUrl={'../static/icons/standard-sprite/svg/symbols.svg#post'} iconType={'post'}/>
               <div className="slds-chat-message__text">
                 {
                   <span>
