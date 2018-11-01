@@ -26,17 +26,34 @@ class EventMessage extends React.Component{
         event.context.user.fullName : event.context.user.name;
     }
 
-    console.log(event)
-
-
-
     return (
-      <li style={{borderBottom: '1px solid #dddbda'}}>
-        <div className="slds-p-around--medium">
+      <li style={{padding: '20px'}}>
+        <div className="">
           <div className="slds-media">
-            <div className="slds-media__body">  
-              <EventHeader event={event} iconUrl={'../static/icons/standard-sprite/svg/symbols.svg#event'}/>
-              <p className="slds-m-horizontal_xx-small">{event.log}</p>
+            <EventHeader type={"event"}/>
+            <div className="slds-media__body">
+              <div className="slds-grid slds-grid_align-spread slds-timeline__trigger">
+                <div className="slds-grid slds-grid_vertical-align-center slds-truncate_container_75 slds-no-space">
+                  <h3 className="slds-truncate" title="Event">
+                    <a href="javascript:void(0);">
+                      <strong>Event - {name}</strong>
+                    </a>
+                  </h3>
+                </div>
+                <div className="slds-timeline__actions slds-timeline__actions_inline">
+                  <p className="slds-timeline__date">
+                    {moment.utc(event.createdAt).format('HH:mm UTC | MM/DD/YYYY')}
+                  </p>
+                </div>
+              </div>
+              <div style={{
+                width: '3px',
+                height: '40px',
+                background: '#eb7092',
+                marginTop: '5px',
+                marginLeft: '10px'}}>
+              </div>
+              <p>{event.log}</p>
             </div>
           </div>
         </div>
@@ -50,3 +67,5 @@ EventMessage.propTypes={
 };
 
 module.exports=EventMessage;
+
+
