@@ -9,6 +9,7 @@
 import PropTypes from 'prop-types';
 const moment = require('moment');
 const React=require('react');
+const EventHeader = require('./EventHeader.jsx');
 import './chat.css';
 
 class EventMessage extends React.Component{
@@ -25,26 +26,18 @@ class EventMessage extends React.Component{
         event.context.user.fullName : event.context.user.name;
     }
 
+    console.log(event)
+
+
+
     return (
-      <li className='slds-chat-listitem slds-chat-listitem_event'>
-        <div className='slds-chat-event'>
-          <div className='slds-chat-event__rule'></div>
-          <div className='slds-chat-event__body'>
-            <span className={svgIconClass}>
-              <svg className={iconClass} aria-hidden='true'>
-                <use
-                  xlinkHref= {iconPath + '#event'}>
-                </use>
-              </svg>
-            </span>
-            <p>
-              <b>Event</b> was performed{name ? ` by ${name}` : ''} •&nbsp;
-              {moment.utc(event.createdAt).format('YYYY-MM-DD HH:mm')} UTC
-            </p>
-          </div>
-          <div className='slds-chat-event__rule'></div>
-          <div className='slds-chat-event__agent-message'>
-            {event.log}
+      <li style={{borderBottom: '1px solid #dddbda'}}>
+        <div className="slds-p-around--medium">
+          <div className="slds-media">
+            <div className="slds-media__body">  
+              <EventHeader event={event} iconUrl={'../static/icons/standard-sprite/svg/symbols.svg#event'}/>
+              <p className="slds-m-horizontal_xx-small">{event.log}</p>
+            </div>
           </div>
         </div>
       </li>
