@@ -153,7 +153,7 @@ class App extends React.Component{
         <FilterHeader
           filter={ this.state.filter }
           changeType={ this.filterType } />
-        <ul className='slds-chat-list'
+        <ul className='slds-timeline'
           id="chat-list"
           ref={(elem) => {
             this.container = elem;
