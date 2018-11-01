@@ -13,6 +13,7 @@ const React=require('react');
 const linkifyHtml = require('linkifyjs/string');
 const decode = require('unescape');
 import './chat.css';
+const EventHeader = require('./EventHeader.jsx');
 
 class ChatMessage extends React.Component{
   render(){
@@ -25,33 +26,32 @@ class ChatMessage extends React.Component{
     }
 
     return (
-      <li className="slds-chat-listitem" key={event.id}>
-        <div className="slds-chat-message">
-          <div className="slds-chat-message__body slds-chat_past">
-            <div className="slds-chat-message__meta">
-              <b>{name ? name : 'User'}</b> •&nbsp;
-              {moment.utc(event.createdAt).format('YYYY-MM-DD HH:mm')} UTC
-            </div>
-            <div className="slds-chat-message__text">
-              {
-                <span>
-                  {
-                    ReactHtmlParser(
-                      linkifyHtml(event.log, {
-                        attributes: {
-                          rel: 'noopener noreferrer'
+      <li style={{borderBottom: '1px solid #dddbda'}}>
+        <div className="slds-p-around--medium">
+          <div className="slds-media">
+            <div className="slds-media__body">  
+              <EventHeader event={event} iconUrl={'../static/icons/standard-sprite/svg/symbols.svg#post'}/>
+              <div className="slds-chat-message__text">
+                {
+                  <span>
+                    {
+                      ReactHtmlParser(
+                        linkifyHtml(event.log, {
+                          attributes: {
+                            rel: 'noopener noreferrer'
+                          }
+                        })
+                      ).map((htmlString) => {
+                        if (typeof htmlString === 'string') {
+                          return decode(htmlString);
+                        } else {
+                          return htmlString;
                         }
                       })
-                    ).map((htmlString) => {
-                      if (typeof htmlString === 'string') {
-                        return decode(htmlString);
-                      } else {
-                        return htmlString;
-                      }
-                    })
-                  }
-                </span>
-              }
+                    }
+                  </span>
+                }
+              </div>
             </div>
           </div>
         </div>
