@@ -11,6 +11,8 @@ const moment = require('moment');
 const React=require('react');
 import './chat.css';
 
+const MasterComponent = require('./MasterComponent.jsx');
+
 class UserMessage extends React.Component{
   render(){
     const { event } = this.props;
@@ -21,33 +23,21 @@ class UserMessage extends React.Component{
     const name = event.context.user.fullName ?
       event.context.user.fullName : event.context.user.name;
 
+    const message = `${((event.context) && (event.context.user)) ?
+                  name : 'User'} has  ${((event.context) && (event.context.isActive)) ?
+                'joined' : 'left'} room.`
+
     return (
-      <li
-        className="slds-chat-listitem slds-chat-listitem_event"
-        key={event.id}>
-        <div className="slds-chat-event">
-          <div className="slds-chat-event__rule"></div>
-          <div className="slds-chat-event__body">
-            <span className={svgIconClass}>
-              <svg className={iconClass} aria-hidden="true">
-                <use
-                  xlinkHref={iconPath + '#user'}>
-                </use>
-              </svg>
-            </span>
-            <p>
-              <b>
-                {((event.context) && (event.context.user)) ?
-                  name : 'User'}
-              </b> has {((event.context) &&
-                (event.context.isActive)) ?
-                'joined' : 'left'} room •&nbsp;
-              {moment.utc(event.createdAt).format('YYYY-MM-DD HH:mm')} UTC
-            </p>
-          </div>
-          <div className="slds-chat-event__rule"></div>
-        </div>
-      </li>
+
+
+      <MasterComponent
+        event={event}
+        type={`User ${event.context && event.context.isActive ? 'Joined' : 'Left'}`}
+        imgUrl={"../static/icons/standard-sprite/svg/symbols.svg#user"}
+        color={"#54698d"}
+        message = {message}
+      />
+
     );
   }
 }
