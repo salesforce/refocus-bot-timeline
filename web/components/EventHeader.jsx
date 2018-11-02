@@ -19,10 +19,11 @@ class EventHeader extends React.Component{
           <svg className="slds-icon slds-icon_small" aria-hidden="true">
             <use
               xmlnsXlink="http://www.w3.org/1999/xlink"
-              xlinkHref={`../static/icons/standard-sprite/svg/symbols.svg#${this.props.type}`}>
+              xlinkHref={this.props.imgUrl}>
             </use>
           </svg>
         </div>
+        <div style={{width: '3px', height: '50px', background: 'rgb(235, 112, 146)', marginLeft: '10px'}}></div>
       </div>
     );
   }
