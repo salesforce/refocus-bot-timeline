@@ -10,8 +10,7 @@
     "build-ui": "webpack --config webpack.config.js",
     "lint": "eslint --ext=js --ext=jsx .",
     "postinstall": "npm run build-ui",
-    "test": "./node_modules/.bin/mocha --reporter spec",
-    "test-dev": "nodemon --ext js --watch ./ --exec 'mocha ./test'"
+    "test": "mocha tests"
   },
   "husky": {
     "hooks": {
