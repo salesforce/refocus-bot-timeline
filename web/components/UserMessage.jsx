@@ -21,14 +21,14 @@ class UserMessage extends React.Component{
       event.context.user.fullName : event.context.user.name;
     const message = `${((event.context) && (event.context.user)) ?
       name : 'User'} has  ${((event.context) && (event.context.isActive)) ?
-        'joined' : 'left'} room.`
+      'joined' : 'left'} room.`;
 
     return (
       <EventBlueprint
         event={event}
         type={`User ${event.context &&
           event.context.isActive ? 'Joined' : 'Left'}`}
-        imgUrl={"../static/icons/standard-sprite/svg/symbols.svg#user"}
+        imgUrl={'../static/icons/standard-sprite/svg/symbols.svg#user'}
         color={sldsGrey}
         message = {message}
       />
