@@ -129,7 +129,7 @@ function init() {
 
   const promises = [
     getEventsByType('comment'),
-    getEventsByType('attachment')
+    getEventsByType('event')
   ];
 
   Promise.all(promises);
