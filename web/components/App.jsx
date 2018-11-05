@@ -34,8 +34,9 @@ class App extends React.Component{
       response: this.props.response
         .sort((a, b) => moment(a.createdAt).diff(moment(b.createdAt)))
         .filter((value, index, self) => {
-          const duplicates = _.filter(self.slice(0, index), ['id', value.id]);
-          return  duplicates.length === 0 ?
+          const duplicates =
+            _.filter(self.slice(ZERO, index), ['id', value.id]);
+          return duplicates.length === ZERO ?
             value : false;
         }),
       currentText: '',
@@ -112,12 +113,12 @@ class App extends React.Component{
           this.setState({ filter: 'All' });
         } else {
           this.setState({ filter: this.state.filter
-            .replace(type, '') });          
+            .replace(type, '') });
         }
       } else {
         this.setState({ filter: this.state.filter +
           type });
-      }      
+      }
     }
     this.setState({ scroll: true });
   }
