@@ -23,23 +23,20 @@ class EventBlueprint extends React.Component{
     }
 
     return (
-      <li className="slds-p-around--small">
-        <div className="">
+      <li className="slds-is-relative slds-m-bottom-small">
+        <span className = "event-line" style={{background: this.props.color}}></span>
+        <div className="slds-m-around--small">
           <div className="slds-media">
             <div className="slds-media__figure">
               <div
                 className={`slds-icon_container slds-timeline__icon`}
-                style = {{ backgroundColor: this.props.color}}>
+                style={{ backgroundColor: this.props.color}}>
                 <svg className="slds-icon slds-icon_small" aria-hidden="true">
                   <use
                     xmlnsXlink="http://www.w3.org/1999/xlink"
                     xlinkHref={this.props.imgUrl}>
                   </use>
                 </svg>
-              </div>
-              <div
-                className="event-line"
-                style={{ background: this.props.color }}>
               </div>
             </div>
             <div className="slds-media__body">

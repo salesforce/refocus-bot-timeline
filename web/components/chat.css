@@ -495,8 +495,13 @@
 }
 
 .event-line {
-  width: 3px;
-  height: 50px;
-  margin: auto;
+  content: '';
+  height: 100%;
+  width: 2px;
+  position: absolute;
+  left: 1.5rem;
+  top: 1.75rem;
 }
+
+
 
