@@ -29,7 +29,6 @@ class AttachmentMessage extends React.Component {
         message = {
           <div>
           <div className='slds-chat-event__agent-message'>
-            File Uploaded &nbsp;
             <a href={event.context.attachment} target='_blank'
               rel='noopener noreferrer'>{event.context.fileName}</a>
           </div>
