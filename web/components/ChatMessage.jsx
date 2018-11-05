@@ -8,31 +8,26 @@
 
 import PropTypes from 'prop-types';
 import ReactHtmlParser from 'react-html-parser';
+import './chat.css';
+
 const moment = require('moment');
 const React=require('react');
 const linkifyHtml = require('linkifyjs/string');
 const decode = require('unescape');
-import './chat.css';
-const EventHeader = require('./EventHeader.jsx');
+const EventBlueprint = require('./EventBlueprint.jsx');
 
-const MasterComponent = require('./MasterComponent.jsx');
+const sldsBlue = '#34becd';
 
 class ChatMessage extends React.Component{
   render(){
     const { event } = this.props;
-    let name;
-
-    if (event.context && event.context.user) {
-      name = event.context.user.fullName ?
-        event.context.user.fullName : event.context.user.name;
-    }
 
     return (
-      <MasterComponent
+      <EventBlueprint
         event={event}
         imgUrl={"../static/icons/standard-sprite/svg/symbols.svg#post"}
         type={'Comment'}
-        color={"#34becd"}
+        color={sldsBlue}
         message = {
           ReactHtmlParser(
             linkifyHtml(event.log, {
@@ -57,4 +52,4 @@ ChatMessage.propTypes={
   event: PropTypes.object,
 };
 
-module.exports=ChatMessage;
+module.exports = ChatMessage;

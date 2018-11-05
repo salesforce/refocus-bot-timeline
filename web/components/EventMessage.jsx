@@ -7,23 +7,23 @@
  */
 
 import PropTypes from 'prop-types';
-const moment = require('moment');
-const React=require('react');
-const EventHeader = require('./EventHeader.jsx');
 import './chat.css';
 
-const MasterComponent = require('./MasterComponent.jsx');
+const moment = require('moment');
+const React = require('react');
+const EventBlueprint = require('./EventBlueprint.jsx');
+const sldsPink = '#eb7092';
 
 class EventMessage extends React.Component{
-  render(){
+  render() {
     const { event } = this.props;
 
     return (
-      <MasterComponent
-        event={event}
-        type={'Event'}
-        imgUrl={"../static/icons/standard-sprite/svg/symbols.svg#event"}
-        color={"#eb7092"}
+      <EventBlueprint
+        event= {event}
+        type= {'Event'}
+        imgUrl = {'../static/icons/standard-sprite/svg/symbols.svg#event'}
+        color = {sldsPink}
         message = {event.log}
       />
     );
@@ -34,6 +34,4 @@ EventMessage.propTypes={
   event: PropTypes.object,
 };
 
-module.exports=EventMessage;
-
-
+module.exports = EventMessage;

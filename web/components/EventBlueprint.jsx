@@ -7,19 +7,15 @@
  */
 
 import PropTypes from 'prop-types';
-const moment = require('moment');
-const React=require('react');
-const EventHeader = require('./EventHeader.jsx');
 import './chat.css';
 
-class MasterComponent extends React.Component{
+const moment = require('moment');
+const React=require('react');
+
+class EventBlueprint extends React.Component{
   render(){
-    const { event } = this.props;
-    const svgIconClass = 'slds-icon_container slds-icon-utility-change_owner ' +
-      'slds-chat-icon';
-    const iconClass = 'slds-icon slds-m-bottom_xx-small slds-icon_xx-small';
-    const iconPath = '../static/icons/utility-sprite/svg/symbols.svg';
     let name;
+    const { event } = this.props;
 
     if (event.context && event.context.user) {
       name = event.context.user.fullName ?
@@ -27,11 +23,13 @@ class MasterComponent extends React.Component{
     }
 
     return (
-      <li>
+      <li className="slds-p-around--small">
         <div className="">
           <div className="slds-media">
             <div className="slds-media__figure">
-              <div className={`slds-icon_container slds-timeline__icon`} style= {{backgroundColor: this.props.color}}>
+              <div
+                className={`slds-icon_container slds-timeline__icon`}
+                style = {{ backgroundColor: this.props.color}}>
                 <svg className="slds-icon slds-icon_small" aria-hidden="true">
                   <use
                     xmlnsXlink="http://www.w3.org/1999/xlink"
@@ -39,11 +37,14 @@ class MasterComponent extends React.Component{
                   </use>
                 </svg>
               </div>
-              <div style={{width: '3px', height: '50px', background: this.props.color, margin: 'auto'}}></div>
+              <div
+                className="event-line"
+                style={{ background: this.props.color }}>
+              </div>
             </div>
             <div className="slds-media__body">
               <div className="slds-grid slds-grid_align-spread slds-timeline__trigger">
-                <div className="slds-grid slds-grid_vertical-align-center slds-truncate_container_75 slds-no-space">
+                <div className="slds-grid slds-grid_vertical-align-center slds-truncate_container_75">
                   <h3 className="slds-truncate" title="Event">
                     <a href="javascript:void(0);">
                       <strong>{this.props.type} - {name}</strong>
@@ -67,10 +68,8 @@ class MasterComponent extends React.Component{
   }
 }
 
-MasterComponent.propTypes={
+EventBlueprint.propTypes={
   event: PropTypes.object,
 };
 
-module.exports=MasterComponent;
-
-
+module.exports = EventBlueprint;
