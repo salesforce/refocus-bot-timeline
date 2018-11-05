@@ -12,8 +12,8 @@ import './chat.css';
 const moment = require('moment');
 const React=require('react');
 
-class EventBlueprint extends React.Component{
-  render(){
+class EventBlueprint extends React.Component {
+  render() {
     let name;
     const { event } = this.props;
 
@@ -24,13 +24,16 @@ class EventBlueprint extends React.Component{
 
     return (
       <li className="slds-is-relative slds-m-bottom-small">
-        <span className = "event-line" style={{background: this.props.color}}></span>
+        <span
+          className="event-line"
+          style={{ background: this.props.color }}>
+        </span>
         <div className="slds-m-around--small">
           <div className="slds-media">
             <div className="slds-media__figure">
               <div
-                className={`slds-icon_container slds-timeline__icon`}
-                style={{ backgroundColor: this.props.color}}>
+                className="slds-icon_container slds-timeline__icon"
+                style={{ backgroundColor: this.props.color }}>
                 <svg className="slds-icon slds-icon_small" aria-hidden="true">
                   <use
                     xmlnsXlink="http://www.w3.org/1999/xlink"
@@ -40,10 +43,10 @@ class EventBlueprint extends React.Component{
               </div>
             </div>
             <div className="slds-media__body">
-              <div className="slds-grid slds-grid_align-spread slds-timeline__trigger">
+              <div className="slds-grid slds-grid_align-spread">
                 <div className="slds-grid slds-grid_vertical-align-center slds-truncate_container_75">
                   <h3 className="slds-truncate" title="Event">
-                    <a href="javascript:void(0);">
+                    <a>
                       <strong>{this.props.type} - {name}</strong>
                     </a>
                   </h3>
@@ -65,8 +68,15 @@ class EventBlueprint extends React.Component{
   }
 }
 
-EventBlueprint.propTypes={
+EventBlueprint.propTypes = {
   event: PropTypes.object,
+  color: PropTypes.string,
+  type: PropTypes.string,
+  imgUrl: PropTypes.string,
+  message: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.array
+  ]),
 };
 
 module.exports = EventBlueprint;

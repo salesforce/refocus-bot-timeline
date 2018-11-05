@@ -9,7 +9,6 @@
 import PropTypes from 'prop-types';
 import './chat.css';
 
-const moment = require('moment');
 const React = require('react');
 const EventBlueprint = require('./EventBlueprint.jsx');
 const sldsPink = '#eb7092';
