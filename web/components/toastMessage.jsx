@@ -6,8 +6,8 @@
  * https://opensource.org/licenses/BSD-3-Clause
  */
 
-const React=require('react');
 import PropTypes from 'prop-types';
+const React=require('react');
 const TIMEOUT = 3000; // ms
 
 class ToastMessage extends React.Component {

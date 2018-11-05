@@ -7,37 +7,31 @@
  */
 
 import PropTypes from 'prop-types';
-const moment = require('moment');
-const React=require('react');
 import './chat.css';
 
-const MasterComponent = require('./MasterComponent.jsx');
+const React = require('react');
+const EventBlueprint = require('./EventBlueprint.jsx');
+
+const sldsGrey = '#54698d';
 
 class UserMessage extends React.Component{
-  render(){
+  render() {
     const { event } = this.props;
-    const svgIconClass = 'slds-icon_container slds-icon-utility-change_owner ' +
-      'slds-chat-icon';
-    const iconClass = 'slds-icon slds-m-bottom_xx-small slds-icon_xx-small';
-    const iconPath = '../static/icons/utility-sprite/svg/symbols.svg';
     const name = event.context.user.fullName ?
       event.context.user.fullName : event.context.user.name;
-
     const message = `${((event.context) && (event.context.user)) ?
-                  name : 'User'} has  ${((event.context) && (event.context.isActive)) ?
-                'joined' : 'left'} room.`
+      name : 'User'} has  ${((event.context) && (event.context.isActive)) ?
+        'joined' : 'left'} room.`
 
     return (
-
-
-      <MasterComponent
+      <EventBlueprint
         event={event}
-        type={`User ${event.context && event.context.isActive ? 'Joined' : 'Left'}`}
+        type={`User ${event.context &&
+          event.context.isActive ? 'Joined' : 'Left'}`}
         imgUrl={"../static/icons/standard-sprite/svg/symbols.svg#user"}
-        color={"#54698d"}
+        color={sldsGrey}
         message = {message}
       />
-
     );
   }
 }
@@ -46,4 +40,4 @@ UserMessage.propTypes={
   event: PropTypes.object,
 };
 
-module.exports=UserMessage;
+module.exports = UserMessage;

@@ -7,8 +7,9 @@
  */
 
 import PropTypes from 'prop-types';
-const React=require('react');
 import './chat.css';
+
+const React=require('react');
 
 class FilterHeader extends React.Component{
   constructor(props){
