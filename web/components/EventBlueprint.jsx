@@ -61,7 +61,7 @@ class EventBlueprint extends React.Component {
                 </div>
               </div>
               <div className="slds-chat-message__text">
-              {this.props.message}
+                {this.props.message}
               </div>
             </div>
           </div>
