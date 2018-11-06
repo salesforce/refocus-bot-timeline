@@ -18,23 +18,27 @@ import React from 'react';
 const testEvent = {
   context: {
     user: {
-      name: 'Test Name'
-    }
-  }
+      name: 'Donald Duck',
+    },
+  },
 };
 
 describe('<EventBlueprint/>: ', () => {
-  it('Ok, <EventBlueprint/> renders as an li element:', (done) => {
-    const eventBlueprint = ReactTestRenderer.create(
+  let eventBlueprint;
+
+  before(() => {
+    eventBlueprint = ReactTestRenderer.create(
       <EventBlueprint
         event={ testEvent }
         color={ '#FFFFFF' }
         type={ 'Event' }
         imgUrl={'https://goo.gl/images/dojH1X'}
-        message={'Test'}/>
-    ).toJSON();
+        message={'Test message'}/>
+    );
+  })
 
-    expect(eventBlueprint.type).to.equal('li');
+  it('Ok, <EventBlueprint/> renders as an li element:', (done) => {
+    expect(eventBlueprint.toJSON().type).to.equal('li');
     done();
   });
 });

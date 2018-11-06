@@ -44,16 +44,19 @@ class EventBlueprint extends React.Component {
             </div>
             <div className="slds-media__body">
               <div className="slds-grid slds-grid_align-spread">
-                <div className="slds-grid slds-grid_vertical-align-center slds-truncate_container_75">
-                  <h3 className="slds-truncate" title="Event">
+                <div className={'slds-grid slds-grid_vertical-align-center ' +
+                  'slds-truncate_container_75'}>
+                  <h3 className="slds-truncate">
                     <a>
                       <strong>{this.props.type} - {name}</strong>
                     </a>
                   </h3>
                 </div>
-                <div className="slds-timeline__actions slds-timeline__actions_inline">
+                <div className={'slds-timeline__actions ' +
+                  'slds-timeline__actions_inline'}>
                   <p className="slds-timeline__date">
-                    {moment.utc(event.createdAt).format('HH:mm UTC | MM/DD/YYYY')}
+                    {moment.utc(event.createdAt)
+                      .format('HH:mm UTC | MM/DD/YYYY')}
                   </p>
                 </div>
               </div>
