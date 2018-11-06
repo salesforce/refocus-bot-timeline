@@ -28,4 +28,4 @@ Follows [semantic versioning](https://docs.npmjs.com/getting-started/semantic-ve
 * 1.1.10 Uglify for production.
 * 1.1.11 Added display name.
 * 1.1.12 Only loading fields as they are toggled.
-* 1.1.13 Added example test.
+* 1.1.13 Rebrand to look more like activity-timeline.
