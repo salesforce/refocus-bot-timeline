@@ -9,7 +9,6 @@
 const path = require('path');
 // creates index.html folder and puts it in dist folder
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const webpack = require('webpack');
 const ZipPlugin = require('zip-webpack-plugin');
 const Dotenv = require('dotenv-webpack');
 const env = require('./config.js').env;

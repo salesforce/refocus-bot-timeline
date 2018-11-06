@@ -10,12 +10,10 @@ import PropTypes from 'prop-types';
 import ReactHtmlParser from 'react-html-parser';
 import './chat.css';
 
-const moment = require('moment');
 const React=require('react');
 const linkifyHtml = require('linkifyjs/string');
 const decode = require('unescape');
 const EventBlueprint = require('./EventBlueprint.jsx');
-
 const sldsBlue = '#34becd';
 
 class ChatMessage extends React.Component{
@@ -25,7 +23,7 @@ class ChatMessage extends React.Component{
     return (
       <EventBlueprint
         event={event}
-        imgUrl={"../static/icons/standard-sprite/svg/symbols.svg#post"}
+        imgUrl={'../static/icons/standard-sprite/svg/symbols.svg#post'}
         type={'Comment'}
         color={sldsBlue}
         message = {
@@ -38,9 +36,9 @@ class ChatMessage extends React.Component{
           ).map((htmlString) => {
             if (typeof htmlString === 'string') {
               return decode(htmlString);
-            } else {
-              return htmlString;
             }
+
+            return htmlString;
           })
         }
       />

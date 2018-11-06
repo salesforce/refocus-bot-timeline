@@ -108,19 +108,18 @@ class App extends React.Component{
     if ((this.state.filter === 'All') ||
       (type === 'All')) {
       this.setState({ filter: type });
-    } else {
-      if (this.state.filter.includes(type)) {
-        if (this.state.filter === type) {
-          this.setState({ filter: 'All' });
-        } else {
-          this.setState({ filter: this.state.filter
-            .replace(type, '') });
-        }
+    } else if (this.state.filter.includes(type)) {
+      if (this.state.filter === type) {
+        this.setState({ filter: 'All' });
       } else {
-        this.setState({ filter: this.state.filter +
-          type });
+        this.setState({ filter: this.state.filter
+          .replace(type, '') });
       }
+    } else {
+      this.setState({ filter: this.state.filter +
+        type });
     }
+
     this.setState({ scroll: true });
   }
 
@@ -231,6 +230,7 @@ App.propTypes={
   roomId: PropTypes.number,
   response: PropTypes.array,
   user: PropTypes.object,
+  getEventsByType: PropTypes.func
 };
 
 module.exports=App;
