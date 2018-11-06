@@ -31,8 +31,8 @@ class FilterHeader extends React.Component{
 
     return (
       <div className={buttonHeaderClass}>
-        <ul className="slds-button-group-list-center">
-          <li>
+        <ul>
+          <li className="slds-show--inline">
             <button
               className={'slds-button ' +
                 (filter === 'All' ?
@@ -42,7 +42,7 @@ class FilterHeader extends React.Component{
               All
             </button>
           </li>
-          <li>
+          <li className="slds-show--inline">
             <button
               className={'slds-button ' +
                 (filter.includes('Comment') ?
@@ -52,7 +52,7 @@ class FilterHeader extends React.Component{
               Comments
             </button>
           </li>
-          <li>
+          <li className="slds-show--inline">
             <button
               className={'slds-button ' +
                 (filter.includes('Event') ?
@@ -62,7 +62,7 @@ class FilterHeader extends React.Component{
               Events
             </button>
           </li>
-          <li>
+          <li className="slds-show--inline">
             <button
               className={'slds-button ' +
                 (filter.includes('User') ?
@@ -72,7 +72,7 @@ class FilterHeader extends React.Component{
               Users
             </button>
           </li>
-          <li>
+          <li className="slds-show--inline">
             <button
               className={'slds-button ' +
                 (filter.includes('Attachment') ?
