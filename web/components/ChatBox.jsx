@@ -49,7 +49,7 @@ class ChatBox extends React.Component{
                   if (!event.shiftKey && !pendingMessage) {
                     event.preventDefault();
                     sendChat();
-                  } 
+                  }
                 }
               }}>
             </div>

@@ -7,10 +7,8 @@
  */
 
 import PropTypes from 'prop-types';
-import ReactHtmlParser from 'react-html-parser';
 import './chat.css';
 
-const moment = require('moment');
 const React = require('react');
 const EventBlueprint = require('./EventBlueprint.jsx');
 
@@ -24,26 +22,26 @@ class AttachmentMessage extends React.Component {
       <EventBlueprint
         event={event}
         type={'File Uploaded'}
-        imgUrl={"../static/icons/standard-sprite/svg/symbols.svg#file"}
+        imgUrl={'../static/icons/standard-sprite/svg/symbols.svg#file'}
         color={sldsGreen}
         message = {
           <div>
-          <div className='slds-chat-event__agent-message'>
-            <a href={event.context.attachment} target='_blank'
-              rel='noopener noreferrer'>{event.context.fileName}</a>
-          </div>
-          {event.context.fileType.includes('image') &&
             <div className='slds-chat-event__agent-message'>
               <a href={event.context.attachment} target='_blank'
-                rel='noopener noreferrer'>
-                <img src={event.context.attachment} className='preview' />
-              </a>
+                rel='noopener noreferrer'>{event.context.fileName}</a>
             </div>
-          }
+            {event.context.fileType.includes('image') &&
+              <div className='slds-chat-event__agent-message'>
+                <a href={event.context.attachment} target='_blank'
+                  rel='noopener noreferrer'>
+                  <img src={event.context.attachment} className='preview' />
+                </a>
+              </div>
+            }
           </div>
         }
       />
-    )
+    );
   }
 }
 

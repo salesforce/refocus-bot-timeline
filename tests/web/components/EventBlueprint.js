@@ -35,7 +35,7 @@ describe('<EventBlueprint/>: ', () => {
         imgUrl={'https://goo.gl/images/dojH1X'}
         message={'Test message'}/>
     );
-  })
+  });
 
   it('Ok, <EventBlueprint/> renders as an li element:', (done) => {
     expect(eventBlueprint.toJSON().type).to.equal('li');
