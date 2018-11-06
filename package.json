@@ -1,6 +1,6 @@
 {
   "name": "Timeline-Bot",
-  "displayName": "Comments",
+  "displayName": "Activity-Timeline",
   "version": "1.1.13",
   "description": "A bot that show all events in a room",
   "url": "https://git.soma.salesforce.com/Refocus-Bots/Timeline-Bot",
@@ -62,7 +62,7 @@
     "html-webpack-plugin": "^2.28.0",
     "husky": "^0.14.3",
     "ignore-styles": "^5.0.1",
-    "react-test-renderer": "15.6.1",
+    "react-test-renderer": "^15.6.2",
     "style-loader": "^0.18.2",
     "uglifyjs-webpack-plugin": "^1.2.7",
     "url-loader": "^0.5.9",
