@@ -7,6 +7,8 @@
  */
 
 import PropTypes from 'prop-types';
+import './chat.css';
+
 const moment = require('moment');
 const _ = require('lodash');
 const React=require('react');
@@ -20,7 +22,6 @@ const ChatMessage = require('./ChatMessage.jsx');
 const AttachmentMessage = require('./AttachmentMessage.jsx');
 const ToastMessage = require('./ToastMessage.jsx');
 const ChatBox = require('./ChatBox.jsx');
-import './chat.css';
 
 const ZERO = 0;
 const DFB = 5; // Distance From Bottom
