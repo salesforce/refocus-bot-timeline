@@ -7,47 +7,31 @@
  */
 
 import PropTypes from 'prop-types';
-const moment = require('moment');
-const React=require('react');
 import './chat.css';
 
+const React = require('react');
+const EventBlueprint = require('./EventBlueprint.jsx');
+
+const sldsGrey = '#54698d';
+
 class UserMessage extends React.Component{
-  render(){
+  render() {
     const { event } = this.props;
-    const svgIconClass = 'slds-icon_container slds-icon-utility-change_owner ' +
-      'slds-chat-icon';
-    const iconClass = 'slds-icon slds-m-bottom_xx-small slds-icon_xx-small';
-    const iconPath = '../static/icons/utility-sprite/svg/symbols.svg';
     const name = event.context.user.fullName ?
       event.context.user.fullName : event.context.user.name;
+    const message = `${((event.context) && (event.context.user)) ?
+      name : 'User'} has  ${((event.context) && (event.context.isActive)) ?
+      'joined' : 'left'} room.`;
 
     return (
-      <li
-        className="slds-chat-listitem slds-chat-listitem_event"
-        key={event.id}>
-        <div className="slds-chat-event">
-          <div className="slds-chat-event__rule"></div>
-          <div className="slds-chat-event__body">
-            <span className={svgIconClass}>
-              <svg className={iconClass} aria-hidden="true">
-                <use
-                  xlinkHref={iconPath + '#user'}>
-                </use>
-              </svg>
-            </span>
-            <p>
-              <b>
-                {((event.context) && (event.context.user)) ?
-                  name : 'User'}
-              </b> has {((event.context) &&
-                (event.context.isActive)) ?
-                'joined' : 'left'} room •&nbsp;
-              {moment.utc(event.createdAt).format('YYYY-MM-DD HH:mm')} UTC
-            </p>
-          </div>
-          <div className="slds-chat-event__rule"></div>
-        </div>
-      </li>
+      <EventBlueprint
+        event={event}
+        type={`User ${event.context &&
+          event.context.isActive ? 'Joined' : 'Left'}`}
+        imgUrl={'../static/icons/standard-sprite/svg/symbols.svg#user'}
+        color={sldsGrey}
+        message = {message}
+      />
     );
   }
 }
@@ -56,4 +40,4 @@ UserMessage.propTypes={
   event: PropTypes.object,
 };
 
-module.exports=UserMessage;
+module.exports = UserMessage;
