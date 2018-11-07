@@ -7,6 +7,8 @@
  */
 
 import PropTypes from 'prop-types';
+import './chat.css';
+
 const moment = require('moment');
 const _ = require('lodash');
 const React=require('react');
@@ -20,7 +22,6 @@ const ChatMessage = require('./ChatMessage.jsx');
 const AttachmentMessage = require('./AttachmentMessage.jsx');
 const ToastMessage = require('./ToastMessage.jsx');
 const ChatBox = require('./ChatBox.jsx');
-import './chat.css';
 
 const ZERO = 0;
 const DFB = 5; // Distance From Bottom
@@ -34,8 +35,9 @@ class App extends React.Component{
       response: this.props.response
         .sort((a, b) => moment(a.createdAt).diff(moment(b.createdAt)))
         .filter((value, index, self) => {
-          const duplicates = _.filter(self.slice(0, index), ['id', value.id]);
-          return  duplicates.length === 0 ?
+          const duplicates =
+            _.filter(self.slice(ZERO, index), ['id', value.id]);
+          return duplicates.length === ZERO ?
             value : false;
         }),
       currentText: '',
@@ -106,19 +108,18 @@ class App extends React.Component{
     if ((this.state.filter === 'All') ||
       (type === 'All')) {
       this.setState({ filter: type });
-    } else {
-      if (this.state.filter.includes(type)) {
-        if (this.state.filter === type) {
-          this.setState({ filter: 'All' });
-        } else {
-          this.setState({ filter: this.state.filter
-            .replace(type, '') });          
-        }
+    } else if (this.state.filter.includes(type)) {
+      if (this.state.filter === type) {
+        this.setState({ filter: 'All' });
       } else {
-        this.setState({ filter: this.state.filter +
-          type });
-      }      
+        this.setState({ filter: this.state.filter
+          .replace(type, '') });
+      }
+    } else {
+      this.setState({ filter: this.state.filter +
+        type });
     }
+
     this.setState({ scroll: true });
   }
 
@@ -153,7 +154,7 @@ class App extends React.Component{
         <FilterHeader
           filter={ this.state.filter }
           changeType={ this.filterType } />
-        <ul className='slds-chat-list'
+        <ul className='slds-chat-list slds-m-bottom--xx-small'
           id="chat-list"
           ref={(elem) => {
             this.container = elem;
@@ -229,6 +230,7 @@ App.propTypes={
   roomId: PropTypes.number,
   response: PropTypes.array,
   user: PropTypes.object,
+  getEventsByType: PropTypes.func
 };
 
 module.exports=App;
