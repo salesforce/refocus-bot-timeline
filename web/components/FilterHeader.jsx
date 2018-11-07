@@ -34,7 +34,7 @@ class FilterHeader extends React.Component{
         <ul>
           <li className="slds-show--inline">
             <button
-              className={'slds-button ' +
+              className={'slds-button slds-m-around--xxx-small ' +
                 (filter === 'All' ?
                   'slds-button_brand' :
                   'slds-button_neutral')}
@@ -44,41 +44,53 @@ class FilterHeader extends React.Component{
           </li>
           <li className="slds-show--inline">
             <button
-              className={'slds-button ' +
+              className={'slds-button slds-m-around--xxx-small ' +
                 (filter.includes('Comment') ?
                   'slds-button_brand' :
                   'slds-button_neutral')}
               onClick={() => changeType('Comment')}>
+              <svg className="slds-button__icon slds-button__icon_left" aria-hidden="true">
+                <use xlinkHref="../static/icons/standard-sprite/svg/symbols.svg#post"></use>
+              </svg>
               Comments
             </button>
           </li>
           <li className="slds-show--inline">
             <button
-              className={'slds-button ' +
+              className={'slds-button slds-m-around--xxx-small ' +
                 (filter.includes('Event') ?
                   'slds-button_brand' :
                   'slds-button_neutral')}
               onClick={() => changeType('Event')}>
+              <svg className="slds-button__icon slds-button__icon_left" aria-hidden="true">
+                <use xlinkHref="../static/icons/standard-sprite/svg/symbols.svg#event"></use>
+              </svg>
               Events
             </button>
           </li>
           <li className="slds-show--inline">
             <button
-              className={'slds-button ' +
+              className={'slds-button slds-m-around--xxx-small ' +
                 (filter.includes('User') ?
                   'slds-button_brand' :
                   'slds-button_neutral')}
               onClick={() => changeType('User')}>
+              <svg className="slds-button__icon slds-button__icon_left" aria-hidden="true">
+                <use xlinkHref="../static/icons/standard-sprite/svg/symbols.svg#user"></use>
+              </svg>
               Users
             </button>
           </li>
           <li className="slds-show--inline">
             <button
-              className={'slds-button ' +
+              className={'slds-button slds-m-around--xxx-small ' +
                 (filter.includes('Attachment') ?
                   'slds-button_brand' :
                   'slds-button_neutral')}
               onClick={() => changeType('Attachment')}>
+              <svg className="slds-button__icon slds-button__icon_left" aria-hidden="true">
+                <use xlinkHref="../static/icons/standard-sprite/svg/symbols.svg#file"></use>
+              </svg>
               Attachments
             </button>
           </li>
