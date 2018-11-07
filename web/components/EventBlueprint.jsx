@@ -54,7 +54,7 @@ class EventBlueprint extends React.Component {
                 </div>
                 <div className={'slds-timeline__actions ' +
                   'slds-timeline__actions_inline'}>
-                  <p className="slds-timeline__date">
+                  <p className="slds-timeline__date slds-text-align--right">
                     {moment.utc(event.createdAt)
                       .format('HH:mm UTC | MM/DD/YYYY')}
                   </p>
