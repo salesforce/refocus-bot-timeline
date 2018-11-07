@@ -493,3 +493,12 @@
 .saving span:nth-child(3) {
   animation-delay: .4s;
 }
+
+.event-line {
+  content: '';
+  height: 100%;
+  width: 2px;
+  position: absolute;
+  left: 1.5rem;
+  top: 1.75rem;
+}

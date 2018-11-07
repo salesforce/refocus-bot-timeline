@@ -7,8 +7,9 @@
  */
 
 import PropTypes from 'prop-types';
-const React=require('react');
 import './chat.css';
+
+const React=require('react');
 
 class FilterHeader extends React.Component{
   constructor(props){
@@ -30,10 +31,10 @@ class FilterHeader extends React.Component{
 
     return (
       <div className={buttonHeaderClass}>
-        <ul className="slds-button-group-list-center">
-          <li>
+        <ul>
+          <li className="slds-show--inline">
             <button
-              className={'slds-button ' +
+              className={'slds-button slds-m-around--xxx-small ' +
                 (filter === 'All' ?
                   'slds-button_brand' :
                   'slds-button_neutral')}
@@ -41,43 +42,55 @@ class FilterHeader extends React.Component{
               All
             </button>
           </li>
-          <li>
+          <li className="slds-show--inline">
             <button
-              className={'slds-button ' +
+              className={'slds-button slds-m-around--xxx-small ' +
                 (filter.includes('Comment') ?
                   'slds-button_brand' :
                   'slds-button_neutral')}
               onClick={() => changeType('Comment')}>
+              <svg className="slds-button__icon slds-button__icon_left" aria-hidden="true">
+                <use xlinkHref="../static/icons/standard-sprite/svg/symbols.svg#post"></use>
+              </svg>
               Comments
             </button>
           </li>
-          <li>
+          <li className="slds-show--inline">
             <button
-              className={'slds-button ' +
+              className={'slds-button slds-m-around--xxx-small ' +
                 (filter.includes('Event') ?
                   'slds-button_brand' :
                   'slds-button_neutral')}
               onClick={() => changeType('Event')}>
+              <svg className="slds-button__icon slds-button__icon_left" aria-hidden="true">
+                <use xlinkHref="../static/icons/standard-sprite/svg/symbols.svg#event"></use>
+              </svg>
               Events
             </button>
           </li>
-          <li>
+          <li className="slds-show--inline">
             <button
-              className={'slds-button ' +
+              className={'slds-button slds-m-around--xxx-small ' +
                 (filter.includes('User') ?
                   'slds-button_brand' :
                   'slds-button_neutral')}
               onClick={() => changeType('User')}>
+              <svg className="slds-button__icon slds-button__icon_left" aria-hidden="true">
+                <use xlinkHref="../static/icons/standard-sprite/svg/symbols.svg#user"></use>
+              </svg>
               Users
             </button>
           </li>
-          <li>
+          <li className="slds-show--inline">
             <button
-              className={'slds-button ' +
+              className={'slds-button slds-m-around--xxx-small ' +
                 (filter.includes('Attachment') ?
                   'slds-button_brand' :
                   'slds-button_neutral')}
               onClick={() => changeType('Attachment')}>
+              <svg className="slds-button__icon slds-button__icon_left" aria-hidden="true">
+                <use xlinkHref="../static/icons/standard-sprite/svg/symbols.svg#file"></use>
+              </svg>
               Attachments
             </button>
           </li>

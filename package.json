@@ -1,25 +1,25 @@
 {
   "name": "Timeline-Bot",
-  "displayName": "Timeline",
-  "version": "1.1.12",
+  "displayName": "Activity Timeline",
+  "version": "1.1.13",
   "description": "A bot that show all events in a room",
-  "url": "https://git.soma.salesforce.com/Refocus-Bots/Timeline-Bot",
+  "url": "https://github.com/salesforce/refocus-bot-timeline/",
   "scripts": {
     "start-ui": "webpack-dev-server --open",
     "start": "npm run build-ui && node index.js",
     "build-ui": "webpack --config webpack.config.js",
     "lint": "eslint --ext=js --ext=jsx .",
     "postinstall": "npm run build-ui",
-    "test": "./node_modules/.bin/mocha --reporter spec",
-    "test-dev": "nodemon --ext js --watch ./ --exec 'mocha ./test'"
+    "test": "mocha tests --recursive --compilers js:babel-core/register **/*.jsx --require ignore-styles"
   },
   "husky": {
     "hooks": {
-      "pre-commit": "npm run lint"
+      "pre-commit": "npm run lint",
+      "pre-push": "npm test"
     }
   },
   "dependencies": {
-    "@salesforce/refocus-bdk": "^1.6.5",
+    "@salesforce/refocus-bdk": "^1.6.9",
     "chai": "^4.0.2",
     "dotenv": "4.0.0",
     "dotenv-webpack": "1.5.4",
@@ -62,6 +62,8 @@
     "eslint-plugin-react": "^7.7.0",
     "html-webpack-plugin": "^2.28.0",
     "husky": "^0.14.3",
+    "ignore-styles": "^5.0.1",
+    "react-test-renderer": "^15.6.2",
     "style-loader": "^0.18.2",
     "uglifyjs-webpack-plugin": "^1.2.7",
     "url-loader": "^0.5.9",
