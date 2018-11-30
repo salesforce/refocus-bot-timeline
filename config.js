@@ -16,7 +16,7 @@
 const DEFAULT_PORT = 5000;
 
 module.exports = {
-  env: process.env.NODE_ENV || 'perf',
+  env: process.env.NODE_ENV || 'dev',
   port: process.env.PORT || DEFAULT_PORT,
   dev: {
     refocusUrl: process.env.REFOCUS_URL ||
