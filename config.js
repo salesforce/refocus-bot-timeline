@@ -16,7 +16,7 @@
 const DEFAULT_PORT = 5000;
 
 module.exports = {
-  env: process.env.NODE_ENV || 'dev',
+  env: process.env.NODE_ENV || 'perf',
   port: process.env.PORT || DEFAULT_PORT,
   dev: {
     refocusUrl: process.env.REFOCUS_URL ||
@@ -25,11 +25,11 @@ module.exports = {
     token: process.env.API_TOKEN,
     socketToken: process.env.SOCKET_TOKEN,
   },
-  staging: {
+  perf: {
     refocusUrl: process.env.REFOCUS_URL ||
-      'http://refocus-staging.herokuapp.com',
+      'http://refocus-rooms-perf.herokuapp.com',
     loginUrl: process.env.SFDC_URL,
-    token: process.env.API_TOKEN,
+    token: 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbm5hbWUiOiJhYWEiLCJ1c2VybmFtZSI6ImFkbWluQHJlZm9jdXMuYWRtaW4iLCJ0aW1lc3RhbXAiOjE1NDM1Nzg5MTMxOTEsIlByb2ZpbGVOYW1lIjoiQWRtaW4iLCJJc0FkbWluIjp0cnVlLCJpYXQiOjE1NDM1Nzg5MTN9.dgIGO7UcK7TDLoKEC4h4jrt4QHNYQNNcIH0gGeMdaog',
     socketToken: process.env.SOCKET_TOKEN,
   },
   sandbox: {
