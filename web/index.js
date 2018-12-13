@@ -59,7 +59,9 @@ function renderUI(response){
  */
 function handleEvents(event) {
   bdk.log.info(botName + ' Event Activity', event);
-  renderUI([event.detail], _user);
+  if (event.detail.context.type !== 'slack') {
+    renderUI([event.detail], _user);
+  }
 }
 
 /**
