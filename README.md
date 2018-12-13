@@ -30,3 +30,4 @@ Follows [semantic versioning](https://docs.npmjs.com/getting-started/semantic-ve
 * 1.1.12 Only loading fields as they are toggled.
 * 1.1.13 Rebrand to look more like activity-timeline.
 * 1.1.14 Change staging to perf env.
+* 1.1.15 Don't show Slack Events in Timeline.

@@ -27,6 +27,7 @@ const _user = {
   email: bdk.getUserEmail(),
 };
 
+// Only these event types will be queried for from Timeline
 const eventTypes = ['comment', 'event', 'user', 'attachment'];
 const eventTypeRetrieved = {};
 eventTypes.forEach((e) => {
@@ -59,6 +60,7 @@ function renderUI(response){
  */
 function handleEvents(event) {
   bdk.log.info(botName + ' Event Activity', event);
+  // We don't want to show slack  events in the Timeline
   if (event.detail.context.type !== 'slack') {
     renderUI([event.detail], _user);
   }
@@ -101,6 +103,8 @@ function getEventsByType(type) {
   const promises = [];
   const typeFinished = [];
 
+  // Even when a user presses all, just the defined event types
+  // will be requested.
   if (type.toLowerCase() === 'all') {
     eventTypes.forEach((e) => {
       if (!eventTypeRetrieved[e.toLowerCase()]) {
