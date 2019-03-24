@@ -26,8 +26,7 @@ module.exports = {
     socketToken: process.env.SOCKET_TOKEN,
   },
   perf: {
-    refocusUrl: process.env.REFOCUS_URL ||
-      'http://refocus-rooms-perf.herokuapp.com',
+    refocusUrl: process.env.REFOCUS_URL,
     loginUrl: process.env.SFDC_URL,
     token: process.env.API_TOKEN,
     socketToken: process.env.SOCKET_TOKEN,
