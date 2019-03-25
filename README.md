@@ -1,6 +1,6 @@
 # Timeline-Bot
 
-### Env Variables
+### Environment variables
 Note: If you want to test this locally you will need some environment variables:
 * ```API_TOKEN``` - Used for Requests to Refocus. Created in refoucs/tokens/new.
 * ```SOCKET_TOKEN``` (Returned Upon Installation) - Used for Socket Connection.
