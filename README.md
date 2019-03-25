@@ -31,3 +31,4 @@ Follows [semantic versioning](https://docs.npmjs.com/getting-started/semantic-ve
 * 1.1.13 Rebrand to look more like activity-timeline.
 * 1.1.14 Change staging to perf env.
 * 1.1.15 Don't show Slack Events in Timeline.
+* 1.1.16 Clean up config.js
