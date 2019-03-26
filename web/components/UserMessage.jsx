@@ -14,7 +14,7 @@ const EventBlueprint = require('./EventBlueprint.jsx');
 
 const sldsGrey = '#54698d';
 
-class UserMessage extends React.Component{
+class UserMessage extends React.Component {
   render() {
     const { event } = this.props;
     const name = event.context.user.fullName ?
@@ -27,16 +27,16 @@ class UserMessage extends React.Component{
       <EventBlueprint
         event={event}
         type={`User ${event.context &&
-          event.context.isActive ? 'Joined' : 'Left'}`}
+        event.context.isActive ? 'Joined' : 'Left'}`}
         imgUrl={'../static/icons/standard-sprite/svg/symbols.svg#user'}
         color={sldsGrey}
-        message = {message}
+        message={message}
       />
     );
   }
 }
 
-UserMessage.propTypes={
+UserMessage.propTypes = {
   event: PropTypes.object,
 };
 

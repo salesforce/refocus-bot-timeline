@@ -9,12 +9,12 @@
 import PropTypes from 'prop-types';
 import './chat.css';
 
-const React=require('react');
+const React = require('react');
 
-class FilterHeader extends React.Component{
-  constructor(props){
+class FilterHeader extends React.Component {
+  constructor(props) {
     super(props);
-    this.state={
+    this.state = {
       filter: this.props.filter,
       changeType: this.props.changeType,
     };
@@ -26,7 +26,7 @@ class FilterHeader extends React.Component{
   }
 
   /* eslint-disable max-len */
-  render(){
+  render() {
     const { filter, changeType } = this.state;
     const buttonHeaderClass = 'slds-size_1-of-1 slds-text-align_center' +
       ' slds-docked-composer__header';
@@ -37,9 +37,9 @@ class FilterHeader extends React.Component{
           <li className="slds-show--inline">
             <button
               className={'slds-button slds-m-around--xxx-small ' +
-                (filter === 'All' ?
-                  'slds-button_brand' :
-                  'slds-button_neutral')}
+              (filter === 'All' ?
+                'slds-button_brand' :
+                'slds-button_neutral')}
               onClick={() => changeType('All')}>
               All
             </button>
@@ -47,9 +47,9 @@ class FilterHeader extends React.Component{
           <li className="slds-show--inline">
             <button
               className={'slds-button slds-m-around--xxx-small ' +
-                (filter.includes('Comment') ?
-                  'slds-button_brand' :
-                  'slds-button_neutral')}
+              (filter.includes('Comment') ?
+                'slds-button_brand' :
+                'slds-button_neutral')}
               onClick={() => changeType('Comment')}>
               <svg className="slds-button__icon slds-button__icon_left"
                 aria-hidden="true">
@@ -64,13 +64,14 @@ class FilterHeader extends React.Component{
           <li className="slds-show--inline">
             <button
               className={'slds-button slds-m-around--xxx-small ' +
-                (filter.includes('Event') ?
-                  'slds-button_brand' :
-                  'slds-button_neutral')}
+              (filter.includes('Event') ?
+                'slds-button_brand' :
+                'slds-button_neutral')}
               onClick={() => changeType('Event')}>
               <svg className="slds-button__icon slds-button__icon_left"
                 aria-hidden="true">
-                <use xlinkHref="../static/icons/standard-sprite/svg/symbols.svg#event">
+                <use
+                  xlinkHref="../static/icons/standard-sprite/svg/symbols.svg#event">
                 </use>
               </svg>
               Events
@@ -79,12 +80,14 @@ class FilterHeader extends React.Component{
           <li className="slds-show--inline">
             <button
               className={'slds-button slds-m-around--xxx-small ' +
-                (filter.includes('User') ?
-                  'slds-button_brand' :
-                  'slds-button_neutral')}
+              (filter.includes('User') ?
+                'slds-button_brand' :
+                'slds-button_neutral')}
               onClick={() => changeType('User')}>
-              <svg className="slds-button__icon slds-button__icon_left" aria-hidden="true">
-                <use xlinkHref="../static/icons/standard-sprite/svg/symbols.svg#user"></use>
+              <svg className="slds-button__icon slds-button__icon_left"
+                aria-hidden="true">
+                <use
+                  xlinkHref="../static/icons/standard-sprite/svg/symbols.svg#user"></use>
               </svg>
               Users
             </button>
@@ -92,12 +95,14 @@ class FilterHeader extends React.Component{
           <li className="slds-show--inline">
             <button
               className={'slds-button slds-m-around--xxx-small ' +
-                (filter.includes('Attachment') ?
-                  'slds-button_brand' :
-                  'slds-button_neutral')}
+              (filter.includes('Attachment') ?
+                'slds-button_brand' :
+                'slds-button_neutral')}
               onClick={() => changeType('Attachment')}>
-              <svg className="slds-button__icon slds-button__icon_left" aria-hidden="true">
-                <use xlinkHref="../static/icons/standard-sprite/svg/symbols.svg#file"></use>
+              <svg className="slds-button__icon slds-button__icon_left"
+                aria-hidden="true">
+                <use
+                  xlinkHref="../static/icons/standard-sprite/svg/symbols.svg#file"></use>
               </svg>
               Attachments
             </button>
@@ -108,9 +113,9 @@ class FilterHeader extends React.Component{
   }
 }
 
-FilterHeader.propTypes={
+FilterHeader.propTypes = {
   filter: PropTypes.string,
   changeType: PropTypes.func,
 };
 
-module.exports=FilterHeader;
+module.exports = FilterHeader;

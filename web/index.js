@@ -41,14 +41,14 @@ eventTypes.forEach((e) => {
  * {User} _user - The current user on page
  * @param {Event} response - Refocus events that are happening in this room
  */
-function renderUI(response){
+function renderUI(response) {
   /* eslint-disable no-use-before-define */
   ReactDOM.render(
     <App
-      roomId = { roomId }
-      response = { response }
-      getEventsByType = { getEventsByType }
-      user={ _user }
+      roomId={roomId}
+      response={response}
+      getEventsByType={getEventsByType}
+      user={_user}
     />,
     document.getElementById(botName)
   );

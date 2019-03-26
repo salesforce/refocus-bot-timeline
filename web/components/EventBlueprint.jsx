@@ -10,7 +10,7 @@ import PropTypes from 'prop-types';
 import './chat.css';
 
 const moment = require('moment');
-const React=require('react');
+const React = require('react');
 
 class EventBlueprint extends React.Component {
   render() {
@@ -45,7 +45,7 @@ class EventBlueprint extends React.Component {
             <div className="slds-media__body">
               <div className="slds-grid slds-grid_align-spread">
                 <div className={'slds-grid slds-grid_vertical-align-center ' +
-                  'slds-truncate_container_75'}>
+                'slds-truncate_container_75'}>
                   <h3 className="slds-truncate">
                     <a>
                       <strong>{this.props.type} - {name}</strong>
@@ -53,7 +53,7 @@ class EventBlueprint extends React.Component {
                   </h3>
                 </div>
                 <div className={'slds-timeline__actions ' +
-                  'slds-timeline__actions_inline'}>
+                'slds-timeline__actions_inline'}>
                   <p className="slds-timeline__date slds-text-align--right">
                     {moment.utc(event.createdAt)
                       .format('HH:mm UTC | MM/DD/YYYY')}

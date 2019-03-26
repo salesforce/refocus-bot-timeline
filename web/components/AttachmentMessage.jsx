@@ -24,19 +24,19 @@ class AttachmentMessage extends React.Component {
         type={'File Uploaded'}
         imgUrl={'../static/icons/standard-sprite/svg/symbols.svg#file'}
         color={sldsGreen}
-        message = {
+        message={
           <div>
             <div className='slds-chat-event__agent-message'>
               <a href={event.context.attachment} target='_blank'
                 rel='noopener noreferrer'>{event.context.fileName}</a>
             </div>
             {event.context.fileType.includes('image') &&
-              <div className='slds-chat-event__agent-message'>
-                <a href={event.context.attachment} target='_blank'
-                  rel='noopener noreferrer'>
-                  <img src={event.context.attachment} className='preview' />
-                </a>
-              </div>
+            <div className='slds-chat-event__agent-message'>
+              <a href={event.context.attachment} target='_blank'
+                rel='noopener noreferrer'>
+                <img src={event.context.attachment} className='preview'/>
+              </a>
+            </div>
             }
           </div>
         }
@@ -45,8 +45,8 @@ class AttachmentMessage extends React.Component {
   }
 }
 
-AttachmentMessage.propTypes={
+AttachmentMessage.propTypes = {
   event: PropTypes.object,
 };
 
-module.exports=AttachmentMessage;
+module.exports = AttachmentMessage;

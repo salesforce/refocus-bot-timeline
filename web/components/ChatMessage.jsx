@@ -10,14 +10,14 @@ import PropTypes from 'prop-types';
 import ReactHtmlParser from 'react-html-parser';
 import './chat.css';
 
-const React=require('react');
+const React = require('react');
 const linkifyHtml = require('linkifyjs/string');
 const decode = require('unescape');
 const EventBlueprint = require('./EventBlueprint.jsx');
 const sldsBlue = '#34becd';
 
-class ChatMessage extends React.Component{
-  render(){
+class ChatMessage extends React.Component {
+  render() {
     const { event } = this.props;
 
     return (
@@ -26,7 +26,7 @@ class ChatMessage extends React.Component{
         imgUrl={'../static/icons/standard-sprite/svg/symbols.svg#post'}
         type={'Comment'}
         color={sldsBlue}
-        message = {
+        message={
           ReactHtmlParser(
             linkifyHtml(event.log, {
               attributes: {
@@ -46,7 +46,7 @@ class ChatMessage extends React.Component{
   }
 }
 
-ChatMessage.propTypes={
+ChatMessage.propTypes = {
   event: PropTypes.object,
 };
 
