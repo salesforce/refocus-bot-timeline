@@ -1,5 +1,7 @@
 # Timeline-Bot
 
+A Refocus bot that show all events in a room.
+
 [![Build Status](https://travis-ci.org/salesforce/refocus-bot-timeline.svg?branch=master)](https://travis-ci.org/salesforce/refocus-bot-timeline.svg)
 
 ### Env Variables
