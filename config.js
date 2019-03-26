@@ -14,8 +14,10 @@
 // user is a global object provided by the Refocus server
 /* eslint no-process-env: 0 */
 const DEFAULT_PORT = 5000;
+const botName = require('./package.json').name;
 
 module.exports = {
+  botName,
   env: process.env.NODE_ENV || 'dev',
   port: process.env.PORT || DEFAULT_PORT,
   dev: {
