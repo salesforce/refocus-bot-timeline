@@ -42,6 +42,7 @@ eventTypes.forEach((e) => {
  * @param {Event} response - Refocus events that are happening in this room
  */
 function renderUI(response){
+  /* eslint-disable no-use-before-define */
   ReactDOM.render(
     <App
       roomId = { roomId }
@@ -118,6 +119,7 @@ function getEventsByType(type) {
   }
 
   return Promise.all(promises).then((res) => {
+    /* eslint-disable prefer-spread */
     const events = [].concat.apply([], res);
     typeFinished.forEach((t) => {
       eventTypeRetrieved[t.toLowerCase()] = true;
