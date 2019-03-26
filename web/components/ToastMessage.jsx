@@ -33,6 +33,7 @@ class ToastMessage extends React.Component {
     this.interval = setInterval(() => this.closeToast(), TIMEOUT);
   }
 
+  /* eslint-disable react/no-deprecated */
   componentWillReceiveProps(nextProps) {
     this.setState({ message: nextProps.message });
     this.setState({ show: true });

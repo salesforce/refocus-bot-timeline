@@ -20,6 +20,7 @@ class ChatBox extends React.Component{
     };
   }
 
+  /* eslint-disable react/no-deprecated */
   componentWillReceiveProps(nextProps) {
     this.setState({
       pendingMessage: nextProps.pendingMessage

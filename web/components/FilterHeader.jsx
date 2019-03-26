@@ -20,10 +20,12 @@ class FilterHeader extends React.Component{
     };
   }
 
+  /* eslint-disable react/no-deprecated */
   componentWillReceiveProps(nextProps) {
     this.setState({ filter: nextProps.filter });
   }
 
+  /* eslint-disable max-len */
   render(){
     const { filter, changeType } = this.state;
     const buttonHeaderClass = 'slds-size_1-of-1 slds-text-align_center' +
@@ -49,8 +51,12 @@ class FilterHeader extends React.Component{
                   'slds-button_brand' :
                   'slds-button_neutral')}
               onClick={() => changeType('Comment')}>
-              <svg className="slds-button__icon slds-button__icon_left" aria-hidden="true">
-                <use xlinkHref="../static/icons/standard-sprite/svg/symbols.svg#post"></use>
+              <svg className="slds-button__icon slds-button__icon_left"
+                aria-hidden="true">
+                <use
+                  xlinkHref
+                    ="../static/icons/standard-sprite/svg/symbols.svg#post">
+                </use>
               </svg>
               Comments
             </button>
@@ -62,8 +68,10 @@ class FilterHeader extends React.Component{
                   'slds-button_brand' :
                   'slds-button_neutral')}
               onClick={() => changeType('Event')}>
-              <svg className="slds-button__icon slds-button__icon_left" aria-hidden="true">
-                <use xlinkHref="../static/icons/standard-sprite/svg/symbols.svg#event"></use>
+              <svg className="slds-button__icon slds-button__icon_left"
+                aria-hidden="true">
+                <use xlinkHref="../static/icons/standard-sprite/svg/symbols.svg#event">
+                </use>
               </svg>
               Events
             </button>

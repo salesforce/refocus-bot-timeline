@@ -32,7 +32,8 @@
 }
 
 /**
- * The chat payload should be displayed in the form of a list. Each item in the list has a number of vertical and horizontal spacing rules based on its type
+ * The chat payload should be displayed in the form of a list. Each item in the list has a number of vertical and
+ * horizontal spacing rules based on its type
  *
  * @summary Handles the display of chat items within a list
  *
@@ -79,7 +80,8 @@
 /**
  * @summary Selector to style sibling, same type message list items
  *
- * @selector .slds-chat-listitem_inbound + .slds-chat-listitem_inbound, .slds-chat-listitem_outbound + .slds-chat-listitem_outbound
+ * @selector .slds-chat-listitem_inbound + .slds-chat-listitem_inbound, .slds-chat-listitem_outbound +
+ * .slds-chat-listitem_outbound
  */
 .slds-chat-listitem_inbound + .slds-chat-listitem_inbound,
 .slds-chat-listitem_outbound + .slds-chat-listitem_outbound {
@@ -112,7 +114,8 @@
  * @summary Used to style icons with a chat log
  *
  * @selector .slds-chat-icon
- * @restrict .slds-chat-message__text .slds-icon_container, .slds-chat-event__body .slds-icon_container, .slds-chat-bookend .slds-icon_container
+ * @restrict .slds-chat-message__text .slds-icon_container, .slds-chat-event__body .slds-icon_container,
+ * .slds-chat-bookend .slds-icon_container
  */
 .slds-chat-icon {
   margin-right: 0.5rem; }
@@ -133,7 +136,8 @@
   display: flex; }
 
 /**
- * @summary Used for when customer avatars are used in consequtive inbound messages to align the message body with the previous message
+ * @summary Used for when customer avatars are used in consequtive inbound messages to align the message body
+ * with the previous message
  *
  * @selector .slds-chat-message_faux-avatar
  * @restrict .slds-chat-message

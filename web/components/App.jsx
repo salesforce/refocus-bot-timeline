@@ -11,7 +11,7 @@ import './chat.css';
 
 const moment = require('moment');
 const _ = require('lodash');
-const React=require('react');
+const React = require('react');
 const { env } = require('../../config.js');
 const config = require('../../config.js')[env];
 const bdk = require('@salesforce/refocus-bdk')(config);
@@ -26,10 +26,10 @@ const ChatBox = require('./ChatBox.jsx');
 const ZERO = 0;
 const DFB = 5; // Distance From Bottom
 
-class App extends React.Component{
-  constructor(props){
+class App extends React.Component {
+  constructor(props) {
     super(props);
-    this.state={
+    this.state = {
       toast: false,
       roomId: this.props.roomId,
       response: this.props.response
@@ -57,12 +57,14 @@ class App extends React.Component{
     this.setState({ scroll: true });
   }
 
+  /* eslint-disable react/no-deprecated */
   componentWillReceiveProps(nextProps) {
     let eventLog = this.state.response.concat(nextProps.response);
     eventLog = eventLog
       .sort((a, b) => moment(a.createdAt).diff(moment(b.createdAt)))
       .filter((value, index, self) => {
-        const duplicates = _.filter(self.slice(ZERO, index), ['id', value.id]);
+        const duplicates = _.filter(self.slice(ZERO, index),
+          ['id', value.id]);
         return duplicates.length === ZERO ?
           value : false;
       });
@@ -92,7 +94,7 @@ class App extends React.Component{
     }
   }
 
-  closeToast(){
+  closeToast() {
     this.setState({ toast: false });
   }
 
@@ -112,22 +114,26 @@ class App extends React.Component{
       if (this.state.filter === type) {
         this.setState({ filter: 'All' });
       } else {
-        this.setState({ filter: this.state.filter
-          .replace(type, '') });
+        this.setState({
+          filter: this.state.filter
+            .replace(type, '')
+        });
       }
     } else {
-      this.setState({ filter: this.state.filter +
-        type });
+      this.setState({
+        filter: this.state.filter +
+          type
+      });
     }
 
     this.setState({ scroll: true });
   }
 
-  chatChange(e){
+  chatChange(e) {
     this.setState({ currentText: e.target.innerText });
   }
 
-  sendChat(){
+  sendChat() {
     if (this.state.currentText !== '') {
       const eventType = {
         'type': 'Comment',
@@ -146,14 +152,14 @@ class App extends React.Component{
     }
   }
 
-  render(){
+  render() {
     const { response } = this.state;
 
     return (
       <div>
         <FilterHeader
-          filter={ this.state.filter }
-          changeType={ this.filterType } />
+          filter={this.state.filter}
+          changeType={this.filterType}/>
         <ul className='slds-chat-list slds-m-bottom--xx-small'
           id="chat-list"
           ref={(elem) => {
@@ -165,44 +171,45 @@ class App extends React.Component{
             </div>
           </li>
           {response.map((event) => {
-            const isAttachment = (this.state.filter.includes('Attachment')) &&
-                  (event.context.type === 'Event') &&
-                  (event.context.attachment);
+            const isAttachment = this.state.filter
+              .includes('Attachment') &&
+              event.context.type === 'Event' &&
+              event.context.attachment;
             const isSelectedFilter = (event.context) &&
               (this.state.filter.includes(event.context.type));
 
             if ((this.state.filter === 'All') ||
               (isSelectedFilter) ||
-                (isAttachment)
+              (isAttachment)
             ) {
               if ((event.context) && (event.context.type === 'Event' ||
                 event.context.type === 'RoomState') &&
                 (!event.context.attachment)) {
                 return (
                   <EventMessage
-                    event={ event }
-                    key={ event.id } />
+                    event={event}
+                    key={event.id}/>
                 );
               }
               if ((event.context) && (event.context.type === 'User')) {
                 return (
                   <UserMessage
-                    event={ event }
-                    key={ event.id } />
+                    event={event}
+                    key={event.id}/>
                 );
               }
               if ((event.context) && (event.context.type === 'Event') &&
-                  (event.context.attachment)) {
+                (event.context.attachment)) {
                 return (
                   <AttachmentMessage
-                    event={ event }
-                    key={ event.id } />
+                    event={event}
+                    key={event.id}/>
                 );
               }
               return (
                 <ChatMessage
-                  event={ event }
-                  key={ event.id } />
+                  event={event}
+                  key={event.id}/>
               );
             }
             return (<div key={event.id}></div>);
@@ -210,7 +217,7 @@ class App extends React.Component{
         </ul>
         {this.state.toast ?
           <ToastMessage
-            message = { 'Jump to new Event..' }
+            message={'Jump to new Event..'}
             closed={this.closeToast}
             clicked={this.clicked}
           /> :
@@ -226,11 +233,11 @@ class App extends React.Component{
   }
 }
 
-App.propTypes={
+App.propTypes = {
   roomId: PropTypes.number,
   response: PropTypes.array,
   user: PropTypes.object,
   getEventsByType: PropTypes.func
 };
 
-module.exports=App;
+module.exports = App;
