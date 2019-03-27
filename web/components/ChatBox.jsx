@@ -7,13 +7,14 @@
  */
 
 import PropTypes from 'prop-types';
-const React=require('react');
+
+const React = require('react');
 import './chat.css';
 
-class ChatBox extends React.Component{
-  constructor(props){
+class ChatBox extends React.Component {
+  constructor(props) {
     super(props);
-    this.state={
+    this.state = {
       chatChange: this.props.chatChange,
       sendChat: this.props.sendChat,
       pendingMessage: this.props.pendingMessage,
@@ -31,7 +32,7 @@ class ChatBox extends React.Component{
     }
   }
 
-  render(){
+  render() {
     const { chatChange, sendChat, pendingMessage } = this.state;
     const footerClass = 'slds-docked-composer__footer slds-grid slds-form' +
       ' slds-form_stacked slds-p-horizontal_medium';
@@ -72,11 +73,11 @@ class ChatBox extends React.Component{
   }
 }
 
-ChatBox.propTypes={
+ChatBox.propTypes = {
   currentText: PropTypes.string,
   chatChange: PropTypes.func,
   sendChat: PropTypes.func,
   pendingMessage: PropTypes.bool
 };
 
-module.exports=ChatBox;
+module.exports = ChatBox;

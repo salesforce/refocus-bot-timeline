@@ -13,23 +13,23 @@ const React = require('react');
 const EventBlueprint = require('./EventBlueprint.jsx');
 const sldsPink = '#eb7092';
 
-class EventMessage extends React.Component{
+class EventMessage extends React.Component {
   render() {
     const { event } = this.props;
 
     return (
       <EventBlueprint
-        event= {event}
-        type= {'Event'}
-        imgUrl = {'../static/icons/standard-sprite/svg/symbols.svg#event'}
-        color = {sldsPink}
-        message = {event.log}
+        event={event}
+        type={'Event'}
+        imgUrl={'../static/icons/standard-sprite/svg/symbols.svg#event'}
+        color={sldsPink}
+        message={event.log}
       />
     );
   }
 }
 
-EventMessage.propTypes={
+EventMessage.propTypes = {
   event: PropTypes.object,
 };
 

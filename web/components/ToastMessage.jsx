@@ -7,7 +7,8 @@
  */
 
 import PropTypes from 'prop-types';
-const React=require('react');
+
+const React = require('react');
 const TIMEOUT = 3000; // ms
 
 class ToastMessage extends React.Component {
@@ -17,7 +18,7 @@ class ToastMessage extends React.Component {
       message: props.message,
       show: false,
     };
-    this.closeToast=this.closeToast.bind(this);
+    this.closeToast = this.closeToast.bind(this);
   }
 
   closeToast() {
@@ -53,13 +54,13 @@ class ToastMessage extends React.Component {
         <div className="slds-region_narrow slds-is-relative">
           <div className="slds-notify_container slds-is-absolute"
             style={{ bottom: '10px', top: 'auto' }}>
-            <div onClick = { this.props.clicked }
+            <div onClick={this.props.clicked}
               className="slds-notify slds-notify_toast"
               style={{ width: 'auto' }}
               role="alert">
               <div className="slds-notify__content">
                 <a className="slds-text-heading_small slds-text-link">
-                  { message }
+                  {message}
                 </a>
               </div>
             </div>
