@@ -5,6 +5,8 @@
   "description": "A bot that show all events in a room",
   "url": "https://github.com/salesforce/refocus-bot-timeline/",
   "scripts": {
+    "test:end-to-end": "npm start && npm run cypress:open", 
+    "cypress:open": "$(npm bin)/cypress open",
     "start-ui": "webpack-dev-server --open",
     "start": "npm run build-ui && node index.js",
     "build-ui": "webpack --config webpack.config.js",
@@ -55,6 +57,7 @@
     "babel-preset-react": "^6.24.1",
     "babel-preset-stage-0": "^6.22.0",
     "css-loader": "^0.28.11",
+    "cypress": "^3.2.0",
     "eslint": "^4.19.0",
     "eslint-config-airbnb": "^16.1.0",
     "eslint-plugin-import": "^2.11.0",
