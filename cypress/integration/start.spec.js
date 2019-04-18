@@ -17,5 +17,11 @@ context('Timeline-Bot >', () => {
   it('OK, send a message on Timeline', () => {
     cy.visit(`/rooms/${name}`);
     // TODO: Figure out talking with iframe
+    cy
+      .get('iframe')
+      .then(function ($iframe) {
+        const doc = $iframe.contents();
+        console.log(doc);
+      })
   });
 });
