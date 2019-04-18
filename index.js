@@ -15,5 +15,3 @@ const bdk = require('@salesforce/refocus-bdk')(config);
 
 // Installs / Updates the Bot
 bdk.installOrUpdateBot(packageJSON);
-const date = new Date();
-console.log(date.getTime())

@@ -1,7 +1,7 @@
 {
-	"chromeWebSecurity": false,
-	"baseUrl": "http://localhost:3000",
-	"env": {
-		"API_TOKEN": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbm5hbWUiOiJzZHNkZnNkIiwidXNlcm5hbWUiOiJhZG1pbjZAcmVmb2N1cy5hZG1pbiIsInRpbWVzdGFtcCI6MTU1NTU4MjYxNTQyNiwiUHJvZmlsZU5hbWUiOiJSZWZvY3VzVXNlciIsIklzQWRtaW4iOmZhbHNlLCJpYXQiOjE1NTU1ODI2MTV9.gBdedx2Y2IdEm4PhuPBZEXhArVCfBE5XmSjXMWFc1gU"
-	}
+  "chromeWebSecurity": false,
+  "baseUrl": "http://localhost:3000",
+  "env": {
+    "API_TOKEN": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbm5hbWUiOiJzZHNkZnNkIiwidXNlcm5hbWUiOiJhZG1pbjZAcmVmb2N1cy5hZG1pbiIsInRpbWVzdGFtcCI6MTU1NTU4MjYxNTQyNiwiUHJvZmlsZU5hbWUiOiJSZWZvY3VzVXNlciIsIklzQWRtaW4iOmZhbHNlLCJpYXQiOjE1NTU1ODI2MTV9.gBdedx2Y2IdEm4PhuPBZEXhArVCfBE5XmSjXMWFc1gU"
+  }
 }

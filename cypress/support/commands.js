@@ -6,15 +6,15 @@
  * https://opensource.org/licenses/BSD-3-Clause
  */
 
-Cypress.Commands.add('login', () => {
+Cypress.Commands.add('login', (email, password) => {
   cy.visit('/rooms/');
   cy.get('input[name="username"]')
-    .type('admin@refocus.admin').should('have.value', 'admin@refocus.admin');
+    .type(email).should('have.value', email);
   cy.get('input[name="password"]')
-    .type('devPassword').should('have.value', 'devPassword');
+    .type(password).should('have.value', password);
   cy.get('button[type="submit"]')
     .click();
-})
+});
 
 Cypress.Commands.add('createRoomTypeAndRoom', (name) => {
   cy
@@ -22,7 +22,7 @@ Cypress.Commands.add('createRoomTypeAndRoom', (name) => {
       method: 'POST',
       url: '/v1/roomTypes',
       body: {
-        name: name,
+        name,
         bots: ['Timeline-Bot']
       },
       headers: {
@@ -35,7 +35,7 @@ Cypress.Commands.add('createRoomTypeAndRoom', (name) => {
           method: 'POST',
           url: '/v1/rooms',
           body: {
-            name: name,
+            name,
             type: name,
           },
           headers: {
