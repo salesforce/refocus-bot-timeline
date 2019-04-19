@@ -42,6 +42,7 @@ class ChatBox extends React.Component {
         <div className="slds-form-element slds-col">
           <div className="slds-form-element__control slds-p-around_xx-small">
             <div id="chat"
+              cy-data="chat-box"
               className="slds-input slds-rich-text-editor"
               contentEditable="true"
               onKeyUp={chatChange}
@@ -59,6 +60,7 @@ class ChatBox extends React.Component {
         </div>
         <div className="slds-p-around_xx-small">
           <button
+            id="send"
             disabled={pendingMessage}
             className="slds-button slds-button_brand"
             onClick={() => sendChat()}>
