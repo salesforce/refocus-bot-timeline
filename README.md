@@ -5,12 +5,19 @@ A Refocus bot that show all events in a room.
 [![Build Status](https://travis-ci.org/salesforce/refocus-bot-timeline.svg?branch=master)](https://travis-ci.org/salesforce/refocus-bot-timeline.svg)
 
 ### Env Variables
-
 Note: If you want to test this locally you will need some environment variables:
 * ```API_TOKEN``` - Used for Requests to Refocus. Created in refocus/tokens/new.
 * ```SOCKET_TOKEN``` (Returned Upon Installation) - Used for Socket Connection.
 * ```NODE_ENV (defaults to 'dev')``` - Used to determine which instance of Refocus to install the bot.
 * ```REFOCUS_URL``` (OPTIONAL) - Used to specify which refocus instance to point to.
+
+### Running E-2-E Tests With Refocus Locally
+* Inside your local refocus instance, run the command ```npm run start-integration-test-instance```.
+* Log in / Sign up to refocus.
+* Retrieve an API token by going to ```/tokens/new```.
+* Place this API token into this project inside .env & cypress.env.json.
+* ```npm run test:end-to-end```.
+
 
 ## Release History
 

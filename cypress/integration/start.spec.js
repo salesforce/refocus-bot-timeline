@@ -22,6 +22,7 @@ context('Timeline-Bot >', () => {
       .then(function ($iframe) {
         const doc = $iframe.contents();
         console.log(doc);
+        console.log("abcdefg")
       })
   });
 });
