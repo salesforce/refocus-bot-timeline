@@ -14,10 +14,14 @@ context('Timeline-Bot >', () => {
     cy.createRoomTypeAndRoom(name);
   });
 
-  it('OK, send a message on Timeline', () => {
+  it('OK, send 2 messages on Timeline', () => {
     cy.visit(`/rooms/${name}`);
     cy.get('iframe[id="Timeline-Bot-iframe-section"]').iframe()
       .find('div[id="chat"]').type('test message').should('contain.text', 'test message');
+    cy.get('iframe[id="Timeline-Bot-iframe-section"]').iframe()
+      .find('button[id="send"]').click();
+    cy.get('iframe[id="Timeline-Bot-iframe-section"]').iframe()
+      .find('div[id="chat"]').type('something else').should('contain.text', 'something else');
     cy.get('iframe[id="Timeline-Bot-iframe-section"]').iframe()
       .find('button[id="send"]').click();
   });
