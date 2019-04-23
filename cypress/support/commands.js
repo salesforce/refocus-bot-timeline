@@ -27,6 +27,18 @@ Cypress.Commands.add('login', (email, password) => {
     .click();
 });
 
+Cypress.Commands.add('authenticate', () => {
+  cy
+    .request({
+      method: 'POST',
+      url: '/v1/authenticate',
+      body: {
+        username: 'admin@refocus.admin',
+        password: 'devPassword',
+      }
+    });
+});
+
 Cypress.Commands.add('createRoomTypeAndRoom', (name) => {
   cy
     .request({
@@ -36,9 +48,6 @@ Cypress.Commands.add('createRoomTypeAndRoom', (name) => {
         name,
         bots: ['Timeline-Bot']
       },
-      headers: {
-        Authorization: Cypress.env().API_TOKEN,
-      }
     })
     .then(() => {
       cy
@@ -49,9 +58,6 @@ Cypress.Commands.add('createRoomTypeAndRoom', (name) => {
             name,
             type: name,
           },
-          headers: {
-            Authorization: Cypress.env().API_TOKEN,
-          }
         });
     });
 });

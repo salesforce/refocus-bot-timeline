@@ -10,7 +10,7 @@ context('Timeline-Bot >', () => {
   const d = new Date();
   const name = 'test_' + d.getTime().toString();
   before(() => {
-    cy.login('admin@refocus.admin', 'devPassword');
+    cy.authenticate();
     cy.createRoomTypeAndRoom(name);
   });
 
