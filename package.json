@@ -5,7 +5,7 @@
   "description": "A bot that show all events in a room",
   "url": "https://github.com/salesforce/refocus-bot-timeline/",
   "scripts": {
-    "test:end-to-end": "npm start && npm run cypress:open",
+    "test:end-to-end": "node retrieveToken.js && npm start && npm run cypress:open",
     "cypress:open": "$(npm bin)/cypress open",
     "start-ui": "webpack-dev-server --open",
     "start": "npm run build-ui && node index.js",
@@ -69,6 +69,7 @@
     "husky": "^0.14.3",
     "ignore-styles": "^5.0.1",
     "istanbul": "^0.4.5",
+    "puppeteer": "^1.14.0",
     "react-test-renderer": "^15.6.2",
     "style-loader": "^0.18.2",
     "uglifyjs-webpack-plugin": "^1.2.7",
