@@ -13,9 +13,6 @@ Note: If you want to test this locally you will need some environment variables:
 
 ### Running E-2-E Tests With Refocus Locally
 * Inside your local refocus instance, run the command: ```npm run start-bot-integration-test```.
-* Manually Log in / Sign up to refocus.
-* Retrieve an API token by going to ```/tokens/new```.
-* Place this API token into this project inside ```.env``` file.
 * Run the command: ```npm run test:end-to-end```.
 
 ## Release History
