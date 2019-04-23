@@ -14,4 +14,3 @@ const packageJSON = require('./package.json');
 const bdk = require('@salesforce/refocus-bdk')(config);
 
 bdk.installOrUpdateBot(packageJSON);
-
