@@ -17,11 +17,13 @@ context('Timeline-Bot >', () => {
   it('OK, send 2 messages on Timeline', () => {
     cy.visit(`/rooms/${name}`);
     cy.get('iframe[id="Timeline-Bot-iframe-section"]').iframe()
-      .find('div[id="chat"]').type('test message').should('contain.text', 'test message');
+      .find('div[id="chat"]').type('test message')
+      .should('contain.text', 'test message');
     cy.get('iframe[id="Timeline-Bot-iframe-section"]').iframe()
       .find('button[id="send-button"]').click();
     cy.get('iframe[id="Timeline-Bot-iframe-section"]').iframe()
-      .find('div[id="chat"]').type('something else').should('contain.text', 'something else');
+      .find('div[id="chat"]').type('something else')
+      .should('contain.text', 'something else');
     cy.get('iframe[id="Timeline-Bot-iframe-section"]').iframe()
       .find('button[id="send-button"]').click();
   });

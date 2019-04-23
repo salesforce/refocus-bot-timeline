@@ -9,11 +9,11 @@
 Cypress.Commands.add('iframe', (iframeSelector, elSelector) => {
   return cy
     .get(`iframe${iframeSelector || ''}`)
-    .should($iframe => {
+    .should(($iframe) =>
       expect($iframe.contents().find(elSelector||'body')).to.exist
-    })
-    .then($iframe => {
-      return cy.wrap($iframe.contents().find('body'))
+    )
+    .then(($iframe) => {
+      return cy.wrap($iframe.contents().find('body'));
     });
 });
 
