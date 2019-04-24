@@ -17,7 +17,7 @@ Note: If you want to test this locally you will need some environment variables:
 * ```NODE_ENV (defaults to 'dev')``` - Used to determine which instance of Refocus to install the bot.
 * ```REFOCUS_URL``` (OPTIONAL) - Used to specify which refocus instance to point to.
 
-### Running E-2-E Tests With Refocus Locally
+### Running End-to-End Tests With Refocus Locally
 * Inside your local refocus instance, run the command: ```npm run start-bot-integration-test```.
 * Run the command: ```npm run test:end-to-end```.
 
