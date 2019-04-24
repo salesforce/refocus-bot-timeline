@@ -1,8 +1,14 @@
 # Timeline-Bot
 
-A Refocus bot that show all events in a room.
-
 [![Build Status](https://travis-ci.org/salesforce/refocus-bot-timeline.svg?branch=master)](https://travis-ci.org/salesforce/refocus-bot-timeline.svg)
+[![Cypress.io tests](https://img.shields.io/badge/cypress.io-tests-green.svg?style=flat-square)](https://cypress.io)
+
+A Refocus Bot that show all events in a room.
+
+### Technologies
+* [React](https://facebook.github.io/react/) for the frontend.
+* [Webpack](https://webpack.github.io/) as an asset bundler.
+* [Crpyess.io](https://www.cypress.io/) for end-to-end tests.
 
 ### Env Variables
 Note: If you want to test this locally you will need some environment variables:
