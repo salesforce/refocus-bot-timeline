@@ -42,4 +42,5 @@ Follows [semantic versioning](https://docs.npmjs.com/getting-started/semantic-ve
 * 1.1.15 Don't show Slack Events in Timeline.
 * 1.1.16 Clean up config.js
 * 1.1.17 Added botName to config file.
-* 1.1.18 Setting up E-2-E tests.
+* 1.1.18 Upgraded packages for npm audit.
+* 1.1.19 Setting up end-to-end tests.
