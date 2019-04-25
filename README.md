@@ -1,25 +1,16 @@
 # Timeline-Bot
 
+A Refocus bot that show all events in a room.
+
 [![Build Status](https://travis-ci.org/salesforce/refocus-bot-timeline.svg?branch=master)](https://travis-ci.org/salesforce/refocus-bot-timeline.svg)
-[![Cypress.io tests](https://img.shields.io/badge/cypress.io-tests-green.svg?style=flat-square)](https://cypress.io)
-
-A Refocus Bot that show all events in a room.
-
-### Technologies
-* [React](https://facebook.github.io/react/) for the frontend.
-* [Webpack](https://webpack.github.io/) as an asset bundler.
-* [Crpyess.io](https://www.cypress.io/) for end-to-end tests.
 
 ### Env Variables
+
 Note: If you want to test this locally you will need some environment variables:
 * ```API_TOKEN``` - Used for Requests to Refocus. Created in refocus/tokens/new.
 * ```SOCKET_TOKEN``` (Returned Upon Installation) - Used for Socket Connection.
 * ```NODE_ENV (defaults to 'dev')``` - Used to determine which instance of Refocus to install the bot.
 * ```REFOCUS_URL``` (OPTIONAL) - Used to specify which refocus instance to point to.
-
-### Running End-to-End Tests With Refocus Locally
-* Inside your local refocus instance, run the command: ```npm run start-bot-integration-test```.
-* Run the command: ```npm run test:end-to-end```.
 
 ## Release History
 
@@ -49,4 +40,3 @@ Follows [semantic versioning](https://docs.npmjs.com/getting-started/semantic-ve
 * 1.1.16 Clean up config.js
 * 1.1.17 Added botName to config file.
 * 1.1.18 Upgraded packages for npm audit.
-* 1.1.19 Setting up end-to-end tests.
