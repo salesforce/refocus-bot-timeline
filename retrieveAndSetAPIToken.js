@@ -29,4 +29,3 @@ fs.writeFileAsync = util.promisify(fs.writeFile);
   await fs.writeFileAsync('.env', data, 'utf-8');
   await browser.close();
 })();
-
