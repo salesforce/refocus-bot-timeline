@@ -13,7 +13,7 @@
     "lint": "eslint --ext=js --ext=jsx .",
     "postinstall": "npm run build-ui",
     "coverage": "istanbul cover node_modules/mocha/bin/_mocha tests/*",
-    "test": "npm run lint && mocha tests --recursive --require babel-core/register **/*.jsx --require ignore-styles && npm run coverage"
+    "test": "npm run lint && mocha tests/unit --recursive --require babel-core/register **/*.jsx --require ignore-styles && npm run coverage"
   },
   "husky": {
     "hooks": {
