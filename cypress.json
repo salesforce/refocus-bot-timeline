@@ -1,0 +1,10 @@
+{
+  "fixturesFolder": "tests/integration/cypress/fixtures",
+  "integrationFolder": "tests/integration/cypress/integration",
+  "pluginsFile": "tests/integration/cypress/plugins/index.js",
+  "screenshotsFolder": "tests/integration/cypress/screenshots",
+  "videosFolder": "tests/integration/cypress/videos",
+  "supportFile": "tests/integration/cypress/support/index.js",
+  "chromeWebSecurity": false,
+  "baseUrl": "http://localhost:3000"
+}

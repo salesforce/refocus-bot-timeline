@@ -59,6 +59,7 @@ class ChatBox extends React.Component {
         </div>
         <div className="slds-p-around_xx-small">
           <button
+            id="send-button"
             disabled={pendingMessage}
             className="slds-button slds-button_brand"
             onClick={() => sendChat()}>
