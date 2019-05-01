@@ -10,7 +10,7 @@ fs.writeFileAsync = util.promisify(fs.writeFile);
 (async () => {
   const browser = await puppeteer.launch();
   const page = await browser.newPage();
-  await page.goto(`${process.env.REFOCUS_CI_URL}/tokens/new`,
+  await page.goto(`${process.env.REFOCUS_INTEGRATION_SANDBOX_URL}/tokens/new`,
     { waitUntil: ['load', 'domcontentloaded'] });
   await page.type('input[name="username"]', 'admin@refocus.admin');
   await page.type('input[name="password"]', 'devPassword');
