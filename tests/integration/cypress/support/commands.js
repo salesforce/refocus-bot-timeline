@@ -6,10 +6,8 @@
  * https://opensource.org/licenses/BSD-3-Clause
  */
 
-const env = require('../../../../config.js').env;
-const config = require('../../../../config.js')[env];
-
-const { refocusUsername, refocusPassword } = config;
+const refocusUsername = Cypress.env('REFOCUS_USERNAME');
+const refocusPassword = Cypress.env('REFOCUS_PASSWORD');
 
 Cypress.Commands.add('iframe', (iframeSelector, elSelector) => {
   return cy
