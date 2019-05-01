@@ -15,17 +15,17 @@ A Refocus bot that show all events in a room.
 Note: If you want to test this locally you will need some environment variables:
 * ```API_TOKEN``` - Used for Requests to Refocus. Created in refocus/tokens/new.
 * ```SOCKET_TOKEN``` (Returned Upon Installation) - Used for Socket Connection.
-* ```NODE_ENV (defaults to 'dev')``` - Used to determine which instance of Refocus to install the bot.
+* ```NODE_ENV``` (defaults to 'dev') - Used to determine which instance of Refocus to install the bot.
 * ```REFOCUS_URL``` (OPTIONAL) - Used to specify which refocus instance to point to.
 
 ### Running End-to-End Tests With Refocus Locally
 * Environment Variables in bot:
-	* HEARTBEAT_OFF=true
-	* NODE_ENV=integrationSandbox
-	* CYPRESS_baseUrl // Url of test refocus instance e.g. http://localhost:3000
-	* REFOCUS_INTEGRATION_SANDBOX_URL // Url of test refocus instance e.g. http://localhost:3000
-	* REFOCUS_USERNAME // Username to authenticate to refocus for integration tests
-	* REFOCUS_PASSWORD // Password to authenticate to refocus for integration tests
+	* ```HEARTBEAT_OFF=true```
+	* ```NODE_ENV=integrationSandbox```
+	* ```CYPRESS_baseUrl``` // Url of test refocus instance e.g. http://localhost:3000
+	* ```REFOCUS_INTEGRATION_SANDBOX_URL``` // Url of test refocus instance e.g. http://localhost:3000
+	* ```REFOCUS_USERNAME``` // Username to authenticate to refocus for integration tests
+	* ```REFOCUS_PASSWORD``` // Password to authenticate to refocus for integration tests
 * Inside your local refocus instance, run the command: ```npm run start-bot-integration-test```.
 * Run the command: ```npm run test:end-to-end```.
 
