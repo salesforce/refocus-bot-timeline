@@ -19,6 +19,11 @@ Note: If you want to test this locally you will need some environment variables:
 * ```REFOCUS_URL``` (OPTIONAL) - Used to specify which refocus instance to point to.
 
 ### Running End-to-End Tests With Refocus Locally
+* Environment Variables in bot:
+	* HEARTBEAT_OFF=true
+	* NODE_ENV=integrationSandbox
+	* CYPRESS_baseUrl= // Url of test refocus instance e.g. http://localhost:3000
+	* REFOCUS_INTEGRATION_SANDBOX_URL= // Url of test refocus instance e.g. http://localhost:3000
 * Inside your local refocus instance, run the command: ```npm run start-bot-integration-test```.
 * Run the command: ```npm run test:end-to-end```.
 
