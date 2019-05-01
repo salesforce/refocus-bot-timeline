@@ -40,5 +40,7 @@ module.exports = {
   integrationSandbox: {
     refocusUrl: process.env.REFOCUS_INTEGRATION_SANDBOX_URL,
     token: process.env.API_TOKEN,
+    refocusUsername: process.env.REFOCUS_USERNAME,
+    refocusPassword: process.env.REFOCUS_PASSWORD,
   }
 };
