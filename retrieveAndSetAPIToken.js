@@ -1,6 +1,10 @@
 const puppeteer = require('puppeteer');
 const fs = require('fs');
 const util = require('util');
+const env = require('./config.js').env;
+const config = require('./config.js')[env];
+
+const { refocusUrl } = config;
 const TIME_DELAY_MS = 500;
 const SECOND_ARRAY_EL = 1;
 
@@ -11,7 +15,7 @@ fs.openFileAsync = util.promisify(fs.open);
 (async () => {
   const browser = await puppeteer.launch();
   const page = await browser.newPage();
-  await page.goto(`${process.env.REFOCUS_INTEGRATION_SANDBOX_URL}/tokens/new`,
+  await page.goto(`${refocusUrl}/tokens/new`,
     { waitUntil: ['load', 'domcontentloaded'] });
   await page.type('input[name="username"]', 'admin@refocus.admin');
   await page.type('input[name="password"]', 'devPassword');
