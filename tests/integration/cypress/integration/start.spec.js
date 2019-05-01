@@ -20,7 +20,7 @@ context('Timeline-Bot >', () => {
       .find('div[id="chat"]').type('test message')
       .should('contain.text', 'test message');
     cy.get('iframe[id="Timeline-Bot-iframe-section"]').iframe()
-      .find('button[id="send-button"]').click()
+      .find('button[id="send-button"]').click();
     cy.get('iframe[id="Timeline-Bot-iframe-section"]').iframe()
       .find('div[id="chat"]').should('have.text', '');
     cy.get('iframe[id="Timeline-Bot-iframe-section"]').iframe()
