@@ -5,6 +5,5 @@
   "screenshotsFolder": "tests/integration/cypress/screenshots",
   "videosFolder": "tests/integration/cypress/videos",
   "supportFile": "tests/integration/cypress/support/index.js",
-  "chromeWebSecurity": false,
-  "baseUrl": "http://localhost:3000"
+  "chromeWebSecurity": false
 }
