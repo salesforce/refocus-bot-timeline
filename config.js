@@ -24,21 +24,23 @@ module.exports = {
     refocusUrl: process.env.REFOCUS_DEV_URL ||
       'http://localhost:3000',
     token: process.env.API_TOKEN,
-    socketToken: process.env.SOCKET_TOKEN,
   },
   perf: {
     refocusUrl: process.env.REFOCUS_PERF_URL,
     token: process.env.API_TOKEN,
-    socketToken: process.env.SOCKET_TOKEN,
   },
   sandbox: {
     refocusUrl: process.env.REFOCUS_SANDBOX_URL,
     token: process.env.API_TOKEN,
-    socketToken: process.env.SOCKET_TOKEN,
   },
   production: {
     refocusUrl: process.env.REFOCUS_PROD_URL,
     token: process.env.API_TOKEN,
-    socketToken: process.env.SOCKET_TOKEN,
   },
+  integrationSandbox: {
+    refocusUrl: process.env.REFOCUS_INTEGRATION_SANDBOX_URL,
+    token: process.env.API_TOKEN,
+    refocusUsername: process.env.REFOCUS_USERNAME,
+    refocusPassword: process.env.REFOCUS_PASSWORD,
+  }
 };

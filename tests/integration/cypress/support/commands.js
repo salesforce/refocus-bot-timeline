@@ -6,6 +6,9 @@
  * https://opensource.org/licenses/BSD-3-Clause
  */
 
+const refocusUsername = Cypress.env('REFOCUS_USERNAME');
+const refocusPassword = Cypress.env('REFOCUS_PASSWORD');
+
 Cypress.Commands.add('iframe', (iframeSelector, elSelector) => {
   return cy
     .get(`iframe${iframeSelector || ''}`)
@@ -33,8 +36,8 @@ Cypress.Commands.add('authenticate', () => {
       method: 'POST',
       url: '/v1/authenticate',
       body: {
-        username: 'admin@refocus.admin',
-        password: 'devPassword',
+        username: refocusUsername,
+        password: refocusPassword,
       }
     });
 });

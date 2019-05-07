@@ -6,3 +6,5 @@ web/dist/*
 !web/dist/public/
 .env
 .idea*
+tests/integration/cypress/screenshots/*
+tests/integration/cypress/fixtures/*

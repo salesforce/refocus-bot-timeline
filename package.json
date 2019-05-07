@@ -5,15 +5,18 @@
   "description": "A bot that show all events in a room",
   "url": "https://github.com/salesforce/refocus-bot-timeline/",
   "scripts": {
-    "test:end-to-end": "node retrieveAndSetAPIToken.js && npm start && npm run cypress:open",
+    "test-integration": "NODE_ENV=integrationSandbox node retrieveAndSetAPIToken.js && npm start && npm run cypress:run",
+    "test-integration:dev": "node retrieveAndSetAPIToken.js && npm start && npm run cypress:open",
     "cypress:open": "$(npm bin)/cypress open",
+    "cypress:run": "$(npm bin)/cypress run --browser chrome",
     "start-ui": "webpack-dev-server --open",
     "start": "npm run build-ui && node index.js",
     "build-ui": "webpack --config webpack.config.js",
     "lint": "eslint --ext=js --ext=jsx .",
     "postinstall": "npm run build-ui",
     "coverage": "istanbul cover node_modules/mocha/bin/_mocha tests/*",
-    "test": "npm run lint && mocha tests/unit --recursive --require babel-core/register **/*.jsx --require ignore-styles && npm run coverage"
+    "test-unit": "npm run lint && mocha tests/unit --recursive --require babel-core/register **/*.jsx --require ignore-styles && npm run coverage",
+    "test": "npm run test-unit && npm run test-integration"
   },
   "husky": {
     "hooks": {
