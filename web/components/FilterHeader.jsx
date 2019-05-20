@@ -20,9 +20,8 @@ class FilterHeader extends React.Component {
     };
   }
 
-  /* eslint-disable react/no-deprecated */
-  componentWillReceiveProps(nextProps) {
-    this.setState({ filter: nextProps.filter });
+  getDerivedStateFromProps(nextProps) {
+    return { filter: nextProps.filter };
   }
 
   /* eslint-disable max-len */
