@@ -20,7 +20,7 @@ class FilterHeader extends React.Component {
     };
   }
 
-  getDerivedStateFromProps(nextProps) {
+  static getDerivedStateFromProps(nextProps) {
     return { filter: nextProps.filter };
   }
 
