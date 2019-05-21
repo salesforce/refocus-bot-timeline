@@ -23,11 +23,13 @@ Note: If you want to test this locally you will need some environment variables:
 	* ```HEARTBEAT_OFF=true```
 	* ```NODE_ENV=integrationSandbox```
 	* ```CYPRESS_baseUrl``` // Url of test refocus instance e.g. http://localhost:3000
+	* ```CYPRESS_REFOCUS_USERNAME``` Username to authenticate to refocus for integration tests
+	* ```CYPRESS_REFOCUS_PASSWORD``` Password to authenticate to refocus for integration tests
 	* ```REFOCUS_INTEGRATION_SANDBOX_URL``` // Url of test refocus instance e.g. http://localhost:3000
 	* ```REFOCUS_USERNAME``` // Username to authenticate to refocus for integration tests
 	* ```REFOCUS_PASSWORD``` // Password to authenticate to refocus for integration tests
 * Inside your local refocus instance, run the command: ```npm run start-bot-integration-test```.
-* Run the command: ```npm run test:end-to-end```.
+* Run the command: ```npm run test-integration:dev```.
 
 ## Release History
 

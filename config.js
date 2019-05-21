@@ -24,6 +24,8 @@ module.exports = {
     refocusUrl: process.env.REFOCUS_DEV_URL ||
       'http://localhost:3000',
     token: process.env.API_TOKEN,
+    refocusUsername: process.env.REFOCUS_USERNAME,
+    refocusPassword: process.env.REFOCUS_PASSWORD,
   },
   perf: {
     refocusUrl: process.env.REFOCUS_PERF_URL,
