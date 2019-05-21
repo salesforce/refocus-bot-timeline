@@ -45,4 +45,32 @@ describe('<App />: ', () => {
       .to.contain('Start of timeline for');
     done();
   });
+
+  it('Ok, 1 event so chat-list has 2 messages', (done) => {
+    const testEvent = {
+      context: {
+        user: {
+          name: 'Donald Duck',
+        },
+      },
+      message: 'Something interesting..'
+    };
+
+
+    const eventBlueprint = ReactTestRenderer.create(
+      <App
+        roomId={1}
+        response={[ testEvent ]}
+        getEventsByType={function() {}}
+        user={{}}/>
+    );
+
+    const chatList = eventBlueprint.toJSON().children[1];
+    expect(chatList.props.id).to.equal('chat-list');
+    expect(chatList.children.length).to.equal(2);
+    console.log(chatList.children[1]);
+    // expect(chatList.children[1].children[0].children[0])
+    //   .to.contain('Start of timeline for');
+    done();
+  });
 });
