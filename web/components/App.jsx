@@ -89,7 +89,7 @@ class App extends React.Component {
   }
 
   componentDidUpdate() {
-    if (this.state.scroll) {
+    if (this.state.scroll && this.container) {
       this.container.scrollTop = this.container.scrollHeight;
       this.setState({ scroll: false });
     }
