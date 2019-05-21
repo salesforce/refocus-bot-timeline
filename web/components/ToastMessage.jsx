@@ -34,10 +34,8 @@ class ToastMessage extends React.Component {
     this.interval = setInterval(() => this.closeToast(), TIMEOUT);
   }
 
-  /* eslint-disable react/no-deprecated */
-  componentWillReceiveProps(nextProps) {
-    this.setState({ message: nextProps.message });
-    this.setState({ show: true });
+  static getDerivedStateFromProps(nextProps) {
+    return { message: nextProps.message, show: true };
   }
 
   componentWillUnmount() {
@@ -46,8 +44,8 @@ class ToastMessage extends React.Component {
 
   render() {
     const { message, show } = this.state;
-    let toastContainer = 'slds-size_2-of-2 ';
-    toastContainer += show ? 'slds-show' : 'slds-hide';
+    const toastContainer =
+      `slds-size_2-of-2 ${show ? 'slds-show' : 'slds-hide'}`;
 
     return (
       <div className={toastContainer}>

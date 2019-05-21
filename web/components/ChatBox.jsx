@@ -21,15 +21,12 @@ class ChatBox extends React.Component {
     };
   }
 
-  /* eslint-disable react/no-deprecated */
-  componentWillReceiveProps(nextProps) {
-    this.setState({
-      pendingMessage: nextProps.pendingMessage
-    });
-
-    if (nextProps.currentText === '') {
+  static getDerivedStateFromProps(nextProps, prevState) {
+    if (prevState.pendingMessage && nextProps.currentText === '') {
       document.getElementById('chat').innerText = '';
     }
+
+    return { pendingMessage: nextProps.pendingMessage };
   }
 
   render() {

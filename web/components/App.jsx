@@ -50,45 +50,46 @@ class App extends React.Component {
     this.chatChange = this.chatChange.bind(this);
     this.sendChat = this.sendChat.bind(this);
     this.clicked = this.clicked.bind(this);
-    this.shouldShowToast = this.shouldShowToast.bind(this);
   }
 
   componentDidMount() {
     this.setState({ scroll: true });
   }
 
-  /* eslint-disable react/no-deprecated */
-  componentWillReceiveProps(nextProps) {
-    let eventLog = this.state.response.concat(nextProps.response);
-    eventLog = eventLog
-      .sort((a, b) => moment(a.createdAt).diff(moment(b.createdAt)))
-      .filter((value, index, self) => {
-        const duplicates = _.filter(self.slice(ZERO, index),
-          ['id', value.id]);
-        return duplicates.length === ZERO ?
-          value : false;
-      });
-    this.setState({ response: eventLog });
-    const element = document.getElementById('chat-list');
-    if (element.scrollHeight - element.scrollTop - DFB <=
-      element.clientHeight) {
-      this.setState({ scroll: true });
-    } else {
-      this.setState({ toast: this.shouldShowToast(nextProps.response[ZERO]) });
-    }
-  }
+  static getDerivedStateFromProps(nextProps, prevState) {
+    const previousEvents = prevState.response;
+    const latestEvent = nextProps.response[ZERO];
 
-  shouldShowToast(response) {
-    if (response.context && (this.state.filter === 'All' ||
-      this.state.filter.includes(response.context.type))) {
-      return true;
+    if (latestEvent && !_.find(previousEvents, latestEvent)) {
+      const newState = {};
+      const allEvents = previousEvents.concat(nextProps.response)
+        .filter((value, index, self) => {
+          const duplicates =
+            _.filter(self.slice(ZERO, index), ['id', value.id]);
+          return duplicates.length === ZERO ? value : false;
+        })
+        .sort((a, b) => moment(a.createdAt).diff(moment(b.createdAt)));
+
+      newState.response = allEvents;
+      const chatList = document.getElementById('chat-list');
+
+      if (chatList && chatList.scrollHeight - chatList.scrollTop - DFB <=
+        chatList.clientHeight) {
+        newState.scroll = true;
+      } else {
+        newState.toast = latestEvent && latestEvent.context &&
+          (prevState.filter === 'All' ||
+          prevState.filter.includes(latestEvent.context.type));
+      }
+
+      return newState;
     }
 
-    return false;
+    return null;
   }
 
   componentDidUpdate() {
-    if (this.state.scroll) {
+    if (this.state.scroll && this.container) {
       this.container.scrollTop = this.container.scrollHeight;
       this.setState({ scroll: false });
     }

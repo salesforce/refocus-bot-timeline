@@ -23,7 +23,7 @@ const testEvent = {
   },
 };
 
-describe('<EventBlueprint/>: ', () => {
+describe('<EventBlueprint />: ', () => {
   let eventBlueprint;
 
   before(() => {

@@ -1,7 +1,7 @@
 {
   "name": "Timeline-Bot",
   "displayName": "Activity Timeline",
-  "version": "1.1.19",
+  "version": "1.1.20",
   "description": "A bot that show all events in a room",
   "url": "https://github.com/salesforce/refocus-bot-timeline/",
   "scripts": {
@@ -16,7 +16,8 @@
     "postinstall": "npm run build-ui",
     "coverage": "istanbul cover node_modules/mocha/bin/_mocha tests/*",
     "test-unit": "npm run lint && mocha tests/unit --recursive --require babel-core/register **/*.jsx --require ignore-styles && npm run coverage",
-    "test": "npm run test-unit && npm run test-integration"
+    "test": "npm run test-unit && npm run test-integration",
+    "test:dev": "npm run test-unit && npm run test-integration:dev"
   },
   "husky": {
     "hooks": {
@@ -34,8 +35,8 @@
     "lodash": "^4.17.11",
     "moment": "^2.24.0",
     "prop-types": "^15.7.2",
-    "react": "^15.6.1",
-    "react-dom": "^15.6.1",
+    "react": "^16.8.6",
+    "react-dom": "^16.8.6",
     "react-html-parser": "^1.0.3",
     "sinon": "^2.3.7",
     "socket.io": "^2.2.0",
@@ -73,7 +74,7 @@
     "istanbul": "^0.4.5",
     "mocha": "^6.1.3",
     "puppeteer": "^1.14.0",
-    "react-test-renderer": "^15.6.2",
+    "react-test-renderer": "^16.8.6",
     "style-loader": "^0.18.2",
     "uglifyjs-webpack-plugin": "^1.3.0",
     "url-loader": "^1.1.2",
