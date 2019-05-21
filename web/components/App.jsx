@@ -64,7 +64,8 @@ class App extends React.Component {
       const newState = {};
       const allEvents = previousEvents.concat(nextProps.response)
         .filter((value, index, self) => {
-          const duplicates = _.filter(self.slice(ZERO, index), ['id', value.id]);
+          const duplicates =
+            _.filter(self.slice(ZERO, index), ['id', value.id]);
           return duplicates.length === ZERO ? value : false;
         })
         .sort((a, b) => moment(a.createdAt).diff(moment(b.createdAt)));

@@ -44,7 +44,8 @@ class ToastMessage extends React.Component {
 
   render() {
     const { message, show } = this.state;
-    const toastContainer = `slds-size_2-of-2 ${show ? 'slds-show' : 'slds-hide'}`;
+    const toastContainer =
+      `slds-size_2-of-2 ${show ? 'slds-show' : 'slds-hide'}`;
 
     return (
       <div className={toastContainer}>
