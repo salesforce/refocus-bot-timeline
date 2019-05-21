@@ -10,7 +10,6 @@
  * tests/web/components/App.js
  */
 
-
 /* eslint-disable no-magic-numbers */
 const expect = require('chai').expect;
 const App = require('../../../../web/components/App.jsx');

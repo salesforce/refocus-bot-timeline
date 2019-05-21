@@ -5,7 +5,6 @@ const env = require('./config.js').env;
 const config = require('./config.js')[env];
 
 const { refocusUrl, refocusUsername, refocusPassword } = config;
-
 const TIME_DELAY_MS = 500;
 const SECOND_ARRAY_EL = 1;
 
