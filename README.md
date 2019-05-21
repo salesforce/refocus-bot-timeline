@@ -60,3 +60,4 @@ Follows [semantic versioning](https://docs.npmjs.com/getting-started/semantic-ve
 * 1.1.17 Added botName to config file.
 * 1.1.18 Upgraded packages for npm audit.
 * 1.1.19 Setting up end-to-end tests.
+* 1.1.20 Upgrade to react 16.

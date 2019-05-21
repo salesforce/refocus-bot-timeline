@@ -9,9 +9,13 @@
 /**
  * tests/web/components/App.js
  */
+
+
+/* eslint-disable no-magic-numbers */
 const expect = require('chai').expect;
 const App = require('../../../../web/components/App.jsx');
 const ReactTestRenderer = require('react-test-renderer');
+const roomId = 1;
 
 import React from 'react';
 
@@ -19,9 +23,9 @@ describe('<App />: ', () => {
   it('Ok, <App /> renders as a div element', (done) => {
     const eventBlueprint = ReactTestRenderer.create(
       <App
-        roomId={1}
+        roomId={roomId}
         response={[]}
-        getEventsByType={function() {}}
+        getEventsByType={() => {}}
         user={{}}/>
     );
 
@@ -32,9 +36,9 @@ describe('<App />: ', () => {
   it('Ok, no events so chat-list has 1 child with start message', (done) => {
     const eventBlueprint = ReactTestRenderer.create(
       <App
-        roomId={1}
+        roomId={roomId}
         response={[]}
-        getEventsByType={function() {}}
+        getEventsByType={() => {}}
         user={{}}/>
     );
 
@@ -59,18 +63,15 @@ describe('<App />: ', () => {
 
     const eventBlueprint = ReactTestRenderer.create(
       <App
-        roomId={1}
-        response={[ testEvent ]}
-        getEventsByType={function() {}}
+        roomId={roomId}
+        response={[testEvent]}
+        getEventsByType={() => {}}
         user={{}}/>
     );
 
     const chatList = eventBlueprint.toJSON().children[1];
     expect(chatList.props.id).to.equal('chat-list');
     expect(chatList.children.length).to.equal(2);
-    console.log(chatList.children[1]);
-    // expect(chatList.children[1].children[0].children[0])
-    //   .to.contain('Start of timeline for');
     done();
   });
 });
