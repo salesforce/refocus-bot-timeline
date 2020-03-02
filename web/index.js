@@ -18,8 +18,8 @@ const ReactDOM = require('react-dom');
 const App = require('./components/App.jsx');
 const { env } = require('../config.js');
 const config = require('../config.js')[env];
-const bdk = require('@salesforce/refocus-bdk')(config);
 const botName = require('../package.json').name;
+const bdk = require('@salesforce/refocus-bdk')(config, botName);
 const roomId = bdk.getRoomId();
 const _user = {
   name: bdk.getUserName(),
