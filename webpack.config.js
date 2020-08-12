@@ -17,21 +17,22 @@ const botName = require('./package.json').name;
 const Uglify = require('uglifyjs-webpack-plugin');
 
 const config = {
-
   entry: './web/index.js',
 
   output: {
     path: path.resolve(__dirname, './web/dist'),
     filename: 'index_bundle.js',
-    publicPath: '/'
+    publicPath: '/',
   },
 
   module: {
     rules: [
       {
         test: /\.(js|jsx)$/,
-        include: [path.resolve(__dirname, 'lib'),
-          path.resolve(__dirname, 'web')],
+        include: [
+          path.resolve(__dirname, 'lib'),
+          path.resolve(__dirname, 'web'),
+        ],
         use: 'babel-loader?compact=true',
       },
       {
@@ -48,15 +49,15 @@ const config = {
         use: 'url-loader?limit=100000',
         include: path.resolve(__dirname, 'web'),
       },
-    ]
+    ],
   },
 
   node: {
-    fs: 'empty'
+    fs: 'empty',
   },
 
   devServer: {
-    historyApiFallback: true
+    historyApiFallback: true,
   },
 
   plugins: [
@@ -68,20 +69,18 @@ const config = {
     new ZipPlugin({
       filename: 'bot.zip',
       include: [/\.js$/, /\.html$/],
-      exclude: ['public']
+      exclude: ['public'],
     }),
     new Dotenv({
       path: './.env',
       safe: false,
-      systemvars: true
+      systemvars: true,
     }),
-  ]
+  ],
 };
 
 if (env === 'production') {
-  config.plugins.push(
-    new Uglify()
-  );
+  config.plugins.push(new Uglify());
 }
 
 module.exports = config;
