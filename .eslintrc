@@ -23,20 +23,23 @@
     "no-unexpected-multiline": 2,
     "no-unreachable": 2,
     "use-isnan": 2,
-    "valid-jsdoc": [1, {
-      "prefer": {
-        "return": "returns"
-      },
-      "requireParamDescription": false,
-      "requireReturn": false,
-      "requireReturnDescription": false
-    }],
+    "valid-jsdoc": [
+      1,
+      {
+        "prefer": {
+          "return": "returns"
+        },
+        "requireParamDescription": false,
+        "requireReturn": false,
+        "requireReturnDescription": false
+      }
+    ],
     "valid-typeof": 2,
     "accessor-pairs": 2,
     "block-scoped-var": 2,
     "complexity": [2, 20],
     "consistent-return": 2,
-    "curly": 2,
+    "curly": 0,
     "default-case": 2,
     "dot-location": [2, "property"],
     "dot-notation": 2,
@@ -61,7 +64,7 @@
     "no-labels": 2,
     "no-lone-blocks": 2,
     "no-loop-func": 2,
-    "no-magic-numbers": 2,
+    "no-magic-numbers": 0,
     "no-multi-spaces": 2,
     "no-multi-str": 2,
     "no-native-reassign": 2,
@@ -111,8 +114,10 @@
     "brace-style": [2, "1tbs"],
     "camelcase": 2,
     "comma-dangle": 0,
-    "comma-spacing": [2, {
-    "before": false,
+    "comma-spacing": [
+      2,
+      {
+        "before": false,
         "after": true
       }
     ],
@@ -121,14 +126,17 @@
     "consistent-this": [2, "_this"],
     "eol-last": 2,
     "func-names": 2,
-    "func-style": [2, "declaration"],
-    "indent": [2, 2, {"SwitchCase": 1}],
+    "func-style": [0, "declaration"],
+    "indent": [2, 2, { "SwitchCase": 1 }],
     "react/jsx-uses-react": 1,
     "react/display-name": 0,
-    "key-spacing": [2, {
-      "beforeColon": false,
-      "afterColon": true
-    }],
+    "key-spacing": [
+      2,
+      {
+        "beforeColon": false,
+        "afterColon": true
+      }
+    ],
     "linebreak-style": [2, "unix"],
     "lines-around-comment": 1,
     "max-depth": 2,
@@ -155,13 +163,16 @@
     "operator-linebreak": [2, "after"],
     "padded-blocks": [2, "never"],
     "quotes": [2, "single"],
-    "require-jsdoc": [1, {
+    "require-jsdoc": [
+      1,
+      {
         "require": {
-            "FunctionDeclaration": true,
-            "MethodDefinition": false,
-            "ClassDeclaration": false
+          "FunctionDeclaration": true,
+          "MethodDefinition": false,
+          "ClassDeclaration": false
         }
-    }],
+      }
+    ],
     "semi": [2, "always"],
     "sort-vars": 2,
     "space-after-keywords": 0,
@@ -197,8 +208,5 @@
     "cypress/globals": true
   },
   "extends": ["eslint:recommended", "plugin:react/recommended"],
-  "plugins": [
-    "react",
-    "cypress"
-  ]
+  "plugins": ["react", "cypress"]
 }
