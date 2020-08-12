@@ -78,4 +78,4 @@ ChatBox.propTypes = {
   pendingMessage: PropTypes.bool
 };
 
-module.exports = ChatBox;
+export default ChatBox;
