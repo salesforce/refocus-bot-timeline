@@ -1,8 +1,8 @@
 language: node_js
 node_js:
-  - "8"
+  - '14'
 before_script:
   - npm install
-# npm run test runs lint, coverage and test  
+# npm run test runs lint, coverage and test
 script:
   - npm test
