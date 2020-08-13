@@ -44,7 +44,7 @@ function postAttachment(
   const chatterIndex = chatterOptionsArray.indexOf(selectedChatter);
 
   // eslint-disable-next-line
-  if (!dropZoneBotAttachment) return;
+  if (!timelineBotAttachment) return;
   if (chatterIndex === NOT_FOUND) {
     bdk.log.error(
       'Invalid Selected Org Setting in post attachment',
