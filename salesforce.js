@@ -26,6 +26,45 @@ chatterLoginDetails.map((option, index) => {
 });
 
 /**
+ * @param {string} caseNumber  - caseNumber from room
+ * @param {object} connection - connection to salesforce org
+ * @returns {Promise} - promise resolving an object containing the case
+ */
+function getCaseByCaseNumber(caseNumber, connection) {
+  return new Promise((resolve, reject) => {
+    const q = `SELECT id FROM Case WHERE CaseNumber = '${caseNumber}'`;
+    connection.query(q).execute((err, resp) => {
+      if (err) {
+        bdk.log.error('ERROR', err, resp);
+        reject(err);
+      }
+      if (resp.records[START_OF_ARRAY]) {
+        resolve(resp);
+      }
+    });
+  });
+}
+
+/**
+ * @param {object} attachmentObject - object with the details of the file
+ * @param {object} connection - connection to salesforce org
+ * @returns {Promise} - resolves the response from salesforce to the attachment
+ */
+function createAttachmentOnCase(attachmentObject, connection) {
+  return new Promise((resolve, reject) => {
+    connection
+      .sobject('Attachment')
+      .create(attachmentObject, (postErr, ret) => {
+        if (postErr) {
+          bdk.log.error('ERROR', postErr, ret);
+          reject(postErr);
+        }
+        resolve(ret);
+      });
+  });
+}
+
+/**
  * Creates a new attachment in Salesforce
  *
  * @param {Object} timelineBotAttachment - attachment Details
@@ -34,7 +73,7 @@ chatterLoginDetails.map((option, index) => {
  * @param {String} id - Action ID
  * @param {string} selectedChatter - the chatter to send to
  */
-function postAttachment(
+async function postAttachment(
   timelineBotAttachment,
   userName,
   caseNumber,
@@ -51,54 +90,47 @@ function postAttachment(
       selectedChatter
     );
   } else {
-    const q = `SELECT id FROM Case WHERE CaseNumber = '${caseNumber}'`;
-    conn[chatterIndex].query(q).execute((err, resp) => {
-      if (err) {
-        bdk.log.error('ERROR', err, resp);
-        return;
-      }
-      if (resp.records[START_OF_ARRAY]) {
-        conn[chatterIndex].sobject('Attachment').create(
-          {
-            ParentId: resp.records[START_OF_ARRAY].Id,
-            Name: timelineBotAttachment.name,
-            Body: timelineBotAttachment.file,
-            ContentType: timelineBotAttachment.type,
-          },
-          (postErr, ret) => {
-            if (postErr) {
-              bdk.log.error('ERROR', postErr, ret);
-              return;
-            }
-            const eventLog = {
-              log: userName + ' has uploaded' + timelineBotAttachment.name,
-              context: {
-                type: 'Event',
-                attachment:
-                  chatterLoginDetails[chatterIndex].loginurl +
-                  '/servlet/servlet.FileDownload?file=' +
-                  ret.id,
-                fileType: timelineBotAttachment.type,
-                fileName: timelineBotAttachment.name,
-                userName,
-              },
-            };
-            ret.name = timelineBotAttachment.name;
-            ret.type = timelineBotAttachment.type;
-            ret.imageUrl =
-              chatterLoginDetails[chatterIndex].loginurl +
-              '/servlet/servlet.FileDownload?file=' +
-              ret.id;
-            // needs to be same parameters from package.json
-            const parametersOverride = [
-              { value: ret.imageUrl, name: 'timelineBotAttachment' },
-            ];
-            bdk.log.info(eventLog);
-            bdk.respondBotAction(id, ret, eventLog, parametersOverride);
-          }
-        );
-      }
-    });
+    try {
+      const caseResponse = await getCaseByCaseNumber(
+        caseNumber,
+        conn[chatterIndex]
+      );
+      const attachmentObject = {
+        ParentId: caseResponse.records[START_OF_ARRAY].Id,
+        Name: timelineBotAttachment.name,
+        Body: timelineBotAttachment.file,
+        ContentType: timelineBotAttachment.type,
+      };
+      const postResponse = await createAttachmentOnCase(attachmentObject);
+      const eventLog = {
+        log: userName + ' has uploaded' + timelineBotAttachment.name,
+        context: {
+          type: 'Event',
+          attachment:
+            chatterLoginDetails[chatterIndex].loginurl +
+            '/servlet/servlet.FileDownload?file=' +
+            postResponse.id,
+          fileType: timelineBotAttachment.type,
+          fileName: timelineBotAttachment.name,
+          userName,
+        },
+      };
+
+      postResponse.name = timelineBotAttachment.name;
+      postResponse.type = timelineBotAttachment.type;
+      postResponse.imageUrl =
+        chatterLoginDetails[chatterIndex].loginurl +
+        '/servlet/servlet.FileDownload?file=' +
+        postResponse.id;
+      // needs to be same parameters from package.json
+      const parametersOverride = [
+        { value: postResponse.imageUrl, name: 'timelineBotAttachment' },
+      ];
+      bdk.log.info(eventLog);
+      bdk.respondBotAction(id, postResponse, eventLog, parametersOverride);
+    } catch (err) {
+      bdk.log.error(`Failed to attach upload to case #${caseNumber}`);
+    }
   }
 }
 
