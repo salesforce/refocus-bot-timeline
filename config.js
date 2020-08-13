@@ -36,21 +36,27 @@ module.exports = {
     token: process.env.API_TOKEN_DEV,
     refocusUsername: process.env.REFOCUS_USERNAME_DEV,
     refocusPassword: process.env.REFOCUS_PASSWORD_DEV,
-    enableDropzone: process.env.ENABLE_DROPZONE_DEV,
+    enableDropzone:
+      process.env.ENABLE_DROPZONE_DEV &&
+      process.env.ENABLE_DROPZONE_DEV === 'true',
     chatterLoginDetails,
     chatterOptionsArray,
   },
   sandbox: {
     refocusUrl: process.env.REFOCUS_URL_SANDBOX,
     token: process.env.API_TOKEN_SANDBOX,
-    enableDropzone: process.env.ENABLE_DROPZONE_SANDBOX,
+    enableDropzone:
+      process.env.ENABLE_DROPZONE_SANDBOX &&
+      process.env.ENABLE_DROPZONE_SANDBOX === 'true',
     chatterLoginDetails,
     chatterOptionsArray,
   },
   production: {
     refocusUrl: process.env.REFOCUS_URL_PROD,
     token: process.env.API_TOKEN_PROD,
-    enableDropzone: process.env.ENABLE_DROPZONE_PROD,
+    enableDropzone:
+      process.env.ENABLE_DROPZONE_PROD &&
+      process.env.ENABLE_DROPZONE_PROD === 'true',
     chatterLoginDetails,
     chatterOptionsArray,
   },
