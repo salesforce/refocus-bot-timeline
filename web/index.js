@@ -12,7 +12,7 @@
  * This code handles intial render of the bot and any rerenders triggered
  * from javascript events.
  */
-import App from './components/App.jsx';
+import App from './components/App.js';
 const React = require('react');
 const ReactDOM = require('react-dom');
 const { env } = require('../config.js');

@@ -10,7 +10,7 @@
  * tests/web/components/EventBlueprint.js
  */
 const expect = require('chai').expect;
-const EventBlueprint = require('../../../../web/components/EventBlueprint.jsx');
+import EventBlueprint from '../../../../web/components/EventBlueprint.js';
 const ReactTestRenderer = require('react-test-renderer');
 
 import React from 'react';
@@ -29,11 +29,12 @@ describe('<EventBlueprint />: ', () => {
   before(() => {
     eventBlueprint = ReactTestRenderer.create(
       <EventBlueprint
-        event={ testEvent }
-        color={ '#FFFFFF' }
-        type={ 'Event' }
+        event={testEvent}
+        color={'#FFFFFF'}
+        type={'Event'}
         imgUrl={'https://goo.gl/images/dojH1X'}
-        message={'Test message'}/>
+        message={'Test message'}
+      />
     );
   });
 

@@ -189,7 +189,7 @@ class App extends React.Component {
       <div>
         <FilterHeader filter={this.state.filter} changeType={this.filterType} />
         <div
-          id="file_drop"
+          id="file-drop"
           onDragOver={this.fileIsDraggedOver}
           style={
             fileDraggedOver ? fileDraggedOverStyle : noFileDraggedOverStyle
