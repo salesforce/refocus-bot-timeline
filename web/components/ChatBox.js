@@ -10,6 +10,8 @@ import PropTypes from 'prop-types';
 
 const React = require('react');
 import './chat.css';
+const { env } = require('../../config');
+const { enableDropzone } = require('../../config')[env];
 
 class ChatBox extends React.Component {
   componentDidUpdate(prevProps) {
@@ -62,15 +64,19 @@ class ChatBox extends React.Component {
               'Send'
             )}
           </button>
-          <label className="slds-button slds-button_brand">
-            Attach File
-            <input
-              id="file-input"
-              type="file"
-              multiple
-              onChange={(e) => uploadFile(e)}
-            />
-          </label>
+          {enableDropzone ? (
+            <label className="slds-button slds-button_brand">
+              Attach File
+              <input
+                id="file-input"
+                type="file"
+                multiple
+                onChange={(e) => uploadFile(e)}
+              />
+            </label>
+          ) : (
+            ''
+          )}
         </div>
       </div>
     );
