@@ -26,7 +26,7 @@
   margin-bottom: 0.75rem;
 }
 
-.preview{
+.preview {
   max-width: 10rem;
   height: auto;
 }
@@ -57,7 +57,8 @@
 .slds-chat-listitem {
   display: -ms-flexbox;
   display: flex;
-  padding: 0.2rem 0; }
+  padding: 0.2rem 0;
+}
 
 /**
  * @summary Modifier used to style outbound message list items
@@ -68,7 +69,8 @@
  */
 .slds-chat-listitem_outbound {
   -ms-flex-pack: end;
-      justify-content: flex-end; }
+  justify-content: flex-end;
+}
 
 /**
  * @summary Modifier used to style inbound message list items
@@ -85,7 +87,8 @@
  */
 .slds-chat-listitem_inbound + .slds-chat-listitem_inbound,
 .slds-chat-listitem_outbound + .slds-chat-listitem_outbound {
-  margin-top: 0.25rem; }
+  margin-top: 0.25rem;
+}
 
 /**
  * @summary Modifier used for spacing bookend items
@@ -95,10 +98,12 @@
  * @modifier
  */
 .slds-chat-listitem_bookend {
-  margin: 1rem 0; }
+  margin: 1rem 0;
+}
 
 .slds-chat-listitem_bookend + .slds-chat-listitem_bookend {
-  margin-top: 3rem; }
+  margin-top: 3rem;
+}
 
 /**
  * @summary Modifier used for spacing event items
@@ -108,7 +113,8 @@
  * @modifier
  */
 .slds-chat-listitem_event {
-  margin: 0.75rem 0; }
+  margin: 0.75rem 0;
+}
 
 /**
  * @summary Used to style icons with a chat log
@@ -118,10 +124,12 @@
  * .slds-chat-bookend .slds-icon_container
  */
 .slds-chat-icon {
-  margin-right: 0.5rem; }
+  margin-right: 0.5rem;
+}
 
 .slds-chat-icon .slds-icon {
-  fill: #706e6b; }
+  fill: #706e6b;
+}
 
 /**
  * Chat logs are mainly made up of chat messages between an agent and a customer
@@ -133,7 +141,8 @@
  */
 .slds-chat-message {
   display: -ms-flexbox;
-  display: flex; }
+  display: flex;
+}
 
 /**
  * @summary Used for when customer avatars are used in consequtive inbound messages to align the message body
@@ -144,7 +153,8 @@
  * @modifier
  */
 .slds-chat-message_faux-avatar {
-  padding-left: 2.5rem; }
+  padding-left: 2.5rem;
+}
 
 /**
  * @summary Used to style avatars in chat logs
@@ -154,7 +164,8 @@
  */
 .slds-chat-avatar {
   margin-right: 0.5rem;
-  min-width: 2rem; }
+  min-width: 2rem;
+}
 
 /**
  * @summary Used to style the avatar intials for chat
@@ -164,10 +175,12 @@
  */
 .slds-chat-avatar__intials {
   background-color: #f2f2f3;
-  color: #706e6b; }
+  color: #706e6b;
+}
 
 .slds-chat-avatar__intials.slds-chat-avatar__intials:hover {
-  color: #706e6b; }
+  color: #706e6b;
+}
 
 /**
  * @summary Used to contain and align chat messages with their avatars
@@ -187,14 +200,17 @@
   word-break: break-word;
   font-size: 0.8125rem;
   max-width: 420px;
-  white-space: pre-line; }
+  white-space: pre-line;
+}
 
 .slds-chat-message__text a {
   color: #005fb2;
-  text-decoration: underline; }
+  text-decoration: underline;
+}
 
 .slds-chat-message__text a:hover {
-  text-decoration: none; }
+  text-decoration: none;
+}
 
 .slds-chat-message__text_inbound,
 .slds-chat-message__text_outbound,
@@ -202,7 +218,8 @@
   border-radius: 0.5rem 0.5rem 0;
   color: white;
   min-height: 2rem;
-  padding: 0.5rem; }
+  padding: 0.5rem;
+}
 
 /**
  * @summary Used for any specific inbound text styling
@@ -214,7 +231,8 @@
 .slds-chat-message__text_inbound {
   background-color: #f2f2f3;
   border-radius: 0.5rem 0.5rem 0.5rem 0;
-  color: #3e3e3c; }
+  color: #3e3e3c;
+}
 
 /**
  * @summary Used for any specific outbound text styling
@@ -224,7 +242,8 @@
  * @modifier
  */
 .slds-chat-message__text_outbound {
-  background-color: #005fb2; }
+  background-color: #005fb2;
+}
 
 /**
  * @summary Used for any specific outbound (from another agent) text styling
@@ -234,12 +253,14 @@
  * @modifier
  */
 .slds-chat-message__text_outbound-agent {
-  background-color: #6b6d70; }
+  background-color: #6b6d70;
+}
 
 .slds-chat-message__text_outbound a,
 .slds-chat-message__text_outbound-agent a {
   color: white;
-  text-decoration: underline; }
+  text-decoration: underline;
+}
 
 /**
  * @summary Used when sneak peak is enabled for customer messages
@@ -249,10 +270,12 @@
  * @modifier
  */
 .slds-chat-message__text_sneak-peak {
-  font-style: italic; }
+  font-style: italic;
+}
 
 .slds-chat-message__text_sneak-peak .slds-icon-typing {
-  margin-right: 0.5rem; }
+  margin-right: 0.5rem;
+}
 
 /**
  * @summary Used to style chat message meta data
@@ -263,7 +286,8 @@
 .slds-chat-message__meta {
   color: #706e6b;
   font-size: 0.75rem;
-  margin: 0.125rem 0 0 0.5rem; }
+  margin: 0.125rem 0 0 0.5rem;
+}
 
 /**
  * During any chat, certain events can occur which need to be displayed to the user
@@ -273,14 +297,14 @@
  */
 .slds-chat-event {
   -ms-flex-align: center;
-      align-items: center;
+  align-items: center;
   color: #706e6b;
   display: -ms-inline-flexbox;
   display: inline-flex;
   -ms-flex-wrap: wrap;
-      flex-wrap: wrap;
+  flex-wrap: wrap;
   -ms-flex-pack: center;
-      justify-content: center;
+  justify-content: center;
   font-size: 0.8125rem;
   text-align: center;
   width: 100%;
@@ -290,13 +314,16 @@
     * @selector .slds-has-error
     * @restrict .slds-chat-event[role="alert"]
     * @modifier
-    */ }
+    */
+}
 
 .slds-chat-event.slds-has-error {
-  color: #c23934; }
+  color: #c23934;
+}
 
 .slds-chat-event.slds-has-error svg {
-  fill: #c23934; }
+  fill: #c23934;
+}
 
 /**
   * @summary Used to style the horizontal rules on an event
@@ -308,8 +335,8 @@
   border-top: 1px #dddbda solid;
   height: 1px;
   -ms-flex-positive: 1;
-      flex-grow: 1;
-  }
+  flex-grow: 1;
+}
 
 /**
   * @summary Used for styling the event body text
@@ -319,7 +346,7 @@
   */
 .slds-chat-event__body {
   -ms-flex-align: center;
-      align-items: center;
+  align-items: center;
   display: -ms-flexbox;
   display: flex;
   margin: 0 0.5rem;
@@ -335,11 +362,12 @@
   */
 .slds-chat-event__agent-message {
   -ms-flex-positive: 3;
-      flex-grow: 3;
+  flex-grow: 3;
   font-size: 0.75rem;
   font-style: italic;
   margin-top: 0.5rem;
-  width: 100%; }
+  width: 100%;
+}
 
 /**
  * Chat sessions are started and stopped with bookends to the conversation
@@ -351,7 +379,7 @@
  */
 .slds-chat-bookend {
   -ms-flex-align: center;
-      align-items: center;
+  align-items: center;
   border: #dddbda 0 solid;
   border-bottom-width: 1px;
   color: #706e6b;
@@ -359,9 +387,10 @@
   display: flex;
   font-size: 0.8125rem;
   -ms-flex-pack: center;
-      justify-content: center;
+  justify-content: center;
   padding: 0.4rem 0 0.4rem 0;
-  width: 100%; }
+  width: 100%;
+}
 
 /**
  * @summary Modifier for bookends which stop a chat session
@@ -371,7 +400,8 @@
  * @modifier
  */
 .slds-chat-bookend_stop {
-  border-width: 1px 0 0; }
+  border-width: 1px 0 0;
+}
 
 /**
  *  Past chat logs are displayed differently for ease of scanning
@@ -384,17 +414,21 @@
  * @restrict section[role="log"]
  */
 .slds-chat_past .slds-chat-listitem_event {
-  margin: 1rem 0; }
+  margin: 1rem 0;
+}
 
 .slds-chat_past .slds-chat-message__meta {
-  margin: 0.25rem 0 0; }
+  margin: 0.25rem 0 0;
+}
 
 .slds-chat_past .slds-chat-message__meta b {
-  color: #3e3e3c; }
+  color: #3e3e3c;
+}
 
 .slds-button + .slds-button-group,
 .slds-button + .slds-button-group-list-center {
-  margin-left: 0.25rem; }
+  margin-left: 0.25rem;
+}
 
 /**
  * @summary Creates button group container
@@ -407,25 +441,30 @@
 .slds-button-group,
 .slds-button-group-list-center {
   display: -ms-inline-flex;
-  display: inline-flex; }
+  display: inline-flex;
+}
 
 .slds-button-group .slds-button,
 .slds-button-group-list-center .slds-button {
-  border-radius: 0; }
+  border-radius: 0;
+}
 
 .slds-button-group .slds-button:focus,
 .slds-button-group-list-center .slds-button:focus {
-  z-index: 1; }
+  z-index: 1;
+}
 
 .slds-button-group .slds-button + .slds-button,
 .slds-button-group .slds-button + .slds-button_last .slds-button,
 .slds-button-group .slds-button + .slds-button--last .slds-button,
 .slds-button-group-list-center li + li .slds-button {
-  margin-left: -1px; }
+  margin-left: -1px;
+}
 
 .slds-button-group-list-center li:first-child .slds-button,
 .slds-button-group .slds-button:first-child {
-  border-radius: 0.25rem 0 0 0.25rem; }
+  border-radius: 0.25rem 0 0 0.25rem;
+}
 
 /**
  * These selectors must remain in long hand in order to zero out borders that
@@ -444,11 +483,13 @@
 .slds-button-group .slds-button--last .slds-button:only-child,
 .slds-button-group .slds-button.slds-button_last,
 .slds-button-group .slds-button.slds-button--last {
-  border-radius: 0 0.25rem 0.25rem 0; }
+  border-radius: 0 0.25rem 0.25rem 0;
+}
 
 .slds-button-group .slds-button:only-child,
 .slds-button-group-list-center li:only-child .slds-button {
-  border-radius: 0.25rem; }
+  border-radius: 0.25rem;
+}
 
 .slds-button-group + .slds-button-group,
 .slds-button-group + .slds-button-group-list-center,
@@ -456,30 +497,31 @@
 .slds-button-group-list-center + .slds-button-group-list-center,
 .slds-button-group-list-center + .slds-button-group,
 .slds-button-group-list-center + .slds-button {
-  margin-left: 0.25rem; }
+  margin-left: 0.25rem;
+}
 
 @keyframes blink {
-    /**
+  /**
      * At the start of the animation the dot
      * has an opacity of .2
      */
-    0% {
-      opacity: .2;
-    }
-    /**
+  0% {
+    opacity: 0.2;
+  }
+  /**
      * At 20% the dot is fully visible and
      * then fades out slowly
      */
-    20% {
-      opacity: 1;
-    }
-    /**
+  20% {
+    opacity: 1;
+  }
+  /**
      * Until it reaches an opacity of .2 and
      * the animation can start again
      */
-    100% {
-      opacity: .2;
-    }
+  100% {
+    opacity: 0.2;
+  }
 }
 
 .saving span {
@@ -491,11 +533,11 @@
 }
 
 .saving span:nth-child(2) {
-  animation-delay: .2s;
+  animation-delay: 0.2s;
 }
 
 .saving span:nth-child(3) {
-  animation-delay: .4s;
+  animation-delay: 0.4s;
 }
 
 .event-line {
@@ -505,4 +547,8 @@
   position: absolute;
   left: 1.5rem;
   top: 1.75rem;
+}
+
+#file-input {
+  display: none;
 }
