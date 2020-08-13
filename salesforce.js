@@ -28,14 +28,14 @@ chatterLoginDetails.map((option, index) => {
 /**
  * Creates a new attachment in Salesforce
  *
- * @param {Object} dropZoneBotAttachment - attachment Details
+ * @param {Object} timelineBotAttachment - attachment Details
  * @param {String} userName - Username of person posting file
  * @param {String} caseNumber - Case number used to get case id
  * @param {String} id - Action ID
  * @param {string} selectedChatter - the chatter to send to
  */
 function postAttachment(
-  dropZoneBotAttachment,
+  timelineBotAttachment,
   userName,
   caseNumber,
   id,
@@ -61,9 +61,9 @@ function postAttachment(
         conn[chatterIndex].sobject('Attachment').create(
           {
             ParentId: resp.records[START_OF_ARRAY].Id,
-            Name: dropZoneBotAttachment.name,
-            Body: dropZoneBotAttachment.file,
-            ContentType: dropZoneBotAttachment.type,
+            Name: timelineBotAttachment.name,
+            Body: timelineBotAttachment.file,
+            ContentType: timelineBotAttachment.type,
           },
           (postErr, ret) => {
             if (postErr) {
@@ -71,21 +71,20 @@ function postAttachment(
               return;
             }
             const eventLog = {
-              log: userName + ' has uploaded' + dropZoneBotAttachment.name,
+              log: userName + ' has uploaded' + timelineBotAttachment.name,
               context: {
                 type: 'Event',
                 attachment:
                   chatterLoginDetails[chatterIndex].loginurl +
                   '/servlet/servlet.FileDownload?file=' +
                   ret.id,
-                fileType: dropZoneBotAttachment.type,
-                fileName: dropZoneBotAttachment.name,
-                // eslint-disable-next-line object-shorthand
-                userName: userName,
+                fileType: timelineBotAttachment.type,
+                fileName: timelineBotAttachment.name,
+                userName,
               },
             };
-            ret.name = dropZoneBotAttachment.name;
-            ret.type = dropZoneBotAttachment.type;
+            ret.name = timelineBotAttachment.name;
+            ret.type = timelineBotAttachment.type;
             ret.imageUrl =
               chatterLoginDetails[chatterIndex].loginurl +
               '/servlet/servlet.FileDownload?file=' +
