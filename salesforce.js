@@ -101,7 +101,10 @@ async function postAttachment(
         Body: timelineBotAttachment.file,
         ContentType: timelineBotAttachment.type,
       };
-      const postResponse = await createAttachmentOnCase(attachmentObject);
+      const postResponse = await createAttachmentOnCase(
+        attachmentObject,
+        conn[chatterIndex]
+      );
       const eventLog = {
         log: userName + ' has uploaded' + timelineBotAttachment.name,
         context: {
@@ -129,7 +132,7 @@ async function postAttachment(
       bdk.log.info(eventLog);
       bdk.respondBotAction(id, postResponse, eventLog, parametersOverride);
     } catch (err) {
-      bdk.log.error(`Failed to attach upload to case #${caseNumber}`);
+      bdk.log.error(`Failed to attach upload to case #${caseNumber}. ${err}`);
     }
   }
 }
