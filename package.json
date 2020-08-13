@@ -14,7 +14,7 @@
     "build-ui": "webpack --config webpack.config.js",
     "lint": "eslint --ext=js --ext=jsx .",
     "postinstall": "npm run build-ui",
-    "coverage": "istanbul cover node_modules/mocha/bin/_mocha tests/unit --recursive --require @babel/register **/*.jsx --require ignore-styles",
+    "coverage": "istanbul cover node_modules/mocha/bin/_mocha tests/unit --recursive --require @babel/register **/*.jsx --require @babel/preset-react --require ignore-styles",
     "test-unit": "npm run lint && mocha tests/unit --recursive --require @babel/register **/*.jsx --require ignore-styles && npm run coverage",
     "test": "npm run test-unit && npm run test-integration",
     "test:dev": "npm run test-unit && npm run test-integration:dev"
