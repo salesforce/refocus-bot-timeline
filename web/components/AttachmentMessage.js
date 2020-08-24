@@ -10,7 +10,7 @@ import PropTypes from 'prop-types';
 import './chat.css';
 
 const React = require('react');
-const EventBlueprint = require('./EventBlueprint.jsx');
+import EventBlueprint from './EventBlueprint';
 
 const sldsGreen = '#8bcf6a';
 
@@ -49,4 +49,4 @@ AttachmentMessage.propTypes = {
   event: PropTypes.object,
 };
 
-module.exports = AttachmentMessage;
+export default AttachmentMessage;

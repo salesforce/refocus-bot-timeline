@@ -13,7 +13,7 @@ import './chat.css';
 const React = require('react');
 const linkifyHtml = require('linkifyjs/string');
 const decode = require('unescape');
-const EventBlueprint = require('./EventBlueprint.jsx');
+import EventBlueprint from './EventBlueprint';
 const sldsBlue = '#34becd';
 
 class ChatMessage extends React.Component {
@@ -50,4 +50,4 @@ ChatMessage.propTypes = {
   event: PropTypes.object,
 };
 
-module.exports = ChatMessage;
+export default ChatMessage;

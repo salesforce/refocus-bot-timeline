@@ -10,7 +10,7 @@ import PropTypes from 'prop-types';
 import './chat.css';
 
 const React = require('react');
-const EventBlueprint = require('./EventBlueprint.jsx');
+import EventBlueprint from './EventBlueprint';
 
 const sldsGrey = '#54698d';
 
@@ -40,4 +40,4 @@ UserMessage.propTypes = {
   event: PropTypes.object,
 };
 
-module.exports = UserMessage;
+export default UserMessage;

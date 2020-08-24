@@ -12,10 +12,9 @@
  * This code handles intial render of the bot and any rerenders triggered
  * from javascript events.
  */
-
+import App from './components/App.js';
 const React = require('react');
 const ReactDOM = require('react-dom');
-const App = require('./components/App.jsx');
 const { env } = require('../config.js');
 const config = require('../config.js')[env];
 const botName = require('../package.json').name;
@@ -26,6 +25,10 @@ const _user = {
   id: bdk.getUserId(),
   email: bdk.getUserEmail(),
 };
+let selectedChatter;
+bdk.findRoom(roomId).then((room) => {
+  selectedChatter = room.body.settings.selectedChatter;
+});
 
 // Only these event types will be queried for from Timeline
 const eventTypes = ['comment', 'event', 'user', 'attachment'];
@@ -49,6 +52,7 @@ function renderUI(response) {
       response={response}
       getEventsByType={getEventsByType}
       user={_user}
+      selectedChatter={selectedChatter}
     />,
     document.getElementById(botName)
   );
@@ -135,21 +139,22 @@ function getEventsByType(type) {
 function init() {
   renderUI([], _user);
 
-  const promises = [
-    getEventsByType('comment'),
-    getEventsByType('event')
-  ];
+  const promises = [getEventsByType('comment'), getEventsByType('event')];
 
   Promise.all(promises);
 }
 
-document.getElementById(botName)
+document
+  .getElementById(botName)
   .addEventListener('refocus.events', handleEvents, false);
-document.getElementById(botName)
+document
+  .getElementById(botName)
   .addEventListener('refocus.room.settings', handleSettings, false);
-document.getElementById(botName)
+document
+  .getElementById(botName)
   .addEventListener('refocus.bot.data', handleData, false);
-document.getElementById(botName)
+document
+  .getElementById(botName)
   .addEventListener('refocus.bot.actions', handleActions, false);
 
 init();

@@ -10,35 +10,28 @@ import PropTypes from 'prop-types';
 
 const React = require('react');
 import './chat.css';
+const { env } = require('../../config');
+const { enableDropzone } = require('../../config')[env];
 
 class ChatBox extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      chatChange: this.props.chatChange,
-      sendChat: this.props.sendChat,
-      pendingMessage: this.props.pendingMessage,
-    };
-  }
-
-  static getDerivedStateFromProps(nextProps, prevState) {
-    if (prevState.pendingMessage && nextProps.currentText === '') {
+  componentDidUpdate(prevProps) {
+    if (prevProps.pendingMessage && this.props.currentText === '') {
       document.getElementById('chat').innerText = '';
     }
-
-    return { pendingMessage: nextProps.pendingMessage };
   }
 
   render() {
-    const { chatChange, sendChat, pendingMessage } = this.state;
-    const footerClass = 'slds-docked-composer__footer slds-grid slds-form' +
+    const { chatChange, sendChat, uploadFile, pendingMessage } = this.props;
+    const footerClass =
+      'slds-docked-composer__footer slds-grid slds-form' +
       ' slds-form_stacked slds-p-horizontal_medium';
 
     return (
       <div className={footerClass}>
         <div className="slds-form-element slds-col">
           <div className="slds-form-element__control slds-p-around_xx-small">
-            <div id="chat"
+            <div
+              id="chat"
               className="slds-input slds-rich-text-editor"
               contentEditable="true"
               onKeyUp={chatChange}
@@ -50,8 +43,8 @@ class ChatBox extends React.Component {
                     sendChat();
                   }
                 }
-              }}>
-            </div>
+              }}
+            ></div>
           </div>
         </div>
         <div className="slds-p-around_xx-small">
@@ -59,12 +52,31 @@ class ChatBox extends React.Component {
             id="send-button"
             disabled={pendingMessage}
             className="slds-button slds-button_brand"
-            onClick={() => sendChat()}>
-            {pendingMessage ?
+            onClick={() => sendChat()}
+          >
+            {pendingMessage ? (
               <p className="saving">
-                <span>.</span><span>.</span><span>.</span>
-              </p> : 'Send'}
+                <span>.</span>
+                <span>.</span>
+                <span>.</span>
+              </p>
+            ) : (
+              'Send'
+            )}
           </button>
+          {enableDropzone ? (
+            <label className="slds-button slds-button_brand">
+              Attach File
+              <input
+                id="file-input"
+                type="file"
+                multiple
+                onChange={(e) => uploadFile(e)}
+              />
+            </label>
+          ) : (
+            ''
+          )}
         </div>
       </div>
     );
@@ -75,7 +87,8 @@ ChatBox.propTypes = {
   currentText: PropTypes.string,
   chatChange: PropTypes.func,
   sendChat: PropTypes.func,
-  pendingMessage: PropTypes.bool
+  uploadFile: PropTypes.func,
+  pendingMessage: PropTypes.bool,
 };
 
-module.exports = ChatBox;
+export default ChatBox;

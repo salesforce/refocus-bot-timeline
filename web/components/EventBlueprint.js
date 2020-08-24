@@ -82,4 +82,4 @@ EventBlueprint.propTypes = {
   ]),
 };
 
-module.exports = EventBlueprint;
+export default EventBlueprint;

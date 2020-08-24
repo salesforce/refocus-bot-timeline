@@ -12,8 +12,8 @@
 
 /* eslint-disable no-magic-numbers */
 const expect = require('chai').expect;
-const App = require('../../../../web/components/App.jsx');
-const ReactTestRenderer = require('react-test-renderer');
+import App from '../../../../web/components/App.js';
+import ReactTestRenderer from 'react-test-renderer';
 const roomId = 1;
 
 import React from 'react';
@@ -21,11 +21,7 @@ import React from 'react';
 describe('<App />: ', () => {
   it('Ok, <App /> renders as a div element', (done) => {
     const eventBlueprint = ReactTestRenderer.create(
-      <App
-        roomId={roomId}
-        response={[]}
-        getEventsByType={() => {}}
-        user={{}}/>
+      <App roomId={roomId} response={[]} getEventsByType={() => {}} user={{}} />
     );
 
     expect(eventBlueprint.toJSON().type).to.equal('div');
@@ -34,18 +30,16 @@ describe('<App />: ', () => {
 
   it('Ok, no events so chat-list has 1 child with start message', (done) => {
     const eventBlueprint = ReactTestRenderer.create(
-      <App
-        roomId={roomId}
-        response={[]}
-        getEventsByType={() => {}}
-        user={{}}/>
+      <App roomId={roomId} response={[]} getEventsByType={() => {}} user={{}} />
     );
 
-    const chatList = eventBlueprint.toJSON().children[1];
-    expect(chatList.props.id).to.equal('chat-list');
+    const dropzone = eventBlueprint.toJSON().children[1];
+    expect(dropzone.props.id).to.equal('file-drop');
+    const chatList = dropzone.children[0];
     expect(chatList.children.length).to.equal(1);
-    expect(chatList.children[0].children[0].children[0])
-      .to.contain('Start of timeline for');
+    expect(chatList.children[0].children[0].children[0]).to.contain(
+      'Start of timeline for'
+    );
     done();
   });
 
@@ -56,19 +50,19 @@ describe('<App />: ', () => {
           name: 'Donald Duck',
         },
       },
-      message: 'Something interesting..'
+      message: 'Something interesting..',
     };
-
 
     const eventBlueprint = ReactTestRenderer.create(
       <App
         roomId={roomId}
         response={[testEvent]}
         getEventsByType={() => {}}
-        user={{}}/>
+        user={{}}
+      />
     );
 
-    const chatList = eventBlueprint.toJSON().children[1];
+    const chatList = eventBlueprint.toJSON().children[1].children[0];
     expect(chatList.props.id).to.equal('chat-list');
     expect(chatList.children.length).to.equal(2);
     done();

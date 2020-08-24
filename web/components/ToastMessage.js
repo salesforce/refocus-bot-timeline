@@ -75,4 +75,4 @@ ToastMessage.propTypes = {
   clicked: PropTypes.func
 };
 
-module.exports = ToastMessage;
+export default ToastMessage;

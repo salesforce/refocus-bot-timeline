@@ -117,4 +117,4 @@ FilterHeader.propTypes = {
   changeType: PropTypes.func,
 };
 
-module.exports = FilterHeader;
+export default FilterHeader;
