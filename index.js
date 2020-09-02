@@ -9,15 +9,16 @@
 require('dotenv').config();
 const http = require('http');
 const express = require('express');
-const { env, port } = require('./config.js');
-const config = require('./config.js')[env];
+const config = require('./config.js');
+const { env, port } = config;
+const envConfig = require('./config.js')[env];
 const packageJSON = require('./package.json');
-const bdk = require('@salesforce/refocus-bdk')(config);
+const bdk = require('@salesforce/refocus-bdk')(envConfig);
 const salesforce = require('./salesforce');
 const botName = packageJSON.name;
 
 const app = express();
-const { enableDropzone } = config;
+const { enableDropzone } = envConfig;
 
 bdk.installOrUpdateBot(packageJSON).then(() => {
   bdk.refocusConnect(app, null, botName);
