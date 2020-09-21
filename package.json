@@ -1,9 +1,12 @@
 {
   "name": "Timeline-Bot",
   "displayName": "Activity Timeline",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "description": "A bot that show all events in a room",
   "url": "https://github.com/salesforce/refocus-bot-timeline/",
+  "engines": {
+    "node": "14.x"
+  },
   "scripts": {
     "test-integration": "NODE_ENV=integrationSandbox node retrieveAndSetAPIToken.js && npm start && npm run cypress:run",
     "test-integration:dev": "node retrieveAndSetAPIToken.js && npm start && npm run cypress:open",
