@@ -1,8 +1,8 @@
 const puppeteer = require('puppeteer');
 const fs = require('fs');
 const util = require('util');
-const env = require('./config.js').env;
-const config = require('./config.js')[env];
+const env = require('./config.tsx').env;
+const config = require('./config.tsx')[env];
 
 const { refocusUrl, refocusUsername, refocusPassword } = config;
 const TIME_DELAY_MS = 500;

@@ -1,7 +1,7 @@
 {
   "name": "Timeline-Bot",
   "displayName": "Activity Timeline",
-  "version": "1.2.1",
+  "version": "1.3.0",
   "description": "A bot that show all events in a room",
   "url": "https://github.com/salesforce/refocus-bot-timeline/",
   "engines": {
@@ -35,6 +35,10 @@
     "@babel/preset-react": "^7.10.4",
     "@babel/register": "^7.10.5",
     "@salesforce/refocus-bdk": "^1.10.2",
+    "@types/jest": "^26.0.14",
+    "@types/node": "^14.11.10",
+    "@types/react": "^16.9.53",
+    "@types/react-dom": "^16.9.8",
     "babel-eslint": "^9.0.0",
     "babel-loader": "^8.1.0",
     "chai": "^4.2.0",
@@ -70,6 +74,7 @@
     "socket.io-client": "^2.2.0",
     "style-loader": "^1.2.1",
     "superagent": "^3.6.0",
+    "typescript": "^4.0.3",
     "uglifyjs-webpack-plugin": "^1.3.0",
     "umd-compat-loader": "^2.1.2",
     "unescape": "1.0.1",

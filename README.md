@@ -60,10 +60,11 @@ Follows [semantic versioning](https://docs.npmjs.com/getting-started/semantic-ve
 - 1.1.13 Rebrand to look more like activity-timeline.
 - 1.1.14 Change staging to perf env.
 - 1.1.15 Don't show Slack Events in Timeline.
-- 1.1.16 Clean up config.js
+- 1.1.16 Clean up config.tsx
 - 1.1.17 Added botName to config file.
 - 1.1.18 Upgraded packages for npm audit.
 - 1.1.19 Setting up end-to-end tests.
 - 1.1.20 Upgrade to react 16.
 - 1.2.0 Added upload file functionality.
-- 1.2.1 Specify node version
+- 1.2.1 Specify node version.
+- 1.3.0 Add typescript to repo.

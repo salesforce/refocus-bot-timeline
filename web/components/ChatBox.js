@@ -10,8 +10,8 @@ import PropTypes from 'prop-types';
 
 const React = require('react');
 import './chat.css';
-const { env } = require('../../config');
-const { enableDropzone } = require('../../config')[env];
+const { env } = require('../../config.tsx');
+const { enableDropzone } = require('../../config.tsx')[env];
 
 class ChatBox extends React.Component {
   componentDidUpdate(prevProps) {

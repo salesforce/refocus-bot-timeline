@@ -9,9 +9,9 @@
 require('dotenv').config();
 const http = require('http');
 const express = require('express');
-const config = require('./config.js');
+const config = require('./config.tsx');
 const { env, port } = config;
-const envConfig = require('./config.js')[env];
+const envConfig = require('./config.tsx')[env];
 const packageJSON = require('./package.json');
 const bdk = require('@salesforce/refocus-bdk')(envConfig);
 const salesforce = require('./salesforce');
