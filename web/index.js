@@ -15,8 +15,8 @@
 import App from './components/App.js';
 const React = require('react');
 const ReactDOM = require('react-dom');
-const { env } = require('../config.tsx');
-const config = require('../config.tsx')[env];
+const { env } = require('../config.ts');
+const config = require('../config.ts')[env];
 const botName = require('../package.json').name;
 const bdk = require('@salesforce/refocus-bdk')(config, botName);
 const roomId = bdk.getRoomId();

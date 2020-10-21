@@ -11,8 +11,8 @@ const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const ZipPlugin = require('zip-webpack-plugin');
 const Dotenv = require('dotenv-webpack');
-const env = require('./config.tsx').env;
-const url = require('./config.tsx')[env].refocusUrl;
+const env = require('./config.ts').env;
+const url = require('./config.ts')[env].refocusUrl;
 const botName = require('./package.json').name;
 const Uglify = require('uglifyjs-webpack-plugin');
 

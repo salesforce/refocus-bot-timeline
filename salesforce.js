@@ -2,8 +2,8 @@
 
 const jsforce = require('jsforce');
 
-const env = require('./config.tsx').env;
-const config = require('./config.tsx')[env];
+const env = require('./config.ts').env;
+const config = require('./config.ts')[env];
 const bdk = require('@salesforce/refocus-bdk')(config);
 
 const { chatterLoginDetails, chatterOptionsArray, httpProxy } = config;

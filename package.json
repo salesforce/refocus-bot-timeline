@@ -35,7 +35,6 @@
     "@babel/preset-react": "^7.10.4",
     "@babel/register": "^7.10.5",
     "@salesforce/refocus-bdk": "^1.10.2",
-    "@types/jest": "^26.0.14",
     "@types/node": "^14.11.10",
     "@types/react": "^16.9.53",
     "@types/react-dom": "^16.9.8",
