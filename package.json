@@ -73,7 +73,6 @@
     "socket.io-client": "^2.2.0",
     "style-loader": "^1.2.1",
     "superagent": "^3.6.0",
-    "typescript": "^4.0.3",
     "uglifyjs-webpack-plugin": "^1.3.0",
     "umd-compat-loader": "^2.1.2",
     "unescape": "1.0.1",
@@ -88,7 +87,10 @@
       "@babel/react"
     ]
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "ts-loader": "^8.0.7",
+    "typescript": "^4.0.5"
+  },
   "metadata": {
     "actions": [
       {

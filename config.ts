@@ -39,7 +39,7 @@ module.exports = {
     enableDropzone:
       process.env.ENABLE_DROPZONE_DEV &&
       process.env.ENABLE_DROPZONE_DEV === 'true',
-    chatterLoginDetails,
+    chatterLoginDetails: chatterLoginDetails,
     chatterOptionsArray,
   },
   sandbox: {

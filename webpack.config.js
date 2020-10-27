@@ -24,6 +24,9 @@ const config = {
     filename: 'index_bundle.js',
     publicPath: '/',
   },
+  resolve: {
+    extensions: ['.tsx', '.ts', '.js'],
+  },
 
   module: {
     rules: [
@@ -34,6 +37,11 @@ const config = {
           path.resolve(__dirname, 'web'),
         ],
         use: 'babel-loader?compact=true',
+      },
+      {
+        test: /\.tsx?$/,
+        use: 'ts-loader',
+        exclude: /node_modules/,
       },
       {
         test: /\.css$/,
