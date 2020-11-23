@@ -9,13 +9,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import EventBlueprint from './EventBlueprint';
+import { GREEN } from '../utils/colors';
 import './chat.css';
-
-const SLDS_GREEN = '#8bcf6a';
 
 /**
  * @param {object} props
- * @param {object} props.event - attachment message event.
  * @returns {JSX} attachment message container.
  */
 export default function AttachmentMessage(props) {
@@ -26,7 +24,7 @@ export default function AttachmentMessage(props) {
       event={event}
       type={'File Uploaded'}
       imgUrl={'../static/icons/standard-sprite/svg/symbols.svg#file'}
-      color={SLDS_GREEN}
+      color={GREEN}
       message={
         <div>
           <div className='slds-chat-event__agent-message'>

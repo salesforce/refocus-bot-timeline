@@ -12,8 +12,6 @@ import './chat.css';
 
 /**
  * @param {object} props
- * @param {string} props.filter - current active filter.
- * @param {func} props.changeType - function for changing the current filter.
  * @returns {JSX} filter header container.
  */
 export default function FilterHeader(props) {

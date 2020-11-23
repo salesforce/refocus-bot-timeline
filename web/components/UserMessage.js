@@ -9,13 +9,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import EventBlueprint from './EventBlueprint';
+import { GREY } from '../utils/colors';
 import './chat.css';
-
-const SLDS_GREY = '#54698d';
 
 /**
  * @param {object} props
- * @param {string} props.event - event that user has joined/left the room.
  * @returns {JSX} user message container.
  */
 export default function UserMessage(props) {
@@ -30,7 +28,7 @@ export default function UserMessage(props) {
       event={event}
       type={`User ${event.context && event.context.isActive ? 'Joined' : 'Left'}`}
       imgUrl={'../static/icons/standard-sprite/svg/symbols.svg#user'}
-      color={SLDS_GREY}
+      color={GREY}
       message={message}
     />
   );

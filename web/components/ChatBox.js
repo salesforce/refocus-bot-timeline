@@ -14,10 +14,6 @@ const { enableDropzone } = require('../../config')[env];
 
 /**
  * @param {object} props
- * @param {function} props.chatChange - chat change handler.
- * @param {function} props.sendChat - function for sending message.
- * @param {function} props.uploadFile - upload file handler.
- * @param {boolean} props.pendingMessage - a message is pending being sent.
  * @returns {JSX} attachment message container.
  */
 export default function ChatBox(props) {

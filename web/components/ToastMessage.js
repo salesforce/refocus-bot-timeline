@@ -13,9 +13,6 @@ const TIMEOUT = 3000; // ms
 
 /**
  * @param {object} props
- * @param {string} props.message - message to be displayed on toast.
- * @param {func} props.clicked - callback run when toast is clicked.
- * @param {func} props.closed - callback run when toast closes.
  * @returns {JSX} toast container.
  */
 export default function ToastMessage(props) {
