@@ -6,7 +6,7 @@
  * https://opensource.org/licenses/BSD-3-Clause
  */
 
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import moment from 'moment';
 import _ from 'lodash';
@@ -17,7 +17,7 @@ import ChatMessage from './ChatMessage';
 import AttachmentMessage from './AttachmentMessage';
 import ToastMessage from './ToastMessage';
 import ChatBox from './ChatBox';
-import { fileIsDraggedOver, fileDraggedAway, doUpload } from '../services/attachmentService';
+import postAttachment from '../services/postAttachment';
 import './chat.css';
 
 const { env } = require('../../config.js');
@@ -26,200 +26,198 @@ const botName = require('../../package.json').name;
 const bdk = require('@salesforce/refocus-bdk')(config, botName);
 const ZERO = 0;
 const DFB = 5; // Distance From Bottom
+const MAX_FILE_SIZE = 5000000;
 
-class App extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      toast: false,
-      response: props.response.sort((a, b) => moment(b.createdAt)
-      .diff(moment(b.createdAt))
-      .filter((value, index, self) => {
-        const duplicates = _.filter(self.slice(ZERO, index), [ 'id', value.id ]);
-        return duplicates.length === ZERO ? value : false;
-      })),
-      currentText: '',
-      scroll: false,
-      filter: 'CommentAttachment',
-      pendingMessage: false,
-    };
-    this.filterType = this.filterType.bind(this);
-    this.sendChat = this.sendChat.bind(this);
-    this.fileIsDraggedOver = fileIsDraggedOver.bind(this);
-    this.fileDraggedAway = fileDraggedAway.bind(this);
-    this.doUpload = doUpload.bind(this);
-  }
+function App(props) {
+  const [toast, setToast] = useState(false);
+  const response = props.response;
+  const [events, setEvents] = useState(response);
+  const [currentText, setCurrentText] = useState('');
+  const [scroll, setScroll] = useState(true);
+  const [fileDraggedOver, setFileDraggedOver] = useState(false);
+  const [filter, setFilter] = useState('CommentAttachment');
+  const [pendingMessage, setPendingMessage] = useState(false);
 
-  componentDidMount() {
-    this.setState({ scroll: true });
-  }
+  useEffect(() => {
+    const chatList = document.getElementById('chat-list');
+    const previousEvents = events;
+    const latestEvent = response[ZERO];
 
-  componentDidUpdate(prevProps) {
-    if (this.state.scroll && this.container) {
-      this.container.scrollTop = this.container.scrollHeight;
-      this.setState({ scroll: false });
+    if (scroll && chatList) {
+      chatList.scrollTop = chatList.scrollHeight;
+      setScroll(false);
     }
-
-    if (_.isEqual(this.props.response, prevProps.response)) return;
-    const previousEvents = this.state.response || [];
-    const latestEvent = this.props.response[ZERO];
 
     if (latestEvent && !_.find(previousEvents, latestEvent)) {
-      const newState = {};
-      const allEvents = previousEvents
-        .concat(this.props.response)
+      const allEvents = previousEvents.concat(response)
         .filter((value, index, self) => {
-          const duplicates = _.filter(self.slice(ZERO, index), [
-            'id',
-            value.id,
-          ]);
+          const duplicates = _.filter(self.slice(ZERO, index), ['id', value.id ]);
           return duplicates.length === ZERO ? value : false;
-        })
-        .sort((a, b) => moment(a.createdAt).diff(moment(b.createdAt)));
-      newState.response = allEvents;
-      const chatList = document.getElementById('chat-list');
+        }).sort((a, b) => moment(a.createdAt).diff(moment(b.createdAt)));
+      setEvents(allEvents);
 
-      if (
-        chatList &&
-        chatList.scrollHeight - chatList.scrollTop - DFB <=
-          chatList.clientHeight
-      ) {
-        newState.scroll = true;
+      if (chatList && chatList.scrollHeight - chatList.scrollTop - DFB <= chatList.clientHeight) {
+        setScroll(true);
       } else {
-        newState.toast =
-          latestEvent &&
-          latestEvent.context &&
-          (this.state.filter === 'All' ||
-            this.state.filter.includes(latestEvent.context.type));
+        setToast(latestEvent && latestEvent.context &&
+          (filter === 'All' || filter.includes(latestEvent.context.type)));
       }
-
-      this.setState(newState);
     }
-  }
+  });
 
-  filterType(type) {
-    this.props.getEventsByType(type);
-    if (this.state.filter === 'All' || type === 'All') {
-      this.setState({ filter: type });
-    } else if (this.state.filter.includes(type)) {
-      if (this.state.filter === type) {
-        this.setState({ filter: 'All' });
+  function filterType(type) {
+    props.getEventsByType(type);
+    if (filter === 'All' || type === 'All') {
+      setFilter(type);
+    } else if (filter.includes(type)) {
+      if (filter === type) {
+        setFilter('All');
       } else {
-        this.setState({
-          filter: this.state.filter.replace(type, ''),
-        });
+        setFilter(filter.replace(type, ''));
       }
     } else {
-      this.setState({
-        filter: this.state.filter + type,
+      setFilter(filter + type);
+    }
+
+    setScroll(true);
+  }
+
+
+  function sendChat() {
+    if (currentText === '') {
+      return;
+    }
+    
+    const eventType = {
+      type: 'Comment',
+      user: props.user,
+      join: true,
+    };
+
+    setPendingMessage(true);
+
+    bdk.createEvents(props.roomId, currentText, eventType)
+      .then(() => {
+        setCurrentText('');
+        setPendingMessage(false);
       });
-    }
+  }
 
-    this.setState({ scroll: true });
+  /**
+   * @param {object} e - event object from file dropped on component
+   * @param {string} botName
+   */
+  function doUpload(e, botName) {
+    setFileDraggedOver(false);
+    const data = e.dataTransfer ? e.dataTransfer : e.target;
+    const { files } = data;
+    if (files[0].size < MAX_FILE_SIZE) {
+      postAttachment(files[0], botName, this.props.selectedChatter);
+    } else {
+      console.error('File is too large to upload')
+    }
+    e.stopPropagation();
+    e.preventDefault();
+  }
+
+  /**
+   * @param {object} e - event object on file dragged over component
+   */
+  function fileIsDraggedOver(e) {
+    const { fileDraggedOver } = this.state;
+    if (!fileDraggedOver) {
+      setFileDraggedOver(true);
+    }
+    e.stopPropagation();
+    e.preventDefault();
+  }
+
+  /**
+   * @param {object} e - event object generated on file dragged away from zone
+   */
+  function fileDraggedAway(e) {
+    setFileDraggedOver(false);
+    e.preventDefault();
   }
 
 
-  sendChat() {
-    if (this.state.currentText !== '') {
-      const eventType = {
-        type: 'Comment',
-        user: this.props.user,
-        join: true,
-      };
-
-      this.setState({ pendingMessage: true });
-      bdk
-        .createEvents(this.props.roomId, this.state.currentText, eventType)
-        .then(() => {
-          this.setState({
-            pendingMessage: false,
-            currentText: '',
-          });
-        });
-    }
-  }
-
-  render() {
-    const { response, fileDraggedOver } = this.state;
-
-    return (
-      <div>
-        <FilterHeader filter={this.state.filter} changeType={this.filterType} />
-        <div
-          id="file-drop"
-          onDragOver={this.fileIsDraggedOver}
-          className={ fileDraggedOver ? 'file-dragged-over' : 'no-file-dragged-over' }
-          onDragLeave={this.fileDraggedAway}
-          onDrop={(e) => this.doUpload(e, bdk, botName)}
+  return (
+    <div>
+      <FilterHeader filter={filter} changeType={filterType} />
+      <div
+        id="file-drop"
+        onDragOver={fileIsDraggedOver}
+        className={ fileDraggedOver ? 'file-dragged-over' : 'no-file-dragged-over' }
+        onDragLeave={fileDraggedAway}
+        onDrop={(e) => doUpload(e, botName)}
+      >
+        <ul
+          className="slds-chat-list slds-m-bottom--xx-small"
+          id="chat-list"
         >
-          <ul
-            className="slds-chat-list slds-m-bottom--xx-small"
-            id="chat-list"
-            ref={(elem) => {
-              this.container = elem;
-            }}
-          >
-            <li>
-              <div className="slds-chat-bookend">
-                Start of timeline for&nbsp;<b>Room #{this.props.roomId}</b>
-              </div>
-            </li>
-            {response.map((event) => {
-              const isAttachment =
-                this.state.filter.includes('Attachment') &&
-                event.context.type === 'Event' &&
-                event.context.attachment;
-              const isSelectedFilter =
-                event.context && this.state.filter.includes(event.context.type);
+          <li>
+            <div className="slds-chat-bookend">
+              Start of timeline for&nbsp;<b>Room #{props.roomId}</b>
+            </div>
+          </li>
+          {events.map((event) => {
+            const isAttachment =
+              filter.includes('Attachment') &&
+              event.context.type === 'Event' &&
+              event.context.attachment;
+            const isSelectedFilter =
+              event.context && filter.includes(event.context.type);
 
+            if (
+              filter === 'All' ||
+              isSelectedFilter ||
+              isAttachment
+            ) {
               if (
-                this.state.filter === 'All' ||
-                isSelectedFilter ||
-                isAttachment
+                event.context &&
+                (event.context.type === 'Event' ||
+                  event.context.type === 'RoomState') &&
+                !event.context.attachment
               ) {
-                if (
-                  event.context &&
-                  (event.context.type === 'Event' ||
-                    event.context.type === 'RoomState') &&
-                  !event.context.attachment
-                ) {
-                  return <EventMessage event={event} key={event.id} />;
-                }
-                if (event.context && event.context.type === 'User') {
-                  return <UserMessage event={event} key={event.id} />;
-                }
-                if (
-                  event.context &&
-                  event.context.type === 'Event' &&
-                  event.context.attachment
-                ) {
-                  return <AttachmentMessage event={event} key={event.id} />;
-                }
-                return <ChatMessage event={event} key={event.id} />;
+                return <EventMessage event={event} key={event.id} />;
               }
-              return <div key={event.id}></div>;
-            })}
-          </ul>
-        </div>
-        {this.state.toast ? (
-          <ToastMessage
-            message={'Jump to new Event..'}
-            closed={() => this.setState({ toast: false })}
-            clicked={() => this.setState({ scroll: true, toast: false })}
-          />
-        ) : (
-          <div></div>
-        )}
-        <ChatBox
-          currentText={this.state.currentText}
-          chatChange={(e) => this.setState({ currentText: e.target.innerText })}
-          sendChat={this.sendChat}
-          pendingMessage={this.state.pendingMessage}
-          uploadFile={(e) => this.doUpload(e, bdk, botName)}
-        />
+              if (event.context && event.context.type === 'User') {
+                return <UserMessage event={event} key={event.id} />;
+              }
+              if (
+                event.context &&
+                event.context.type === 'Event' &&
+                event.context.attachment
+              ) {
+                return <AttachmentMessage event={event} key={event.id} />;
+              }
+              return <ChatMessage event={event} key={event.id} />;
+            }
+            return <div key={event.id}></div>;
+          })}
+        </ul>
       </div>
-    );
-  }
+      {toast ? (
+        <ToastMessage
+          message={'Jump to new Event..'}
+          closed={() => setToast(false)}
+          clicked={() => {
+            setScroll(true);
+            setToast(false);
+          }}
+        />
+      ) : (
+        <div></div>
+      )}
+      <ChatBox
+        currentText={currentText}
+        chatChange={(e) => setCurrentText(e.target.innerText)}
+        sendChat={sendChat}
+        pendingMessage={pendingMessage}
+        uploadFile={(e) => doUpload(e, botName)}
+      />
+    </div>
+  );
 }
 
 App.propTypes = {

@@ -1,3 +1,8 @@
+const { env } = require('../../config.js');
+const config = require('../../config.js')[env];
+const botName = require('../../package.json').name;
+const bdk = require('@salesforce/refocus-bdk')(config, botName);
+
 /**
  * Turn file into base64 string
  *
@@ -22,11 +27,10 @@ function getBase64(file) {
  * Create botAction for newCase
  *
  * @param {string} f - file being uploaded
- * @param {object} bdk - reference to bdk to get information and post action.
  * @param {string} botName
  * @param {string} selectedChatter - selected salesforce org to post to.
  */
-function postNewAttachment(f, bdk, botName, selectedChatter) {
+function postNewAttachment(f, botName, selectedChatter) {
   getBase64(f)
     .then((base64String) => {
       const postAttachment = {
