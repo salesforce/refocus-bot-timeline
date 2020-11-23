@@ -1,5 +1,5 @@
 /* eslint-disable no-invalid-this */
-import postAttachment from './postAttachment';
+import postAttachment from '../services/postAttachment';
 
 const MAX_FILE_SIZE = 5000000;
 

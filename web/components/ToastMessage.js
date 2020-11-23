@@ -29,7 +29,7 @@ export default function ToastMessage(props) {
     <div className="slds-size_2-of-2 slds-show">
       <div className="slds-region_narrow slds-is-relative">
         <div className="slds-notify_container slds-is-absolute"
-          style={{ bottom: '10px' }}>
+          style={{ bottom: '10px', top: 'auto' }}>
           <div onClick={clicked}
             className="slds-notify slds-notify_toast"
             style={{ width: 'auto' }}

@@ -1,15 +1,12 @@
 /**
- * Copyright (c) 2020, salesforce.com, inc.
+ * Copyright (c) 2018, salesforce.com, inc.
  * All rights reserved.
  * Licensed under the BSD 3-Clause license.
  * For full license text, see LICENSE.txt file in the repo root or
  * https://opensource.org/licenses/BSD-3-Clause
  */
 
-import React from 'react';
 import PropTypes from 'prop-types';
-import moment from 'moment';
-import _ from 'lodash';
 import FilterHeader from './FilterHeader';
 import EventMessage from './EventMessage';
 import UserMessage from './UserMessage';
@@ -17,9 +14,16 @@ import ChatMessage from './ChatMessage';
 import AttachmentMessage from './AttachmentMessage';
 import ToastMessage from './ToastMessage';
 import ChatBox from './ChatBox';
-import { fileIsDraggedOver, fileDraggedAway, doUpload } from '../services/attachmentService';
+import {
+  fileIsDraggedOver,
+  fileDraggedAway,
+  doUpload,
+} from '../services/attachmentService';
 import './chat.css';
 
+const moment = require('moment');
+const _ = require('lodash');
+const React = require('react');
 const { env } = require('../../config.js');
 const config = require('../../config.js')[env];
 const botName = require('../../package.json').name;
@@ -27,27 +31,48 @@ const bdk = require('@salesforce/refocus-bdk')(config, botName);
 const ZERO = 0;
 const DFB = 5; // Distance From Bottom
 
+const fileDraggedOverStyle = {
+  borderBottom: '2px solid #005fb2',
+  borderLeft: '2px solid #005fb2',
+  borderRight: '2px solid #005fb2',
+};
+
+const noFileDraggedOverStyle = {
+  borderBottom: '2px solid #00000000',
+  borderLeft: '2px solid #00000000',
+  borderRight: '2px solid #00000000',
+};
+
 class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       toast: false,
-      response: props.response.sort((a, b) => moment(b.createdAt)
-      .diff(moment(b.createdAt))
-      .filter((value, index, self) => {
-        const duplicates = _.filter(self.slice(ZERO, index), [ 'id', value.id ]);
-        return duplicates.length === ZERO ? value : false;
-      })),
+      response: this.props.response.sort((a, b) =>
+        moment(a.createdAt)
+          .diff(moment(b.createdAt))
+          .filter((value, index, self) => {
+            const duplicates = _.filter(self.slice(ZERO, index), [
+              'id',
+              value.id,
+            ]);
+            return duplicates.length === ZERO ? value : false;
+          })
+      ),
       currentText: '',
       scroll: false,
       filter: 'CommentAttachment',
       pendingMessage: false,
     };
+    this.closeToast = this.closeToast.bind(this);
     this.filterType = this.filterType.bind(this);
+    this.chatChange = this.chatChange.bind(this);
     this.sendChat = this.sendChat.bind(this);
+    this.clicked = this.clicked.bind(this);
     this.fileIsDraggedOver = fileIsDraggedOver.bind(this);
     this.fileDraggedAway = fileDraggedAway.bind(this);
     this.doUpload = doUpload.bind(this);
+    this.uploadFile = this.uploadFile.bind(this);
   }
 
   componentDidMount() {
@@ -97,6 +122,21 @@ class App extends React.Component {
     }
   }
 
+  uploadFile(e) {
+    this.doUpload(e, bdk, botName);
+  }
+
+  closeToast() {
+    this.setState({ toast: false });
+  }
+
+  clicked() {
+    this.setState({
+      scroll: true,
+      toast: false,
+    });
+  }
+
   filterType(type) {
     this.props.getEventsByType(type);
     if (this.state.filter === 'All' || type === 'All') {
@@ -118,6 +158,9 @@ class App extends React.Component {
     this.setState({ scroll: true });
   }
 
+  chatChange(e) {
+    this.setState({ currentText: e.target.innerText });
+  }
 
   sendChat() {
     if (this.state.currentText !== '') {
@@ -148,9 +191,11 @@ class App extends React.Component {
         <div
           id="file-drop"
           onDragOver={this.fileIsDraggedOver}
-          className={ fileDraggedOver ? 'file-dragged-over' : 'no-file-dragged-over' }
+          style={
+            fileDraggedOver ? fileDraggedOverStyle : noFileDraggedOverStyle
+          }
           onDragLeave={this.fileDraggedAway}
-          onDrop={(e) => this.doUpload(e, bdk, botName)}
+          onDrop={this.uploadFile}
         >
           <ul
             className="slds-chat-list slds-m-bottom--xx-small"
@@ -204,18 +249,18 @@ class App extends React.Component {
         {this.state.toast ? (
           <ToastMessage
             message={'Jump to new Event..'}
-            closed={() => this.setState({ toast: false })}
-            clicked={() => this.setState({ scroll: true, toast: false })}
+            closed={this.closeToast}
+            clicked={this.clicked}
           />
         ) : (
           <div></div>
         )}
         <ChatBox
           currentText={this.state.currentText}
-          chatChange={(e) => this.setState({ currentText: e.target.innerText })}
+          chatChange={this.chatChange}
           sendChat={this.sendChat}
           pendingMessage={this.state.pendingMessage}
-          uploadFile={(e) => this.doUpload(e, bdk, botName)}
+          uploadFile={this.uploadFile}
         />
       </div>
     );
