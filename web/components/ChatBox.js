@@ -15,17 +15,31 @@ const { enableDropzone } = require('../../config')[env];
 const FOOTER_CLASS = 'slds-docked-composer__footer slds-grid slds-form' +
   ' slds-form_stacked slds-p-horizontal_medium';
 
+/**
+ * @param {object} props
+ * @param {function} props.chatChange - chat change handler.
+ * @param {function} props.sendChat - function for sending message.
+ * @param {function} props.uploadFile - upload file handler.
+ * @param {boolean} props.pendingMessage - a message is pending being sent.
+ * @returns {JSX} attachment message container.
+ */
 export default function ChatBox(props) {
   const { chatChange, sendChat, uploadFile, pendingMessage } = props;
 
-  function usePrevious(value) {
+  /**
+   * @param {object} value - current props value
+   * @returns {object} previous props object.
+   */
+  function usePreviousProps(value) {
     const ref = useRef();
-    useEffect(() => { ref.current = value });
+    useEffect(() => {
+      ref.current = value;
+    });
     return ref.current;
   }
 
-  const prevProps = usePrevious(props);
-  if (prevProps && prevProps.pendingMessage && props.currentText == '') {
+  const prevProps = usePreviousProps(props);
+  if (prevProps && prevProps.pendingMessage && props.currentText === '') {
     document.getElementById('chat').innerText = '';
   }
 

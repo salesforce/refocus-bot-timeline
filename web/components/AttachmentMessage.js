@@ -15,7 +15,7 @@ const SLDS_GREEN = '#8bcf6a';
 
 /**
  * @param {object} props
- * @param {string} props.event - attachment message event.
+ * @param {object} props.event - attachment message event.
  * @returns {JSX} attachment message container.
  */
 export default function AttachmentMessage(props) {

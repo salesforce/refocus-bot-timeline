@@ -1,7 +1,7 @@
 {
   "name": "Timeline-Bot",
   "displayName": "Activity Timeline",
-  "version": "1.2.1",
+  "version": "1.2.2",
   "description": "A bot that show all events in a room",
   "url": "https://github.com/salesforce/refocus-bot-timeline/",
   "engines": {

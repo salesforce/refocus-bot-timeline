@@ -140,7 +140,7 @@
     "linebreak-style": [2, "unix"],
     "lines-around-comment": 1,
     "max-depth": 2,
-    "max-len": [2, 80, 2],
+    "max-len": [2, 100, 2],
     "max-nested-callbacks": [2, 6],
     "max-params": [2, 4],
     "max-statements": [2, 20],
