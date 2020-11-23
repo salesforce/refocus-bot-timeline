@@ -18,7 +18,7 @@ import {
   fileIsDraggedOver,
   fileDraggedAway,
   doUpload,
-} from './dropzoneActions';
+} from '../services/attachmentService';
 import './chat.css';
 
 const moment = require('moment');

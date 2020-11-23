@@ -1,52 +1,52 @@
 /**
- * Copyright (c) 2018, salesforce.com, inc.
+ * Copyright (c) 2020, salesforce.com, inc.
  * All rights reserved.
  * Licensed under the BSD 3-Clause license.
  * For full license text, see LICENSE.txt file in the repo root or
  * https://opensource.org/licenses/BSD-3-Clause
  */
 
+import React from 'react';
 import PropTypes from 'prop-types';
+import EventBlueprint from './EventBlueprint';
 import './chat.css';
 
-const React = require('react');
-import EventBlueprint from './EventBlueprint';
+const SLDS_GREEN = '#8bcf6a';
 
-const sldsGreen = '#8bcf6a';
+/**
+ * @param {object} props
+ * @param {string} props.event - attachment message event.
+ * @returns {JSX} attachment message container.
+ */
+export default function AttachmentMessage(props) {
+  const { event } = props;
 
-class AttachmentMessage extends React.Component {
-  render() {
-    const { event } = this.props;
-
-    return (
-      <EventBlueprint
-        event={event}
-        type={'File Uploaded'}
-        imgUrl={'../static/icons/standard-sprite/svg/symbols.svg#file'}
-        color={sldsGreen}
-        message={
-          <div>
-            <div className='slds-chat-event__agent-message'>
-              <a href={event.context.attachment} target='_blank'
-                rel='noopener noreferrer'>{event.context.fileName}</a>
-            </div>
-            {event.context.fileType.includes('image') &&
-            <div className='slds-chat-event__agent-message'>
-              <a href={event.context.attachment} target='_blank'
-                rel='noopener noreferrer'>
-                <img src={event.context.attachment} className='preview'/>
-              </a>
-            </div>
-            }
+  return (
+    <EventBlueprint
+      event={event}
+      type={'File Uploaded'}
+      imgUrl={'../static/icons/standard-sprite/svg/symbols.svg#file'}
+      color={SLDS_GREEN}
+      message={
+        <div>
+          <div className='slds-chat-event__agent-message'>
+            <a href={event.context.attachment} target='_blank'
+              rel='noopener noreferrer'>{event.context.fileName}</a>
           </div>
-        }
-      />
-    );
-  }
+          {event.context.fileType.includes('image') &&
+          <div className='slds-chat-event__agent-message'>
+            <a href={event.context.attachment} target='_blank'
+              rel='noopener noreferrer'>
+              <img src={event.context.attachment} className='preview'/>
+            </a>
+          </div>
+          }
+        </div>
+      }
+    />
+  );
 }
 
 AttachmentMessage.propTypes = {
   event: PropTypes.object,
 };
-
-export default AttachmentMessage;

@@ -1,53 +1,54 @@
 /**
- * Copyright (c) 2018, salesforce.com, inc.
+ * Copyright (c) 2020, salesforce.com, inc.
  * All rights reserved.
  * Licensed under the BSD 3-Clause license.
  * For full license text, see LICENSE.txt file in the repo root or
  * https://opensource.org/licenses/BSD-3-Clause
  */
 
+import React from 'react';
+import linkifyHtml from 'linkifyjs/string';
+import decode from 'unescape';
 import PropTypes from 'prop-types';
 import ReactHtmlParser from 'react-html-parser';
+import EventBlueprint from './EventBlueprint';
 import './chat.css';
 
-const React = require('react');
-const linkifyHtml = require('linkifyjs/string');
-const decode = require('unescape');
-import EventBlueprint from './EventBlueprint';
-const sldsBlue = '#34becd';
+const SLDS_BLUE = '#34becd';
 
-class ChatMessage extends React.Component {
-  render() {
-    const { event } = this.props;
+/**
+ * @param {object} props
+ * @param {string} props.event - chat message event.
+ * @returns {JSX} chat message container.
+ */
+export default function ChatMessage(props) {
+  const { event } = props;
 
-    return (
-      <EventBlueprint
-        event={event}
-        imgUrl={'../static/icons/standard-sprite/svg/symbols.svg#post'}
-        type={'Comment'}
-        color={sldsBlue}
-        message={
-          ReactHtmlParser(
-            linkifyHtml(event.log, {
-              attributes: {
-                rel: 'noopener noreferrer'
-              }
-            })
-          ).map((htmlString) => {
-            if (typeof htmlString === 'string') {
-              return decode(htmlString);
+  return (
+    <EventBlueprint
+      event={event}
+      imgUrl={'../static/icons/standard-sprite/svg/symbols.svg#post'}
+      type={'Comment'}
+      color={SLDS_BLUE}
+      message={
+        ReactHtmlParser(
+          linkifyHtml(event.log, {
+            attributes: {
+              rel: 'noopener noreferrer'
             }
-
-            return htmlString;
           })
-        }
-      />
-    );
-  }
+        ).map((htmlString) => {
+          if (typeof htmlString === 'string') {
+            return decode(htmlString);
+          }
+
+          return htmlString;
+        })
+      }
+    />
+  );
 }
 
 ChatMessage.propTypes = {
   event: PropTypes.object,
 };
-
-export default ChatMessage;

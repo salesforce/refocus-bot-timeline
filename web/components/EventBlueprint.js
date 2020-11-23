@@ -1,74 +1,79 @@
 /**
- * Copyright (c) 2018, salesforce.com, inc.
+ * Copyright (c) 2020, salesforce.com, inc.
  * All rights reserved.
  * Licensed under the BSD 3-Clause license.
  * For full license text, see LICENSE.txt file in the repo root or
  * https://opensource.org/licenses/BSD-3-Clause
  */
 
+import React from 'react';
 import PropTypes from 'prop-types';
+import moment from 'moment';
 import './chat.css';
 
-const moment = require('moment');
-const React = require('react');
+/**
+ * @param {object} props
+ * @param {object} props.event - event details object.
+ * @param {string} props.color - color for event background.
+ * @param {string} props.imgUrl - url for event icon.
+ * @param {string} props.type - type of event.
+ * @param {string} props.message - event message.
+ * @returns {JSX} event blueprint container.
+ */
+export default function EventBlueprint(props) {
+  let name;
+  const { event, color, imgUrl, type, message } = props;
 
-class EventBlueprint extends React.Component {
-  render() {
-    let name;
-    const { event } = this.props;
+  if (event.context && event.context.user) {
+    name = event.context.user.fullName ?
+      event.context.user.fullName : event.context.user.name;
+  }
 
-    if (event.context && event.context.user) {
-      name = event.context.user.fullName ?
-        event.context.user.fullName : event.context.user.name;
-    }
-
-    return (
-      <li className="slds-is-relative slds-m-bottom-small">
-        <span
-          className="event-line"
-          style={{ background: this.props.color }}>
-        </span>
-        <div className="slds-m-around--small">
-          <div className="slds-media">
-            <div className="slds-media__figure">
-              <div
-                className="slds-icon_container slds-timeline__icon"
-                style={{ backgroundColor: this.props.color }}>
-                <svg className="slds-icon slds-icon_small" aria-hidden="true">
-                  <use
-                    xmlnsXlink="http://www.w3.org/1999/xlink"
-                    xlinkHref={this.props.imgUrl}>
-                  </use>
-                </svg>
+  return (
+    <li className="slds-is-relative slds-m-bottom-small">
+      <span
+        className="event-line"
+        style={{ background: color }}>
+      </span>
+      <div className="slds-m-around--small">
+        <div className="slds-media">
+          <div className="slds-media__figure">
+            <div
+              className="slds-icon_container slds-timeline__icon"
+              style={{ backgroundColor: color }}>
+              <svg className="slds-icon slds-icon_small" aria-hidden="true">
+                <use
+                  xmlnsXlink="http://www.w3.org/1999/xlink"
+                  xlinkHref={imgUrl}>
+                </use>
+              </svg>
+            </div>
+          </div>
+          <div className="slds-media__body">
+            <div className="slds-grid slds-grid_align-spread">
+              <div className={'slds-grid slds-grid_vertical-align-center ' +
+              'slds-truncate_container_75'}>
+                <h3 className="slds-truncate">
+                  <a>
+                    <strong>{type} - {name}</strong>
+                  </a>
+                </h3>
+              </div>
+              <div className={'slds-timeline__actions ' +
+              'slds-timeline__actions_inline'}>
+                <p className="slds-timeline__date slds-text-align--right">
+                  {moment.utc(event.createdAt).format('HH:mm UTC | MM/DD/YYYY')}
+                </p>
               </div>
             </div>
-            <div className="slds-media__body">
-              <div className="slds-grid slds-grid_align-spread">
-                <div className={'slds-grid slds-grid_vertical-align-center ' +
-                'slds-truncate_container_75'}>
-                  <h3 className="slds-truncate">
-                    <a>
-                      <strong>{this.props.type} - {name}</strong>
-                    </a>
-                  </h3>
-                </div>
-                <div className={'slds-timeline__actions ' +
-                'slds-timeline__actions_inline'}>
-                  <p className="slds-timeline__date slds-text-align--right">
-                    {moment.utc(event.createdAt)
-                      .format('HH:mm UTC | MM/DD/YYYY')}
-                  </p>
-                </div>
-              </div>
-              <div className="slds-chat-message__text">
-                {this.props.message}
-              </div>
+            <div className="slds-chat-message__text">
+              {message}
             </div>
           </div>
         </div>
-      </li>
-    );
-  }
+      </div>
+    </li>
+  );
 }
 
 EventBlueprint.propTypes = {
@@ -81,5 +86,3 @@ EventBlueprint.propTypes = {
     PropTypes.array
   ]),
 };
-
-export default EventBlueprint;
