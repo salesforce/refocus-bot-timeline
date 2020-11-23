@@ -66,4 +66,4 @@ Follows [semantic versioning](https://docs.npmjs.com/getting-started/semantic-ve
 - 1.1.20 Upgrade to react 16.
 - 1.2.0 Added upload file functionality.
 - 1.2.1 Specify node version.
-- 1.2.2 Refactoring to use react hooks & statless components.
+- 1.2.2 Refactoring to use react hooks & stateless components.
