@@ -17,7 +17,7 @@ export default class MessageService {
       throw Error('File size is too large');
     }
 
-    const base64String = await getBase64String(f);
+    const base64String = await this.getBase64String(f);
     const postAttachment = {
       name: 'postAttachmentTimeline',
       botId: botName,
@@ -35,23 +35,23 @@ export default class MessageService {
     await this.bdk.createBotAction(postAttachment);
     console.log('postAttachmentTimeline botAction created');
   }
-}
 
-/**
- * Turn file into base64 string
- *
- * @param {String} file - file being uploaded
- * @returns {String} file converted to base64 string
- */
-function getBase64String(file) {
-  return new Promise((resolve, reject) => {
-    const reader = new FileReader();
-    reader.onload = () => {
-      const base64data = Buffer.from(reader.result, 'base64');;
-      resolve(base64data);
-    };
+  /**
+   * Turn file into base64 string
+   *
+   * @param {String} file - file being uploaded
+   * @returns {Promise} resolves to file converted to base64 string
+   */
+  getBase64String(file) {
+    return new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.onload = () => {
+        const base64data = Buffer.from(reader.result, 'base64');;
+        resolve(base64data);
+      };
 
-    reader.onerror = reject;
-    reader.readAsArrayBuffer(file);
-  });
+      reader.onerror = reject;
+      reader.readAsArrayBuffer(file);
+    });
+  }
 }
