@@ -10,13 +10,13 @@ import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import moment from 'moment';
 import _ from 'lodash';
-import FilterHeader from './FilterHeader';
-import EventMessage from './EventMessage';
-import UserMessage from './UserMessage';
-import ChatMessage from './ChatMessage';
-import AttachmentMessage from './AttachmentMessage';
-import ToastMessage from './ToastMessage';
-import ChatBox from './ChatBox';
+import FilterHeader from './FilterHeader.jsx';
+import EventMessage from './EventMessage.jsx';
+import UserMessage from './UserMessage.jsx';
+import ChatMessage from './ChatMessage.jsx';
+import AttachmentMessage from './AttachmentMessage.jsx';
+import ToastMessage from './ToastMessage.jsx';
+import ChatBox from './ChatBox.jsx';
 import './chat.css';
 
 const { env } = require('../../config.js');
@@ -32,8 +32,9 @@ const messageService = new MessageService(bdk);
 const attachmentService = new AttachmentService(bdk);
 
 export default function App(props) {
+  let container;
+  const { response } = props;
   const [toast, setToast] = useState(false);
-  const response = props.response;
   const [events, setEvents] = useState(response);
   const [currentText, setCurrentText] = useState('');
   const [scroll, setScroll] = useState(true);
@@ -42,12 +43,11 @@ export default function App(props) {
   const [pendingMessage, setPendingMessage] = useState(false);
 
   useEffect(() => {
-    const chatList = document.getElementById('chat-list');
     const previousEvents = events;
     const latestEvent = response[ZERO];
 
-    if (scroll && chatList) {
-      chatList.scrollTop = chatList.scrollHeight;
+    if (scroll && container) {
+      container.scrollTop = container.scrollHeight;
       setScroll(false);
     }
 
@@ -59,7 +59,7 @@ export default function App(props) {
         }).sort((a, b) => moment(a.createdAt).diff(moment(b.createdAt)));
       setEvents(allEvents);
 
-      if (chatList && chatList.scrollHeight - chatList.scrollTop - DFB <= chatList.clientHeight) {
+      if (container && container.scrollHeight - container.scrollTop - DFB <= container.clientHeight) {
         setScroll(true);
       } else {
         setToast(latestEvent && latestEvent.context &&
@@ -68,23 +68,20 @@ export default function App(props) {
     }
   });
 
-  function filterType(type) {
-    props.getEventsByType(type);
+  function changeFilterType(type) {
     if (filter === 'All' || type === 'All') {
       setFilter(type);
+    } else if (filter === type) {
+      setFilter('All');
     } else if (filter.includes(type)) {
-      if (filter === type) {
-        setFilter('All');
-      } else {
-        setFilter(filter.replace(type, ''));
-      }
+      setFilter(filter.replace(type, ''));
     } else {
       setFilter(filter + type);
     }
 
+    props.getEventsByType(type);
     setScroll(true);
   }
-
 
   async function sendChat() {
     if (currentText === '') {
@@ -106,7 +103,7 @@ export default function App(props) {
   /**
    * @param {object} e - event object from file dropped on component
    */
-  async function doUpload(e) {
+  async function uploadAttachment(e) {
     setFileDraggedOver(false);
     e.stopPropagation();
     e.preventDefault();
@@ -123,7 +120,7 @@ export default function App(props) {
   /**
    * @param {object} e - event object on file dragged over component
    */
-  function fileIsDraggedOver(e) {
+  function fileDraggedOverHandler(e) {
     setFileDraggedOver(true);
     e.stopPropagation();
     e.preventDefault();
@@ -131,17 +128,20 @@ export default function App(props) {
 
   return (
     <div>
-      <FilterHeader filter={filter} changeType={filterType} />
+      <FilterHeader filter={filter} changeType={changeFilterType} />
       <div
         id="file-drop"
-        onDragOver={fileIsDraggedOver}
+        onDragOver={fileDraggedOverHandler}
         className={ fileDraggedOver ? 'file-dragged-over' : 'no-file-dragged-over' }
         onDragLeave={() => setFileDraggedOver(false)}
-        onDrop={doUpload}
+        onDrop={uploadAttachment}
       >
         <ul
           className="slds-chat-list slds-m-bottom--xx-small"
           id="chat-list"
+          ref={(elem) => {
+            container = elem;
+          }}
         >
           <li>
             <div className="slds-chat-bookend">
@@ -202,7 +202,7 @@ export default function App(props) {
         chatChange={(e) => setCurrentText(e.target.innerText)}
         sendChat={sendChat}
         pendingMessage={pendingMessage}
-        uploadFile={doUpload}
+        uploadFile={uploadAttachment}
       />
     </div>
   );

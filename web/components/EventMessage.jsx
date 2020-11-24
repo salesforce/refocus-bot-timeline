@@ -8,7 +8,7 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
-import EventBlueprint from './EventBlueprint';
+import EventBlueprint from './EventBlueprint.jsx';
 import { PINK } from '../utils/colors';
 import './chat.css';
 

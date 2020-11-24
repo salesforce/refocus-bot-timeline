@@ -7,10 +7,10 @@
  */
 
 /**
- * tests/web/components/EventBlueprint.js
+ * tests/web/components/EventBlueprint.jsx
  */
 const expect = require('chai').expect;
-import EventBlueprint from '../../../../web/components/EventBlueprint.js';
+import EventBlueprint from '../../../../web/components/EventBlueprint';
 const ReactTestRenderer = require('react-test-renderer');
 
 import React from 'react';

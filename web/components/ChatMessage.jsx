@@ -11,7 +11,7 @@ import linkifyHtml from 'linkifyjs/string';
 import decode from 'unescape';
 import PropTypes from 'prop-types';
 import ReactHtmlParser from 'react-html-parser';
-import EventBlueprint from './EventBlueprint';
+import EventBlueprint from './EventBlueprint.jsx';
 import { BLUE } from '../utils/colors';
 import './chat.css';
 

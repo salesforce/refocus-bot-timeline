@@ -2,7 +2,6 @@
 export default class MessageService {
   constructor(bdk) {
     this.bdk = bdk;
-    this.roomId = bdk.getRoomId();
   }
 
   async sendMessage(message, user) {
@@ -12,6 +11,6 @@ export default class MessageService {
       join: true,
     };
 
-    await this.bdk.createEvents(this.roomId, message, eventType);
+    await this.bdk.createEvents(this.bdk.getRoomId(), message, eventType);
   }
 }
