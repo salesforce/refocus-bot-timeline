@@ -6,6 +6,7 @@
  * https://opensource.org/licenses/BSD-3-Clause
  */
 
+/* eslint-disable no-console */
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import moment from 'moment';
@@ -31,6 +32,10 @@ const DFB = 5; // Distance From Bottom
 const messageService = new MessageService(bdk);
 const attachmentService = new AttachmentService(bdk);
 
+/**
+ * @param {object} props
+ * @returns {JSX} app container.
+ */
 export default function App(props) {
   let container;
   const { response } = props;
@@ -42,9 +47,30 @@ export default function App(props) {
   const [filter, setFilter] = useState('CommentAttachment');
   const [pendingMessage, setPendingMessage] = useState(false);
 
+  /**
+   * @param {array} previousEvents
+   * @param {array} newEvents
+   */
+  function handleNewEventsReceived(previousEvents, newEvents) {
+    const allEvents = previousEvents.concat(newEvents).filter((value, index, self) => {
+      const duplicates = _.filter(self.slice(ZERO, index), ['id', value.id]);
+      return duplicates.length === ZERO ? value : false;
+    }).sort((a, b) => moment(a.createdAt).diff(moment(b.createdAt)));
+
+    setEvents(allEvents);
+
+    if (container && container.scrollHeight - container.scrollTop - DFB <= container.clientHeight) {
+      setScroll(true);
+    } else {
+      const latestEvent = newEvents.length && newEvents[ZERO];
+      setToast(latestEvent && latestEvent.context &&
+        (filter === 'All' || filter.includes(latestEvent.context.type)));
+    }
+  }
+
   useEffect(() => {
     const previousEvents = events;
-    const latestEvent = response[ZERO];
+    const latestEvent = response.length && response[ZERO];
 
     if (scroll && container) {
       container.scrollTop = container.scrollHeight;
@@ -52,22 +78,14 @@ export default function App(props) {
     }
 
     if (latestEvent && !_.find(previousEvents, latestEvent)) {
-      const allEvents = previousEvents.concat(response)
-        .filter((value, index, self) => {
-          const duplicates = _.filter(self.slice(ZERO, index), ['id', value.id ]);
-          return duplicates.length === ZERO ? value : false;
-        }).sort((a, b) => moment(a.createdAt).diff(moment(b.createdAt)));
-      setEvents(allEvents);
-
-      if (container && container.scrollHeight - container.scrollTop - DFB <= container.clientHeight) {
-        setScroll(true);
-      } else {
-        setToast(latestEvent && latestEvent.context &&
-          (filter === 'All' || filter.includes(latestEvent.context.type)));
-      }
+      handleNewEventsReceived(previousEvents, response);
     }
   });
 
+  /**
+   * changes the active message filter
+   * @param {object} type - filter type that was selected
+   */
   function changeFilterType(type) {
     if (filter === 'All' || type === 'All') {
       setFilter(type);
@@ -83,6 +101,9 @@ export default function App(props) {
     setScroll(true);
   }
 
+  /**
+   * sends a chat message.
+   */
   async function sendChat() {
     if (currentText === '') return;
     setPendingMessage(true);
@@ -91,8 +112,8 @@ export default function App(props) {
       await messageService.sendMessage(currentText, props.user);
       setCurrentText('');
       setPendingMessage(false);
-    } catch (e) {
-      console.error (`message failed to send - ${e.message}`)
+    } catch (err){
+      console.error(`message failed to send - ${err.message}`);
     }
   }
 
@@ -108,8 +129,8 @@ export default function App(props) {
       const data = e.dataTransfer ? e.dataTransfer : e.target;
       const { files } = data;
       await attachmentService.postAttachment(files[0], props.selectedChatter);
-    } catch(e) {
-      console.error(`failed to upload file - ${e.message}`);
+    } catch (err){
+      console.error(`failed to upload file - ${err.message}`);
     }
   }
 
@@ -145,34 +166,17 @@ export default function App(props) {
             </div>
           </li>
           {events.map((event) => {
-            const isAttachment =
-              filter.includes('Attachment') &&
-              event.context.type === 'Event' &&
-              event.context.attachment;
-            const isSelectedFilter =
-              event.context && filter.includes(event.context.type);
-
-            if (
-              filter === 'All' ||
-              isSelectedFilter ||
-              isAttachment
-            ) {
-              if (
-                event.context &&
-                (event.context.type === 'Event' ||
-                  event.context.type === 'RoomState') &&
-                !event.context.attachment
-              ) {
+            const eventType = event.context && event.context.type;
+            const isAttachment = filter.includes('Attachment') &&
+              eventType === 'Event' && event.context.attachment;
+            const isSelectedFilter = event.context && filter.includes(event.context.type);
+            if (filter === 'All' || isSelectedFilter || isAttachment) {
+              if ((eventType === 'Event' || eventType === 'RoomState') &&
+              !event.context.attachment) {
                 return <EventMessage event={event} key={event.id} />;
-              }
-              if (event.context && event.context.type === 'User') {
+              } else if (eventType === 'User') {
                 return <UserMessage event={event} key={event.id} />;
-              }
-              if (
-                event.context &&
-                event.context.type === 'Event' &&
-                event.context.attachment
-              ) {
+              } else if (eventType === 'Event' && event.context.attachment) {
                 return <AttachmentMessage event={event} key={event.id} />;
               }
               return <ChatMessage event={event} key={event.id} />;
@@ -181,7 +185,7 @@ export default function App(props) {
           })}
         </ul>
       </div>
-      {toast ? (
+      {toast && (
         <ToastMessage
           message={'Jump to new Event..'}
           closed={() => setToast(false)}
@@ -190,8 +194,6 @@ export default function App(props) {
             setToast(false);
           }}
         />
-      ) : (
-        <div></div>
       )}
       <ChatBox
         currentText={currentText}
