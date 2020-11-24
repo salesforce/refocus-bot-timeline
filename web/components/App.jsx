@@ -28,7 +28,7 @@ import MessageService from '../services/MessageService';
 import AttachmentService from '../services/AttachmentService';
 
 const ZERO = 0;
-const DFB = 5; // Distance From Bottom
+const DISTANCE_FROM_BOTTOM = 5;
 const messageService = new MessageService(bdk);
 const attachmentService = new AttachmentService(bdk);
 
@@ -53,13 +53,14 @@ export default function App(props) {
    */
   function handleNewEventsReceived(previousEvents, newEvents) {
     const allEvents = previousEvents.concat(newEvents).filter((value, index, self) => {
-      const duplicates = _.filter(self.slice(ZERO, index), ['id', value.id]);
+      const duplicates = self.slice(ZERO, index).filter((el) => value.id === el.id);
       return duplicates.length === ZERO ? value : false;
     }).sort((a, b) => moment(a.createdAt).diff(moment(b.createdAt)));
 
     setEvents(allEvents);
 
-    if (container && container.scrollHeight - container.scrollTop - DFB <= container.clientHeight) {
+    if (container && container.scrollHeight - container.scrollTop - DISTANCE_FROM_BOTTOM <=
+      container.clientHeight) {
       setScroll(true);
     } else {
       const latestEvent = newEvents.length && newEvents[ZERO];
@@ -143,6 +144,29 @@ export default function App(props) {
     e.preventDefault();
   }
 
+  /**
+   * @param {object} event - event to be displayed
+   * @returns {JSX} event container.
+   */
+  function displayEvent(event) {
+    const eventType = event.context && event.context.type;
+    const isAttachment = filter.includes('Attachment') &&
+      eventType === 'Event' && event.context.attachment;
+    const isSelectedFilter = event.context && filter.includes(event.context.type);
+    if (filter === 'All' || isSelectedFilter || isAttachment) {
+      if ((eventType === 'Event' || eventType === 'RoomState') &&
+      !event.context.attachment) {
+        return <EventMessage event={event} key={event.id} />;
+      } else if (eventType === 'User') {
+        return <UserMessage event={event} key={event.id} />;
+      } else if (eventType === 'Event' && event.context.attachment) {
+        return <AttachmentMessage event={event} key={event.id} />;
+      }
+      return <ChatMessage event={event} key={event.id} />;
+    }
+    return <div key={event.id}></div>;
+  }
+
   return (
     <div>
       <FilterHeader filter={filter} changeType={changeFilterType} />
@@ -154,7 +178,7 @@ export default function App(props) {
         onDrop={uploadAttachment}
       >
         <ul
-          className="slds-chat-list slds-m-bottom--xx-small"
+          className="slds-chat-list slds-m-bottom_xx-small"
           id="chat-list"
           ref={(elem) => {
             container = elem;
@@ -165,24 +189,7 @@ export default function App(props) {
               Start of timeline for&nbsp;<b>Room #{props.roomId}</b>
             </div>
           </li>
-          {events.map((event) => {
-            const eventType = event.context && event.context.type;
-            const isAttachment = filter.includes('Attachment') &&
-              eventType === 'Event' && event.context.attachment;
-            const isSelectedFilter = event.context && filter.includes(event.context.type);
-            if (filter === 'All' || isSelectedFilter || isAttachment) {
-              if ((eventType === 'Event' || eventType === 'RoomState') &&
-              !event.context.attachment) {
-                return <EventMessage event={event} key={event.id} />;
-              } else if (eventType === 'User') {
-                return <UserMessage event={event} key={event.id} />;
-              } else if (eventType === 'Event' && event.context.attachment) {
-                return <AttachmentMessage event={event} key={event.id} />;
-              }
-              return <ChatMessage event={event} key={event.id} />;
-            }
-            return <div key={event.id}></div>;
-          })}
+          {events.map((event) => displayEvent(event))}
         </ul>
       </div>
       {toast && (

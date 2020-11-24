@@ -23,7 +23,7 @@ export default function ToastMessage(props) {
   }, [props.message]);
 
   return (
-    <div className="slds-size_2-of-2 slds-show">
+    <div className="slds-size_1-of-1 slds-show">
       <div className="slds-region_narrow slds-is-relative">
         <div className="slds-notify_container slds-is-absolute"
           style={{ bottom: '10px', top: 'auto' }}>
