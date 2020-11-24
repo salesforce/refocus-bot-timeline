@@ -45,7 +45,7 @@ export default class AttachmentService {
     return new Promise((resolve, reject) => {
       const reader = new FileReader();
       reader.onload = () => {
-        const base64data = Buffer.from(reader.result, 'base64');
+        const base64data = new Buffer(reader.result).toString('base64');
         resolve(base64data);
       };
 
