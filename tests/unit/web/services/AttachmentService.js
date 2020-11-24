@@ -3,7 +3,6 @@ import sinon from 'sinon';
 import AttachmentService from '../../../../web/services/AttachmentService';
 
 describe('Attachment.js >', () => {
-  
   it('Ok, create attachment', async () => {
     // arrange
     const roomId = 99;
@@ -16,14 +15,14 @@ describe('Attachment.js >', () => {
     const createBotActionSpy = sinon.spy(bdk, 'createBotAction');
     // act
     const attachmentService = new AttachmentService(bdk);
-    sinon.stub(attachmentService, 'getBase64String').resolves(['010101011011010']);
+    sinon.stub(attachmentService, '_getBase64String').resolves(['010101011011010']);
     await attachmentService.postAttachment(file, 'TEST');
     // assert
     expect(createBotActionSpy.called).to.equal(true);
     const createBotActionSpyArg = createBotActionSpy.args[0][0];
     expect(createBotActionSpyArg.name).to.equal('postAttachmentTimeline');
     expect(createBotActionSpyArg.botId).to.equal('Timeline-Bot');
-    expect(createBotActionSpyArg.roomId).to.equal(roomId)
+    expect(createBotActionSpyArg.roomId).to.equal(roomId);
     expect(createBotActionSpyArg.isPending).to.equal(true);
     expect(createBotActionSpyArg.parameters[1].value).to.equal('my_file');
     expect(createBotActionSpyArg.parameters[2].value).to.equal('jpg');
@@ -31,7 +30,7 @@ describe('Attachment.js >', () => {
 
   it('Fail, attachment is too large', async () => {
     // arrange
-    const bdk = { createBotAction: () => {}};
+    const bdk = { createBotAction: () => {} };
     const largeFile = { name: 'my_file', type: 'jpg', size: 999999999999999 };
     const createBotActionSpy = sinon.spy(bdk, 'createBotAction');
     const attachmentService = new AttachmentService(bdk);
@@ -44,6 +43,6 @@ describe('Attachment.js >', () => {
     }
     // assert
     expect(createBotActionSpy.called).to.equal(false);
-    expect(error.message).to.equal('File size is too large')
+    expect(error.message).to.equal('File size is too large');
   });
 });

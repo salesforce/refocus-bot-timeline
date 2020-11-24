@@ -17,8 +17,8 @@
     "build-ui": "webpack --config webpack.config.js",
     "lint": "eslint --ext=js --ext=jsx .",
     "postinstall": "npm run build-ui",
-    "coverage": "istanbul cover node_modules/mocha/bin/_mocha tests/unit --recursive --require @babel/register **/*.jsx --require ignore-styles",
-    "test-unit": "mocha tests/unit --recursive --require @babel/register **/*.jsx --require ignore-styles",
+    "coverage": "nyc node_modules/mocha/bin/_mocha --recursive tests/unit/* --require @babel/register **/*.jsx --require ignore-styles",
+    "test-unit": "npm run lint && mocha tests/unit --recursive --require @babel/register **/*.jsx --require ignore-styles",
     "test": "npm run test-unit && npm run test-integration",
     "test:dev": "npm run test-unit && npm run test-integration:dev"
   },
@@ -91,6 +91,7 @@
     "eslint-plugin-jsx-a11y": "^6.2.1",
     "eslint-plugin-react": "^7.17.0",
     "html-webpack-plugin": "^4.5.0",
+    "nyc": "^15.1.0",
     "style-loader": "^0.18.2",
     "url-loader": "^1.1.2",
     "webpack": "^4.43.0",

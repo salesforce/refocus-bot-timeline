@@ -1,4 +1,3 @@
-
 export default class MessageService {
   constructor(bdk) {
     this.bdk = bdk;

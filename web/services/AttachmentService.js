@@ -1,8 +1,7 @@
-
 const botName = require('../../package.json').name;
 const MAX_FILE_SIZE = 5000000;
 
-export default class MessageService {
+export default class AttachmentService {
   constructor(bdk) {
     this.bdk = bdk;
   }
@@ -11,13 +10,14 @@ export default class MessageService {
    * Create botAction for postAttachmentTimeline
    *
    * @param {string} f - file being uploaded
+   * @param {string} selectedChatter
    */
   async postAttachment(f, selectedChatter) {
     if (f.size > MAX_FILE_SIZE) {
       throw Error('File size is too large');
     }
 
-    const base64String = await this.getBase64String(f);
+    const base64String = await this._getBase64String(f);
     const postAttachment = {
       name: 'postAttachmentTimeline',
       botId: botName,
@@ -33,7 +33,6 @@ export default class MessageService {
     };
 
     await this.bdk.createBotAction(postAttachment);
-    console.log('postAttachmentTimeline botAction created');
   }
 
   /**
@@ -42,11 +41,11 @@ export default class MessageService {
    * @param {String} file - file being uploaded
    * @returns {Promise} resolves to file converted to base64 string
    */
-  getBase64String(file) {
+  _getBase64String(file) {
     return new Promise((resolve, reject) => {
       const reader = new FileReader();
       reader.onload = () => {
-        const base64data = Buffer.from(reader.result, 'base64');;
+        const base64data = Buffer.from(reader.result, 'base64');
         resolve(base64data);
       };
 

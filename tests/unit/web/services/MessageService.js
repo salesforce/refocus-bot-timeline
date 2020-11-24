@@ -13,7 +13,7 @@ describe('MessageService.js >', () => {
     await messageService.sendMessage('Hello World!', { email: 'john@example.com' });
     // assert
     expect(createEventsSpy.called).to.equal(true);
-    expect(createEventsSpy.args[0][0]).to.equal(roomId)
+    expect(createEventsSpy.args[0][0]).to.equal(roomId);
     expect(createEventsSpy.args[0][1]).to.equal('Hello World!');
     expect(createEventsSpy.args[0][2].type).to.equal('Comment');
     expect(createEventsSpy.args[0][2].user.email).to.equal('john@example.com');
@@ -27,7 +27,7 @@ describe('MessageService.js >', () => {
     // act
     const messageService = new MessageService(bdk);
     await messageService.sendMessage('Hello World #2!', { email: 'peter@example.com' });
-    //assert
+    // assert
     expect(createEventsSpy.called).to.equal(true);
     expect(createEventsSpy.args[0][0]).to.equal(roomId);
     expect(createEventsSpy.args[0][1]).to.equal('Hello World #2!');

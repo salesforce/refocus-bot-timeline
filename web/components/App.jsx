@@ -84,20 +84,16 @@ export default function App(props) {
   }
 
   async function sendChat() {
-    if (currentText === '') {
-      return;
-    }
-
+    if (currentText === '') return;
     setPendingMessage(true);
 
     try {
-      await messageService.sendMessage(currentText, props.user)
+      await messageService.sendMessage(currentText, props.user);
+      setCurrentText('');
+      setPendingMessage(false);
     } catch (e) {
       console.error (`message failed to send - ${e.message}`)
     }
-
-    setCurrentText('');
-    setPendingMessage(false);
   }
 
   /**
