@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2020, salesforce.com, inc.
+ * Copyright (c) 2018, salesforce.com, inc.
  * All rights reserved.
  * Licensed under the BSD 3-Clause license.
  * For full license text, see LICENSE.txt file in the repo root or
@@ -13,9 +13,6 @@ const TIMEOUT = 3000; // ms
 
 /**
  * @param {object} props
- * @param {string} props.message - message to be displayed on toast.
- * @param {func} props.clicked - callback run when toast is clicked.
- * @param {func} props.closed - callback run when toast closes.
  * @returns {JSX} toast container.
  */
 export default function ToastMessage(props) {

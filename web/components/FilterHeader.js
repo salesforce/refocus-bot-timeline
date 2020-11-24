@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2020, salesforce.com, inc.
+ * Copyright (c) 2018, salesforce.com, inc.
  * All rights reserved.
  * Licensed under the BSD 3-Clause license.
  * For full license text, see LICENSE.txt file in the repo root or
@@ -10,20 +10,16 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import './chat.css';
 
-const BUTTON_HEADER_CLASS = 'slds-size_1-of-1 slds-text-align_center' +
-' slds-docked-composer__header';
-
 /**
  * @param {object} props
- * @param {string} props.filter - current active filter.
- * @param {func} props.changeType - function for changing the current filter.
  * @returns {JSX} filter header container.
  */
 export default function FilterHeader(props) {
   const { filter, changeType } = props;
 
   return (
-    <div className={BUTTON_HEADER_CLASS}>
+    <div className={'slds-size_1-of-1 slds-text-align_center' +
+    ' slds-docked-composer__header'}>
       <ul>
         <li className="slds-show--inline">
           <button

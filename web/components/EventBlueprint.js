@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2020, salesforce.com, inc.
+ * Copyright (c) 2018, salesforce.com, inc.
  * All rights reserved.
  * Licensed under the BSD 3-Clause license.
  * For full license text, see LICENSE.txt file in the repo root or
@@ -13,11 +13,6 @@ import './chat.css';
 
 /**
  * @param {object} props
- * @param {object} props.event - event details object.
- * @param {string} props.color - color for event background.
- * @param {string} props.imgUrl - url for event icon.
- * @param {string} props.type - type of event.
- * @param {string} props.message - event message.
  * @returns {JSX} event blueprint container.
  */
 export default function EventBlueprint(props) {

@@ -27,7 +27,7 @@ const _user = {
 };
 let selectedChatter;
 bdk.findRoom(roomId).then((room) => {
-  selectedChatter = room.body.settings.selectedChatter;
+  selectedChatter = 'GUS';
 });
 
 // Only these event types will be queried for from Timeline

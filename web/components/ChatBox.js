@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2020, salesforce.com, inc.
+ * Copyright (c) 2018, salesforce.com, inc.
  * All rights reserved.
  * Licensed under the BSD 3-Clause license.
  * For full license text, see LICENSE.txt file in the repo root or
@@ -12,15 +12,8 @@ import './chat.css';
 const { env } = require('../../config');
 const { enableDropzone } = require('../../config')[env];
 
-const FOOTER_CLASS = 'slds-docked-composer__footer slds-grid slds-form' +
-  ' slds-form_stacked slds-p-horizontal_medium';
-
 /**
  * @param {object} props
- * @param {function} props.chatChange - chat change handler.
- * @param {function} props.sendChat - function for sending message.
- * @param {function} props.uploadFile - upload file handler.
- * @param {boolean} props.pendingMessage - a message is pending being sent.
  * @returns {JSX} attachment message container.
  */
 export default function ChatBox(props) {
@@ -44,7 +37,8 @@ export default function ChatBox(props) {
   }
 
   return (
-    <div className={FOOTER_CLASS}>
+    <div className={'slds-docked-composer__footer slds-grid slds-form' +
+    ' slds-form_stacked slds-p-horizontal_medium'}>
       <div className="slds-form-element slds-col">
         <div className="slds-form-element__control slds-p-around_xx-small">
           <div

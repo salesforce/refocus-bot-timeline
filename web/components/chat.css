@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2020, salesforce.com, inc.
+ * Copyright (c) 2018, salesforce.com, inc.
  * All rights reserved.
  * Licensed under the BSD 3-Clause license.
  * For full license text, see LICENSE.txt file in the repo root or
@@ -7,16 +7,16 @@
  */
 
 .file-dragged-over {
-  border-bottom: '2px solid #005fb2';
-  border-left: '2px solid #005fb2';
-  border-right: '2px solid #005fb2';
-};
+  border-bottom: 2px solid #005fb2;
+  border-left: 2px solid #005fb2;
+  border-right: 2px solid #005fb2;
+}
 
 .no-file-dragged-over {
-  border-bottom: '2px solid #00000000';
-  border-left: '2px solid #00000000';
-  border-right: '2px solid #00000000';
-};
+  border-bottom: 2px solid #00000000;
+  border-left: 2px solid #00000000;
+  border-right: 2px solid #00000000;
+}
 
 .slds-rich-text-editor {
   max-height: 100px;

@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2020, salesforce.com, inc.
+ * Copyright (c) 2018, salesforce.com, inc.
  * All rights reserved.
  * Licensed under the BSD 3-Clause license.
  * For full license text, see LICENSE.txt file in the repo root or
@@ -17,18 +17,21 @@ import ChatMessage from './ChatMessage';
 import AttachmentMessage from './AttachmentMessage';
 import ToastMessage from './ToastMessage';
 import ChatBox from './ChatBox';
-import postAttachment from '../services/postAttachment';
 import './chat.css';
 
 const { env } = require('../../config.js');
 const config = require('../../config.js')[env];
 const botName = require('../../package.json').name;
 const bdk = require('@salesforce/refocus-bdk')(config, botName);
+import MessageService from '../services/MessageService';
+import AttachmentService from '../services/AttachmentService';
+
 const ZERO = 0;
 const DFB = 5; // Distance From Bottom
-const MAX_FILE_SIZE = 5000000;
+const messageService = new MessageService(bdk);
+const attachmentService = new AttachmentService(bdk);
 
-function App(props) {
+export default function App(props) {
   const [toast, setToast] = useState(false);
   const response = props.response;
   const [events, setEvents] = useState(response);
@@ -83,63 +86,48 @@ function App(props) {
   }
 
 
-  function sendChat() {
+  async function sendChat() {
     if (currentText === '') {
       return;
     }
-    
-    const eventType = {
-      type: 'Comment',
-      user: props.user,
-      join: true,
-    };
 
     setPendingMessage(true);
 
-    bdk.createEvents(props.roomId, currentText, eventType)
-      .then(() => {
-        setCurrentText('');
-        setPendingMessage(false);
-      });
+    try {
+      await messageService.sendMessage(currentText, props.user)
+    } catch (e) {
+      console.error (`message failed to send - ${e.message}`)
+    }
+
+    setCurrentText('');
+    setPendingMessage(false);
   }
 
   /**
    * @param {object} e - event object from file dropped on component
-   * @param {string} botName
    */
-  function doUpload(e, botName) {
+  async function doUpload(e) {
     setFileDraggedOver(false);
-    const data = e.dataTransfer ? e.dataTransfer : e.target;
-    const { files } = data;
-    if (files[0].size < MAX_FILE_SIZE) {
-      postAttachment(files[0], botName, this.props.selectedChatter);
-    } else {
-      console.error('File is too large to upload')
-    }
     e.stopPropagation();
     e.preventDefault();
+
+    try {
+      const data = e.dataTransfer ? e.dataTransfer : e.target;
+      const { files } = data;
+      await attachmentService.postAttachment(files[0], props.selectedChatter);
+    } catch(e) {
+      console.error(`failed to upload file - ${e.message}`);
+    }
   }
 
   /**
    * @param {object} e - event object on file dragged over component
    */
   function fileIsDraggedOver(e) {
-    const { fileDraggedOver } = this.state;
-    if (!fileDraggedOver) {
-      setFileDraggedOver(true);
-    }
+    setFileDraggedOver(true);
     e.stopPropagation();
     e.preventDefault();
   }
-
-  /**
-   * @param {object} e - event object generated on file dragged away from zone
-   */
-  function fileDraggedAway(e) {
-    setFileDraggedOver(false);
-    e.preventDefault();
-  }
-
 
   return (
     <div>
@@ -148,8 +136,8 @@ function App(props) {
         id="file-drop"
         onDragOver={fileIsDraggedOver}
         className={ fileDraggedOver ? 'file-dragged-over' : 'no-file-dragged-over' }
-        onDragLeave={fileDraggedAway}
-        onDrop={(e) => doUpload(e, botName)}
+        onDragLeave={() => setFileDraggedOver(false)}
+        onDrop={doUpload}
       >
         <ul
           className="slds-chat-list slds-m-bottom--xx-small"
@@ -214,7 +202,7 @@ function App(props) {
         chatChange={(e) => setCurrentText(e.target.innerText)}
         sendChat={sendChat}
         pendingMessage={pendingMessage}
-        uploadFile={(e) => doUpload(e, botName)}
+        uploadFile={doUpload}
       />
     </div>
   );
@@ -227,5 +215,3 @@ App.propTypes = {
   selectedChatter: PropTypes.string,
   getEventsByType: PropTypes.func,
 };
-
-export default App;

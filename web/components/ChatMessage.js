@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2020, salesforce.com, inc.
+ * Copyright (c) 2018, salesforce.com, inc.
  * All rights reserved.
  * Licensed under the BSD 3-Clause license.
  * For full license text, see LICENSE.txt file in the repo root or
@@ -12,13 +12,11 @@ import decode from 'unescape';
 import PropTypes from 'prop-types';
 import ReactHtmlParser from 'react-html-parser';
 import EventBlueprint from './EventBlueprint';
+import { BLUE } from '../utils/colors';
 import './chat.css';
-
-const SLDS_BLUE = '#34becd';
 
 /**
  * @param {object} props
- * @param {string} props.event - chat message event.
  * @returns {JSX} chat message container.
  */
 export default function ChatMessage(props) {
@@ -29,7 +27,7 @@ export default function ChatMessage(props) {
       event={event}
       imgUrl={'../static/icons/standard-sprite/svg/symbols.svg#post'}
       type={'Comment'}
-      color={SLDS_BLUE}
+      color={BLUE}
       message={
         ReactHtmlParser(
           linkifyHtml(event.log, {
