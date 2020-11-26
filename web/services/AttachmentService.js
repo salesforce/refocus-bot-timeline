@@ -19,7 +19,6 @@ export default class AttachmentService {
    *
    * @param {string} f - file being uploaded
    * @param {string} selectedChatter
-   * @returns {Promise}
    */
   async postAttachment(f, selectedChatter) {
     if (f.size > MAX_FILE_SIZE) {
@@ -41,7 +40,7 @@ export default class AttachmentService {
       ],
     };
 
-    return await this.bdk.createBotAction(postAttachment);
+    await this.bdk.createBotAction(postAttachment);
   }
 
   /**
