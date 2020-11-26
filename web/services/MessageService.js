@@ -18,6 +18,6 @@ export default class MessageService {
       join: true,
     };
 
-    await this.bdk.createEvents(this.bdk.getRoomId(), message, eventType);
+    return await this.bdk.createEvents(this.bdk.getRoomId(), message, eventType);
   }
 }
