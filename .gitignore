@@ -8,3 +8,4 @@ web/dist/*
 .idea*
 tests/integration/cypress/screenshots/*
 tests/integration/cypress/fixtures/*
+.nyc_output

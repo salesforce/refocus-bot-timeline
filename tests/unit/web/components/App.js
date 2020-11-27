@@ -7,12 +7,12 @@
  */
 
 /**
- * tests/web/components/App.js
+ * tests/web/components/App.jsx
  */
 
 /* eslint-disable no-magic-numbers */
 const expect = require('chai').expect;
-import App from '../../../../web/components/App.js';
+import App from '../../../../web/components/App';
 import ReactTestRenderer from 'react-test-renderer';
 const roomId = 1;
 
@@ -20,20 +20,20 @@ import React from 'react';
 
 describe('<App />: ', () => {
   it('Ok, <App /> renders as a div element', (done) => {
-    const eventBlueprint = ReactTestRenderer.create(
+    const app = ReactTestRenderer.create(
       <App roomId={roomId} response={[]} getEventsByType={() => {}} user={{}} />
     );
 
-    expect(eventBlueprint.toJSON().type).to.equal('div');
+    expect(app.toJSON().type).to.equal('div');
     done();
   });
 
   it('Ok, no events so chat-list has 1 child with start message', (done) => {
-    const eventBlueprint = ReactTestRenderer.create(
+    const app = ReactTestRenderer.create(
       <App roomId={roomId} response={[]} getEventsByType={() => {}} user={{}} />
     );
 
-    const dropzone = eventBlueprint.toJSON().children[1];
+    const dropzone = app.toJSON().children[1];
     expect(dropzone.props.id).to.equal('file-drop');
     const chatList = dropzone.children[0];
     expect(chatList.children.length).to.equal(1);

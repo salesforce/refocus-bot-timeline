@@ -12,9 +12,9 @@
  * This code handles intial render of the bot and any rerenders triggered
  * from javascript events.
  */
-import App from './components/App.js';
-const React = require('react');
-const ReactDOM = require('react-dom');
+import App from './components/App.jsx';
+import React from 'react';
+import ReactDOM from 'react-dom';
 const { env } = require('../config.js');
 const config = require('../config.js')[env];
 const botName = require('../package.json').name;
@@ -138,23 +138,17 @@ function getEventsByType(type) {
  */
 function init() {
   renderUI([], _user);
-
   const promises = [getEventsByType('comment'), getEventsByType('event')];
-
   Promise.all(promises);
 }
 
-document
-  .getElementById(botName)
+document.getElementById(botName)
   .addEventListener('refocus.events', handleEvents, false);
-document
-  .getElementById(botName)
+document.getElementById(botName)
   .addEventListener('refocus.room.settings', handleSettings, false);
-document
-  .getElementById(botName)
+document.getElementById(botName)
   .addEventListener('refocus.bot.data', handleData, false);
-document
-  .getElementById(botName)
+document.getElementById(botName)
   .addEventListener('refocus.bot.actions', handleActions, false);
 
 init();
