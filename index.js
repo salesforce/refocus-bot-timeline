@@ -66,11 +66,6 @@ function handleActions(action) {
 }
 
 app.on('refocus.bot.actions', handleActions);
-app.use(express.static('web/dist'));
-app.get('/*', (req, res) => {
-  // eslint-disable-next-line
-  res.sendFile(__dirname + '/web/dist/index.html');
-});
 
 http.Server(app).listen(port, () => {
   bdk.log.info('listening on: ', port);
